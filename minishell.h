@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/14 22:37:10 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/03/15 16:35:02 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,21 @@ typedef struct data
 
 typedef struct env
 {
-	char		*ptr;
+	char		*path;
+	char		*name;
 	struct env	*next;
 }			t_env;
+
+//libft
+int		ft_dim1(char *s, char c);
+char	**ft_freestr(char **arr, int p);
+char	**ft_func(char **arr, char *s, char c);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strchr(const char *str, int c);
+size_t	ft_strlen(const char *str);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup(const char *s);
+
 
 
 #endif

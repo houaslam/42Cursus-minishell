@@ -6,14 +6,16 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/03/14 22:49:58 by houaslam         ###   ########.fr        #
+#    Updated: 2023/03/15 16:38:54 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror  -fsanitize=address -g3
 
-SRCS =  main.c
+SRCS =  main.c \
+		split.c \
+		ft_substr.c
 
 all : ${NAME}
 
@@ -22,7 +24,7 @@ B_OBJ = ${B_SRCS:.c=.o}
 
 
 ${NAME} : ${OBJ}
-	cc $(CFLAGS) ${OBJ} -o ${NAME}
+	cc $(CFLAGS)  ${OBJ} -o ${NAME}
 
 clean :
 	rm -f ${OBJ}

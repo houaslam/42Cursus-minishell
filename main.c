@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/14 22:52:10 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/03/15 16:39:21 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ void	creat_env(char **en, t_env *env)
 	i = 0;
 	while (en[i])
 	{
-		j = -1;
-		tmp->ptr = malloc(sizeof(en[i]));
-		while (en[i][++j])
+		j = 0;
+		tmp->path = malloc(sizeof(en[i]));
+		while (en[i][j])
 		{
-			tmp->ptr[j] = en[i][j];
+			tmp->path[j] = en[i][j];
 			printf("%c", en[i][j]);
+			j++;
 		}
 		printf("\n");
 		tmp = tmp->next;
@@ -47,8 +48,8 @@ int	main(int ac, char **av, char **en)
 		creat_env(en, env);
 		while (env)
 		{
-			printf("%s\n", env->ptr);
-			printf("%s\n", env->next->ptr);
+			printf("%s\n", env->path);
+			printf("%s\n", env->next->path);
 			env = env->next;
 		}
 		// minishell(ac, av, env);
