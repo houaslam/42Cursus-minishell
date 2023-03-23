@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split.c                                            :+:      :+:    :+:   */
+/*   libft3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:29:43 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/15 16:30:10 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:17:24 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ char	**ft_func(char **arr, char *s, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**p;
-	int		j;
-	size_t	i;
+	//int		j;
+	//size_t	i;
 	size_t	size ;
 
-	j = 0;
-	i = 0;
+	//j = 0;
+	//i = 0;
 	if (!s)
 		return (NULL);
 	size = ft_dim1((char *)s, c);

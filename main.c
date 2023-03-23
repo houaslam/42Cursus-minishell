@@ -6,36 +6,11 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/15 16:39:21 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:05:04 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	creat_env(char **en, t_env *env)
-{
-	t_env	*tmp;
-	int		j;
-	int		i;
-
-	env = malloc(sizeof(t_env));
-	i = 0;
-	while (en[i])
-	{
-		j = 0;
-		tmp->path = malloc(sizeof(en[i]));
-		while (en[i][j])
-		{
-			tmp->path[j] = en[i][j];
-			printf("%c", en[i][j]);
-			j++;
-		}
-		printf("\n");
-		tmp = tmp->next;
-		i++;
-		printf("here\n");
-	}
-}
 
 int	main(int ac, char **av, char **en)
 {

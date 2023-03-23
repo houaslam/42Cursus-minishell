@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/15 16:35:02 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:20:07 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,14 @@ char	*ft_strchr(const char *str, int c);
 size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s);
+void	ft_lstadd_back(t_env **lst, t_env *new);
+t_env	*ft_lstnew(char *name, char *path);
+int	ft_lstsize(t_env *lst);
+t_env	*ft_lstlast(t_env *lst);
 
-
+//env
+void	creat_env(char **en, t_env *env);
+char    *name(char *env);
+char    *path(char *env);
 
 #endif
