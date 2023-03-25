@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/25 13:01:20 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/03/25 13:56:12 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_lstsize(t_env *lst);
 t_env	*ft_lstlast(t_env *lst);
 
 //env
-void	creat_env(char **en, t_env *env);
+void	creat_env(char **en, t_env **env);
 char    *name(char *env);
 char    *path(char *env);
 
