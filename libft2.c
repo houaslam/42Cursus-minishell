@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   outils.c                                           :+:      :+:    :+:   */
+/*   libft2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:15 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/15 16:48:38 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/03/23 23:53:05 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ t_env	*ft_lstnew(char *name, char *path)
 	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
-	node->path = path;
-	node->name = name;
+	node->path = malloc(sizeof(path));
+	node->name = malloc(sizeof(name));
+	strcpy(node->name, name);
+	strcpy(node->path, path);
 	node->next = NULL;
 	return (node);
 }

@@ -6,12 +6,12 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/03/23 12:16:06 by houaslam         ###   ########.fr        #
+#    Updated: 2023/03/23 23:44:22 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CFLAGS = -Wall -Wextra -Werror  -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
 
 SRCS =  main.c \
 		libft1.c \
