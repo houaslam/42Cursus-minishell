@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/23 12:05:04 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/03/25 13:00:31 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ int	main(int ac, char **av, char **en)
 			env = env->next;
 		}
 		// minishell(ac, av, env);
+		aff(env);
+
 	}
 }

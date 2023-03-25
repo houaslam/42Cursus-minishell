@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:04:34 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/24 15:46:07 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/03/25 13:00:09 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char    *path_(char *env)
         j++;
     path = malloc(sizeof(char) * (j - i));
     j = 0;
-    while(env[i] != '=')
+    i++;
+    while(env[i])
         path[j++] = env[i++];
     path[j] = '\0';
     return(path);
@@ -52,6 +53,7 @@ void	aff(t_env *env)
 	t_env *tmp;
 
 	tmp = env;
+        printf("here\n");
 	while(tmp)
 	{
 		printf("---->name = %s path = %s\n", tmp->name, tmp->path);
@@ -71,11 +73,9 @@ void	creat_env(char **en, t_env *env)
 		name = name_(en[i]);
 		path = path_(en[i]);
 		ft_lstadd_back(&env, ft_lstnew(name, path));
-        printf("%s\n", env->name);
         free(path);
         free(name);
         env = env->next;
 		i++;
 	}
-	aff(env);
 }

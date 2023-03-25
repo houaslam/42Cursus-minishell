@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/23 12:20:07 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/03/25 13:01:20 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,8 @@ t_env	*ft_lstlast(t_env *lst);
 void	creat_env(char **en, t_env *env);
 char    *name(char *env);
 char    *path(char *env);
+
+void	aff(t_env *env);
+
 
 #endif
