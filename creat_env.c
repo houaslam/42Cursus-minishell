@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:04:34 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/25 14:17:29 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:15:03 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,18 @@ void	creat_env(char **en, t_env **env)
 {
 	int		i;
 	char	*name;
+	t_env	*new_node;
 	char 	*path;
-    t_env   *tmp;
 
-	i = 0;
-    tmp = *env;
-	while (en[i])
+	i = 0;	
+    while (en[i])
 	{
 		name = name_(en[i]);
 		path = path_(en[i]);
-		ft_lstadd_back(&tmp, ft_lstnew(name, path));
-		// printf("---->name = %s path = %s\n", (*env)->name, (*env)->path);
+        new_node =  ft_lstnew(name, path);
+		ft_lstadd_back(env, new_node);
         free(path);
         free(name);
-        tmp = tmp->next;
 		i++;
 	}
 }
