@@ -6,11 +6,11 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:29:43 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/23 12:17:24 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:21:06 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_dim1(char *s, char c)
 {

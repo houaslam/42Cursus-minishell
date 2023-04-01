@@ -6,75 +6,53 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:04:34 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/26 15:15:03 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/01 21:35:25 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char    *path_(char *env)
-{
-    int i;
-    int j;
-    char    *path;
-
-    i = 0;
-    while(env[i] != '=')
-        i++;
-    j = i;
-    while(env[j])
-        j++;
-    path = malloc(sizeof(char) * (j - i));
-    j = 0;
-    i++;
-    while(env[i])
-        path[j++] = env[i++];
-    path[j] = '\0';
-    return(path);
-}
-
-char    *name_(char *env)
-{
-    int i;
-    char    *name;
-    i = 0;
-    while(env[i] != '=')
-        i++;
-    name = malloc(sizeof(char) * i + 1);
-    i = -1;
-    while(env[++i] != '=')
-		name[i] = env[i];
-    name[i] = '\0';
-    return(name);
-}
-
 void	aff(t_env *env)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = env;
-	while(tmp)
+	while (tmp)
 	{
 		printf("---->name = %s path = %s\n", tmp->name, tmp->path);
 		tmp = tmp->next;
 	}
 }
-void	creat_env(char **en, t_env **env)
+
+void	creat_env(char **en, t_data **data)
 {
 	int		i;
 	char	*name;
 	t_env	*new_node;
-	char 	*path;
+	char	*path;
+	int		j;
 
-	i = 0;	
-    while (en[i])
+	i = 0;
+	(*data)->env = NULL;
+	while (en[i])
 	{
-		name = name_(en[i]);
-		path = path_(en[i]);
-        new_node =  ft_lstnew(name, path);
-		ft_lstadd_back(env, new_node);
-        free(path);
-        free(name);
+		j = 0;
+		while (en[i][j])
+		{
+			if (en[i][j] == '=')
+			{
+				name = ft_substr(en[i], 0, j);
+				path = ft_substr(en[i], j + 1, ft_strlen(en[i]));
+				new_node = ft_lstnew(name, path);
+				ft_lstadd_back(&(*data)->env, new_node);
+				printf("%s\n", (*data)->env->name);
+				free(path);
+				free(name);
+				j = ft_strlen(en[i]);
+			}
+			else
+				j++;
+		}
 		i++;
 	}
 }

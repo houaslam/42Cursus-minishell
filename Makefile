@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
+#    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/01 21:53:36 by aatki            ###   ########.fr        #
+#    Updated: 2023/04/01 18:18:49 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,12 @@ NAME = minishell
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
 
 SRCS =  main.c \
-		libft1.c \
-		libft2.c \
-		libft3.c \
-		creat_env.c
+		creat_env.c \
+		libft/libft1.c \
+		libft/libft2.c \
+		libft/libft3.c \
+		get_next_line/get_next_line.c \
+		get_next_line/get_next_line_utils.c
 
 all : ${NAME}
 

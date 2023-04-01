@@ -6,11 +6,11 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:15 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/26 15:15:51 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/01 21:38:41 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_lstadd_back(t_env **lst, t_env *new)
 {
@@ -20,6 +20,7 @@ void	ft_lstadd_back(t_env **lst, t_env *new)
 		return ;
 	if (*lst)
 	{
+		printf("new = %s\n", new->name);
 		last = ft_lstlast(*lst);
 		last->next = new;
 	}
@@ -34,17 +35,21 @@ t_env	*ft_lstnew(char *name, char *path)
 	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
+	//change this one
 	node->path = malloc(strlen(path) + 1);
-	if (!node->path) {
+	if (!node->path)
+	{
 		free(node);
 		return (NULL);
 	}
 	node->name = malloc(strlen(name) + 1);
-	if (!node->name) {
+	if (!node->name)
+	{
 		free(node->path);
 		free(node);
 		return (NULL);
 	}
+	//change this one
 	strcpy(node->path, path);
 	strcpy(node->name, name);
 	node->next = NULL;
