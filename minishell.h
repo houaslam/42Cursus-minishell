@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/01 21:52:29 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/01 22:09:01 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	creat_env(char **en, t_env **env);
 char    *name(char *env);
 char    *path(char *env);
 
+void	aff(t_env *env);
 void	aff(t_env *env);
 void	aff(t_env *env);
 
