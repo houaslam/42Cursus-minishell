@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/02 21:18:55 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/02 22:48:46 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ typedef struct env
 
 typedef struct string
 {
+	char	*str;
 	char	*cmd;
-	char	*arg;
-	
 }			t_string;
 
 typedef struct data
 {
-	t_env	*env;
-	char	*s;
+	t_env		*env;
+	t_string	*string;
+	char		*s;
 }			t_data;
 
 //libft
