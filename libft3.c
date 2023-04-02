@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:29:43 by houaslam          #+#    #+#             */
-/*   Updated: 2023/03/23 12:17:24 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/02 20:57:03 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**ft_func(char **arr, char *s, char c)
 	return (arr);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**p;
 	//int		j;

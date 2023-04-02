@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/01 22:09:01 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/02 20:58:14 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_lstadd_back(t_env **lst, t_env *new);
 t_env	*ft_lstnew(char *name, char *path);
 int	ft_lstsize(t_env *lst);
 t_env	*ft_lstlast(t_env *lst);
-
+char	**ft_split(char *s, char c);
 //env
 void	creat_env(char **en, t_env **env);
 char    *name(char *env);
@@ -52,5 +52,8 @@ char    *path(char *env);
 void	aff(t_env *env);
 void	aff(t_env *env);
 void	aff(t_env *env);
+
+//execution
+void ft_echo(char *str, int fd,char **env);
 
 #endif

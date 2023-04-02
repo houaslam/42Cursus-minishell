@@ -6,27 +6,28 @@
 #    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/01 21:53:36 by aatki            ###   ########.fr        #
+#    Updated: 2023/04/02 20:32:10 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
+
+CFLAGS = #-Wall -Wextra -Werror -g3 -fsanitize=address 
 
 SRCS =  main.c \
 		libft1.c \
 		libft2.c \
 		libft3.c \
-		creat_env.c
+		creat_env.c\
+		
 
 all : ${NAME}
 
 OBJ = ${SRCS:.c=.o}
 B_OBJ = ${B_SRCS:.c=.o}
 
-
-${NAME} : ${OBJ}
-	cc $(CFLAGS)  ${OBJ} -o ${NAME}
+${NAME} : ${SRCS}
+	cc $(CFLAGS)  ${SRCS} -o ${NAME}
 
 clean :
 	rm -f ${OBJ}
