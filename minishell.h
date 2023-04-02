@@ -6,12 +6,17 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/01 21:34:06 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:02:30 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define PIPE  124
+# define RED_IN  60
+# define RED_OUT  62
+
 
 # include<unistd.h>
 # include<stdlib.h>
@@ -29,7 +34,7 @@ typedef struct env
 typedef struct data
 {
 	t_env	*env;
-	char	*string;
+	char	*s;
 }			t_data;
 
 //libft

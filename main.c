@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/01 21:49:32 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:02:35 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,29 @@ int	main(int ac, char **av, char **en)
 	{
 		data = malloc(sizeof(t_data));
 		creat_env(en, &data);
-		data = malloc(sizeof(t_data));
 		while (1)
 		{
 			write(1, "minishell> ", 11);
-			data->string = get_next_line(0);
-			if (!data->string)
-				exit(1);
-			printf("%s\n", data->string);
-			// lexer(data);
-			free(data->string);
+			data->s = get_next_line(0);
+			if (!data->s)
+				exit(0);
+			printf("%s\n", data->s);
+			lexer(data);
+			free(data->s);
 		}
 	}
 }
 
-// void	lexer(t_data *data)
+void	lexer(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->s[i])
+	{
+		if (data->s[i] >= 97 && data->s[i] <= 122)
+			i += handle_string(data->s);
+		else if (data->s[i] == PIPE)
+			i += handle_special(data->s);
+	}
+}
