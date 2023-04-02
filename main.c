@@ -6,34 +6,34 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/02 21:02:03 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:13:29 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	lexer(t_data *data)
-// {
-// 	int	i;
+void	lexer(t_data *data)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (data->s[i])
-// 	{
-// 		if (data->s[i] >= 97 && data->s[i] <= 122)
-// 			i += handle_string(data);
-// 		else if (data->s[i] == PIPE)
-// 			i += handle_pipe(data);
-// 		else if (data->s[i] == RED_IN && data->s[i + 1] == RED_IN)
-// 			i += handle_here_doc_in(data);
-// 		else if (data->s[i] == RED_OUT && data->s[i + 1] == RED_OUT)
-// 			i += handle_here_doc_out(data);
-// 		else if (data->s[i] == RED_IN)
-// 			i += handle_redin(data);
-// 		else if (data->s[i] == RED_OUT)
-// 			i += handle_redout(data);
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (data->s[i])
+	{
+		if (data->s[i] >= 97 && data->s[i] <= 122)
+			i += handle_string(data);
+		else if (data->s[i] == PIPE)
+			i += handle_pipe(data);
+		else if (data->s[i] == RED_IN && data->s[i + 1] == RED_IN)
+			i += handle_here_doc_in(data);
+		else if (data->s[i] == RED_OUT && data->s[i + 1] == RED_OUT)
+			i += handle_here_doc_out(data);
+		else if (data->s[i] == RED_IN)
+			i += handle_redin(data);
+		else if (data->s[i] == RED_OUT)
+			i += handle_redout(data);
+		i++;
+	}
+}
 
 // void	lexer(t_data *data)
 // {
