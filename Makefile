@@ -6,7 +6,7 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/02 22:08:54 by houaslam         ###   ########.fr        #
+#    Updated: 2023/04/03 01:25:31 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS =  main.c \
 		libft_bonus/libft2.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
+		tokens.c 
 		
 
 all : ${NAME}

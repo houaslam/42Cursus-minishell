@@ -6,34 +6,40 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/02 22:11:31 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/03 02:13:43 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void	lexer(t_data *data)
-// {
-// 	int	i;
+void	lexer(t_data *data)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (data->s[i])
-// 	{
-// 		if (data->s[i] >= 97 && data->s[i] <= 122)
-// 			i += handle_string(data);
-// 		else if (data->s[i] == PIPE)
-// 			i += handle_pipe(data);
-// 		else if (data->s[i] == RED_IN && data->s[i + 1] == RED_IN)
-// 			i += handle_here_doc_in(data);
-// 		else if (data->s[i] == RED_OUT && data->s[i + 1] == RED_OUT)
-// 			i += handle_here_doc_out(data);
-// 		else if (data->s[i] == RED_IN)
-// 			i += handle_redin(data);
-// 		else if (data->s[i] == RED_OUT)
-// 			i += handle_redout(data);
-// 		i++;
-// 	}
-// }
+	i = 0;
+	printf("%lu\n", strlen(data->s));
+	while (data->s[i])
+	{
+		if (data->s[i] >= 97 && data->s[i] <= 122)
+			i += handle_string(data, i);
+		// else if (data->s[i] == PIPE)
+		// 	i += handle_pipe(data, i);
+		else if (data->s[i] == D_QUOT)
+			i += handle_d_quote(data, i);
+		else if (data->s[i] == S_QUOT)
+			i += handle_s_quote(data, i);
+		// else if (data->s[i] == RED_IN && data->s[i + 1] == RED_IN)
+		// 	i += handle_here_doc_in(data, i);
+		// else if (data->s[i] == RED_OUT && data->s[i + 1] == RED_OUT)
+		// 	i += handle_here_doc_out(data, i);
+		// else if (data->s[i] == RED_IN)
+		// 	i += handle_redin(data, i);
+		// else if (data->s[i] == RED_OUT)
+			// i += handle_redout(data, i);
+		printf("%d\n", i);
+		i++;
+	}
+}
 
 // void	lexer(t_data *data)
 // {
@@ -54,7 +60,7 @@
 // 			{printf("red\n");}
 // 		else if (data->s[i] == RED_OUT)
 // 			{printf("red\n");}
-// 		i++;
+		// i++;
 // 	}
 // }
 
@@ -66,6 +72,7 @@ int	main(int ac, char **av, char **en)
 	if (ac == 1)
 	{
 		data = malloc(sizeof(t_data));
+		data->string = malloc(sizeof(t_string));
 		creat_env(en, &data);
 		while (1)
 		{
@@ -73,8 +80,7 @@ int	main(int ac, char **av, char **en)
 			data->s = get_next_line(0);
 			if (!data->s)
 				exit(0);
-			printf("%s\n", data->s);
-			// lexer(data);
+			lexer(data);
 			free(data->s);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/02 22:48:46 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/03 02:12:11 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define PIPE  124
 # define RED_IN  60
 # define RED_OUT  62
+# define D_QUOT  34
+# define S_QUOT  39
 
 # include<unistd.h>
 # include<stdlib.h>
@@ -62,5 +64,10 @@ t_env	*ft_lstlast(t_env *lst);
 void	creat_env(char **en, t_data **data);
 void	aff(t_env *env);
 
+//tokens
+void	lexer(t_data *data);
+int		handle_string(t_data *data, int i);
+int		handle_d_quote(t_data *data, int i);
+int		handle_s_quote(t_data *data, int i);
 
 #endif
