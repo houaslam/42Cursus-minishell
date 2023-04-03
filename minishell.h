@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/03 02:12:11 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/03 02:41:18 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define RED_OUT  62
 # define D_QUOT  34
 # define S_QUOT  39
+# define STRING 1
+
 
 # include<unistd.h>
 # include<stdlib.h>
@@ -32,6 +34,15 @@ typedef struct env
 	char		*name;
 	struct env	*next;
 }			t_env;
+
+typedef struct str
+{
+	int			type;
+	char		*cmd;
+	char		*red;
+	char		*here_doc;
+	struct str	*next;
+}			t_str;
 
 typedef struct string
 {
