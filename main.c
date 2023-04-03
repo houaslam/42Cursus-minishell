@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/03 02:13:43 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:36:29 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,31 @@ void	lexer(t_data *data)
 	int	i;
 
 	i = 0;
-	printf("%lu\n", strlen(data->s));
+	data->exec = NULL;
+	// printf("%lu\n", strlen(data->s));
 	while (data->s[i])
 	{
-		if (data->s[i] >= 97 && data->s[i] <= 122)
-			i += handle_string(data, i);
+		// if (data->s[i] == RED_IN && data->s[i + 1] == RED_IN)
+		// 	i += handle_here_doc_in(data, i);
+		// else if (data->s[i] == RED_OUT && data->s[i + 1] == RED_OUT)
+		// 	i += handle_here_doc_out(data, i);
+		if (data->s[i] == RED_IN)
+			i += handle_redin(data, i);
+		else if (data->s[i] == RED_OUT)
+			i += handle_redout(data, i);
 		// else if (data->s[i] == PIPE)
 		// 	i += handle_pipe(data, i);
 		else if (data->s[i] == D_QUOT)
 			i += handle_d_quote(data, i);
 		else if (data->s[i] == S_QUOT)
 			i += handle_s_quote(data, i);
-		// else if (data->s[i] == RED_IN && data->s[i + 1] == RED_IN)
-		// 	i += handle_here_doc_in(data, i);
-		// else if (data->s[i] == RED_OUT && data->s[i + 1] == RED_OUT)
-		// 	i += handle_here_doc_out(data, i);
-		// else if (data->s[i] == RED_IN)
-		// 	i += handle_redin(data, i);
-		// else if (data->s[i] == RED_OUT)
-			// i += handle_redout(data, i);
-		printf("%d\n", i);
+		// if (data->s[i] >= 97 && data->s[i] <= 122)
+			// i += handle_string(data, i);
+		// printf("%d\n", i);
 		i++;
 	}
+		aff1(data->exec);
+
 }
 
 // void	lexer(t_data *data)
@@ -72,7 +75,7 @@ int	main(int ac, char **av, char **en)
 	if (ac == 1)
 	{
 		data = malloc(sizeof(t_data));
-		data->string = malloc(sizeof(t_string));
+		data->exec = malloc(sizeof(t_exec));
 		creat_env(en, &data);
 		while (1)
 		{

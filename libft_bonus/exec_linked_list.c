@@ -1,61 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft2.c                                           :+:      :+:    :+:   */
+/*   exec_linked_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:15 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/01 22:27:16 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:16:29 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_lstadd_back(t_env **lst, t_env *new)
+void	ft_lstadd_back_exec(t_exec **lst, t_exec *new)
 {
-	t_env	*last;
+	t_exec	*last;
 
 	if (!lst || !new)
 		return ;
 	if (*lst)
 	{
-		last = ft_lstlast(*lst);
+		last = ft_lstlast_exec(*lst);
 		last->next = new;
 	}
 	else
 		*lst = new;
 }
 
-t_env	*ft_lstnew(char *name, char *path)
+t_exec	*ft_lstnew_exec(char *value, int type)
 {
-	t_env	*node;
+	t_exec	*node;
 
-	node = malloc(sizeof(t_env));
+	node = malloc(sizeof(t_exec));
 	if (!node)
 		return (NULL);
-	//change this one to ft_strlen
-	node->path = malloc(strlen(path) + 1);
-	if (!node->path)
+	node->value = malloc(ft_strlen(value) + 1);
+	if (!node->value)
 	{
 		free(node);
 		return (NULL);
 	}
-	node->name = malloc(strlen(name) + 1);
-	if (!node->name)
+	if (!node->type)
 	{
-		free(node->path);
+		free(node->value);
 		free(node);
 		return (NULL);
 	}
 	//change this one to ft_strcpy
-	strcpy(node->path, path);
-	strcpy(node->name, name);
+	strcpy(node->value, value);
+	node->type = type;
 	node->next = NULL;
 	return (node);
 }
 
-int	ft_lstsize(t_env *lst)
+int	ft_lstsize_exec(t_exec *lst)
 {
 	int	i;
 
@@ -71,9 +69,9 @@ int	ft_lstsize(t_env *lst)
 }
 
 
-t_env	*ft_lstlast(t_env *lst)
+t_exec	*ft_lstlast_exec(t_exec *lst)
 {
-	t_env	*tmp;
+	t_exec	*tmp;
 
 	tmp = lst;
 	if (!lst)

@@ -6,7 +6,7 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/03 01:25:31 by houaslam         ###   ########.fr        #
+#    Updated: 2023/04/03 15:57:30 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 SRCS =  main.c \
 		creat_env.c \
-		libft_bonus/libft2.c \
+		libft_bonus/env_linked_list.c \
+		libft_bonus/exec_linked_list.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
 		tokens.c 
