@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/03 17:51:05 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/04 23:01:43 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@
 # define D_QUOT  34
 # define S_QUOT  39
 # define STRING 1
-
-// # define IN_FILE 2
-// # define OUT_FILE 3
+# define IN_FILE 2
+# define OUT_FILE 3
+# define BUILTIN 4
+# define HERE_DOC_IN 5
+# define HERE_DOC_OUT 6
 
 
 # include<unistd.h>
@@ -43,7 +45,6 @@ typedef struct exec
 	int			type;
 	char		*value;
 	// char		*cmd;
-	// char		*red;
 	char		*here_doc;
 	struct exec	*next;
 }			t_exec;
@@ -83,7 +84,6 @@ t_exec	*ft_lstnew_exec(char *value, int type);
 int		ft_lstsize_exe(t_exec *lst);
 t_exec	*ft_lstlast_exec(t_exec *lst);
 
-
 //env
 void	creat_env(char **en, t_data **data);
 void	aff(t_env *env);
@@ -96,5 +96,11 @@ int		handle_d_quote(t_data *data, int i);
 int		handle_s_quote(t_data *data, int i);
 int		handle_redin(t_data *data, int i);
 int		handle_redout(t_data *data, int i);
+int		handle_here_doc_in(t_data *data, int i);
+int		handle_here_doc_out(t_data *data, int i);
+int		handle_pipe(t_data *data, int i);
+
+int		builtin(char *str);
+int		exact_type(char *str);
 
 #endif
