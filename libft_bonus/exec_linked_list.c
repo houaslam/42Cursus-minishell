@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:15 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/03 17:16:29 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/05 00:28:11 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	ft_lstsize_exec(t_exec *lst)
 	}
 	return (i);
 }
-
 
 t_exec	*ft_lstlast_exec(t_exec *lst)
 {

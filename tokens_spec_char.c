@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/04 23:05:01 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/05 00:31:27 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	handle_pipe(t_data *data, int i)
 	int	k;
 
 	k = i;
-	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(NULL, PIPE));
+	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec("|", PIPE));
 	i++;
 	return (i - k);
 }
