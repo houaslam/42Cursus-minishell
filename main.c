@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/05 01:04:43 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/05 21:30:12 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ void	lexer(t_data *data)
 			i += handle_d_quote(data, i);
 		else if (data->s[i] == S_QUOT)
 			i += handle_s_quote(data, i);
-		else if (ft_isalpha(data->s[i]))
+		else if (ft_isstring(data->s[i]))
 			i += handle_string(data, i);
-		printf("%c\n", data->s[i - 1]);
-		printf("%c\n", data->s[i]);
-		if (data->s[i] != '\0')
+		else
 			i++;
 	}
 	aff1(data->exec);

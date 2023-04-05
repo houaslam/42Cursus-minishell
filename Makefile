@@ -6,7 +6,7 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/04 23:03:20 by houaslam         ###   ########.fr        #
+#    Updated: 2023/04/05 01:57:45 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,7 @@ SRCS =  main.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
 		tokens_string.c \
-		tokens_spec_char.c \
-		string.c
+		tokens_spec_char.c 
 		
 
 all : ${NAME}

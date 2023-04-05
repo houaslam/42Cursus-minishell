@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/04 23:01:43 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/05 18:30:53 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define BUILTIN 4
 # define HERE_DOC_IN 5
 # define HERE_DOC_OUT 6
+# define EXIT_STATUS 7
+# define ENV_VAR 8
 
 
 # include<unistd.h>
@@ -44,21 +46,14 @@ typedef struct exec
 {
 	int			type;
 	char		*value;
-	// char		*cmd;
 	char		*here_doc;
 	struct exec	*next;
 }			t_exec;
 
-// typedef struct exec
-// {
-// 	char	*str;
-// 	char	*cmd;
-// }			t_exec;
 
 typedef struct data
 {
 	t_env		*env;
-	// t_str		*str;
 	t_exec		*exec;
 	char		*s;
 }			t_data;
@@ -99,6 +94,8 @@ int		handle_redout(t_data *data, int i);
 int		handle_here_doc_in(t_data *data, int i);
 int		handle_here_doc_out(t_data *data, int i);
 int		handle_pipe(t_data *data, int i);
+int		handle_dollar_sign(t_data *data, int i);
+
 
 int		builtin(char *str);
 int		exact_type(char *str);
