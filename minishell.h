@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/05 18:30:53 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:36:11 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@
 # include<stdlib.h>
 # include<stdio.h>
 # include<string.h>
-# include"get_next_line/get_next_line.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 # include"libft_/libft.h"
 
 typedef struct env

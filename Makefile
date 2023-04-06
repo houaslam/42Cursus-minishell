@@ -6,7 +6,7 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/05 01:57:45 by houaslam         ###   ########.fr        #
+#    Updated: 2023/04/05 22:36:17 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,6 @@ SRCS =  main.c \
 		creat_env.c \
 		libft_bonus/env_linked_list.c \
 		libft_bonus/exec_linked_list.c \
-		get_next_line/get_next_line.c \
-		get_next_line/get_next_line_utils.c \
 		tokens_string.c \
 		tokens_spec_char.c 
 		
@@ -30,7 +28,7 @@ B_OBJ = ${B_SRCS:.c=.o}
 
 
 ${NAME} : ${OBJ}
-	cc $(CFLAGS)  libft_/libft.a ${OBJ}  -o ${NAME}
+	cc $(CFLAGS)  libft_/libft.a ${OBJ}  -o ${NAME} -L/usr/local/lib -lreadline
 
 clean :
 	rm -f ${OBJ}

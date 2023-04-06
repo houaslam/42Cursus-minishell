@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/05 21:30:12 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/05 22:34:07 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ int	main(int ac, char **av, char **en)
 		creat_env(en, &data);
 		while (1)
 		{
-			write(1, "minishell> ", 11);
-			data->s = get_next_line(0);
+			data->s = readline("minishell>");
 			if (!data->s)
 				exit(0);
 			lexer(data);
