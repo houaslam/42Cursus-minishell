@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:15 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/05 00:28:11 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/07 21:37:37 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,6 @@ t_exec	*ft_lstnew_exec(char *value, int type)
 	node->value = malloc(ft_strlen(value) + 1);
 	if (!node->value)
 	{
-		free(node);
-		return (NULL);
-	}
-	if (!node->type)
-	{
-		free(node->value);
 		free(node);
 		return (NULL);
 	}

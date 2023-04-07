@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/05 22:36:03 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/06 22:24:22 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,35 @@ int	handle_redout(t_data *data, int i)
 int	handle_pipe(t_data *data, int i)
 {
 	int	k;
+	int	c;
 
-	k = i;
-	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec("|", PIPE));
 	i++;
-	return (i - k);
+	k = i;
+	c = 0;
+	while (data->s[c])
+	{
+		if (ft_isalpha(data->s[i]))
+		{
+			k = 5;
+			break ;
+		}
+		if (data->s[c] == PIPE)
+		{
+			printf("ERROR\n");
+			return (1);
+		}
+		c++;
+	}
+	while (data->s[i])
+	{
+		if (ft_isalpha(data->s[i]))
+		{
+			k = 5;
+			break ;
+		}
+		i++;
+	}
+	if (k == 5 && c == 5)
+		ft_lstadd_back_exec(&data->exec, ft_lstnew_exec("|", PIPE));
+	return (1);
 }

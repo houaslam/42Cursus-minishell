@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/05 22:36:11 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/07 20:52:26 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define HERE_DOC_OUT 6
 # define EXIT_STATUS 7
 # define ENV_VAR 8
-
 
 # include<unistd.h>
 # include<stdlib.h>
@@ -51,11 +50,19 @@ typedef struct exec
 	struct exec	*next;
 }			t_exec;
 
+typedef struct history
+{
+	char			*cmd;
+	int				nb;
+	struct history	*next;
+}				t_his;
 
 typedef struct data
 {
 	t_env		*env;
 	t_exec		*exec;
+	t_his		*history;
+	int			cmd_nb;
 	char		*s;
 }			t_data;
 
@@ -80,10 +87,17 @@ t_exec	*ft_lstnew_exec(char *value, int type);
 int		ft_lstsize_exe(t_exec *lst);
 t_exec	*ft_lstlast_exec(t_exec *lst);
 
+// linked list
+void	ft_lstadd_back_his(t_his **lst, t_his *new);
+t_his	*ft_lstnew_his(char *value, int type);
+int		ft_lstsize_his(t_his *lst);
+t_his	*ft_lstlast_his(t_his *lst);
+
 //env
 void	creat_env(char **en, t_data **data);
 void	aff(t_env *env);
 void	aff1(t_exec *env);
+void	aff2(t_his *env);
 
 //tokens
 void	lexer(t_data *data);
@@ -96,7 +110,7 @@ int		handle_here_doc_in(t_data *data, int i);
 int		handle_here_doc_out(t_data *data, int i);
 int		handle_pipe(t_data *data, int i);
 int		handle_dollar_sign(t_data *data, int i);
-
+void	handle_history(t_data *data);
 
 int		builtin(char *str);
 int		exact_type(char *str);

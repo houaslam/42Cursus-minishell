@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/05 22:00:45 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/07 21:37:23 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	handle_string(t_data *data, int i)
 	char	*str;
 
 	k = i;
+
 	if (data->s[i] == '$')
 		return (handle_dollar_sign(data, i));
 	while (data->s[i] && ft_isstring(data->s[i]))

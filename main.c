@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/05 22:34:07 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/07 21:38:15 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	lexer(t_data *data)
 		else
 			i++;
 	}
-	aff1(data->exec);
 }
+
 
 int	main(int ac, char **av, char **en)
 {
@@ -57,8 +57,11 @@ int	main(int ac, char **av, char **en)
 			data->s = readline("minishell>");
 			if (!data->s)
 				exit(0);
+			add_history(data->s);
 			lexer(data);
+			aff1(data->exec);
 			free(data->s);
+			data->cmd_nb++;
 		}
 	}
 }
