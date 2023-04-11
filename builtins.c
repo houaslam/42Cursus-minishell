@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 05:24:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/11 02:27:09 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/11 02:31:00 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void	ft_export(char **env, char *arg,int fd)
 			i++;
 		}
 		printf("declare -x %s=\"%s\"\n", sp2[0],sp2[1]);
-		//ft_free(sp2);
+		ft_free(sp2,2);
 		i++;
 	}
 }

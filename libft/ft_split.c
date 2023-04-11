@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:34:09 by aatki             #+#    #+#             */
-/*   Updated: 2022/10/27 22:43:17 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/11 02:30:31 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	word(char const *s, char c)
 	return (k);
 }
 
-static char	**ft_free(char **p, int len)
+char	**ft_free(char **p, int len)
 {
 	int	i;
 
