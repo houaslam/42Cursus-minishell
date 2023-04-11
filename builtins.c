@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 05:24:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/11 02:44:30 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/11 03:48:16 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,24 @@ void	ft_pwd(int fd)
 		printf("%s\n", buff);
 	else
 		ft_error("no path");
+}
+
+void ft_unset(char **env,char *arg)
+{
+	int i;
+
+	i=0;
+	while ((env[i]))
+	{
+		if (!ft_strncmp(env[i], arg, ft_strlen(arg)))
+			break;
+		i++;
+	}
+	while ((env[i+1]))
+	{
+		env[i]=ft_strdup(env[i+1]);
+		i++;
+	}
+	env[i]=NULL;
+	ft_env(env,NULL,1);
 }

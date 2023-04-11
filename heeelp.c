@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 02:33:24 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/11 02:53:28 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/11 03:11:07 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,13 @@ char	**ft_envo(char **env)
 	{
 		i++;
 	}
-	menv = malloc(sizeof(char *) * i);
+	menv = malloc(sizeof(char *) * i + 2);
 	i = 0;
 	while (env[i])
 	{
 		menv[i] = ft_strdup(env[i]);
 		i++;
 	}
+    env[i]=NULL;
 	return (menv);
 }

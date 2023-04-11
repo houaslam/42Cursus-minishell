@@ -6,13 +6,13 @@
 #    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/11 02:38:49 by aatki            ###   ########.fr        #
+#    Updated: 2023/04/11 03:30:49 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = #-Wall -Wextra -Werror -g3 -fsanitize=address 
+CFLAGS = #-g3 -fsanitize=address #-Wall -Wextra -Werror 
 
 SRCS =  main.c \
 		builtins.c\
