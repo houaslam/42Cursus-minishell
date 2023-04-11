@@ -6,13 +6,13 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 07:38:13 by aatki             #+#    #+#             */
-/*   Updated: 2022/10/25 18:04:17 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/11 02:23:25 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*join;
 	int		i;
@@ -29,5 +29,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[++i])
 		join[ft_strlen(s1) + i] = s2[i];
 	join[ft_strlen(s1) + i] = '\0';
+	free(s1);
 	return (join);
 }

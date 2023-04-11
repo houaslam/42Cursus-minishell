@@ -6,13 +6,13 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 05:24:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/11 00:16:38 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/11 02:27:09 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char **ft_env(char **env)
+char **ft_envo(char **env)
 {
 	char **menv;
 	int i=0;
@@ -67,6 +67,24 @@ void	ft_cdi(char *dir)
 		ft_error("error in chdir");
 }
 
+void	sort_env(char **env)
+{
+	int i = 0;
+	char *change;
+	while ((env[i]))
+	{
+		if(env[i+1] && env[i][0] > env[i+1][0])
+		{
+			change=ft_strdup(env[i]);
+			env[i]=ft_strdup(env[i+1]);
+			env[i+1]=ft_strdup(change);
+			free(change);
+			i=0;
+		}
+		i++;
+	}
+}
+
 void	found(char *sa, char **env)
 {
 	int	i;
@@ -108,15 +126,67 @@ void	ft_echo(char **s, int fd, char **env)
 		printf("\n");
 }
 
-void	ft_env(char **env, int fd)
+int here(char **env,char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if(arg && arg[ft_strlen(arg)-1]=='=' && !ft_strncmp(env[i],arg,ft_strlen(arg)))
+		return (1);
+		i++;
+	}
+	return 0;
+}
+
+void	ft_export(char **env, char *arg,int fd)
+{
+	int	i;
+
+	i = 0;
+	char **export=ft_envo(env);
+	sort_env(export);
+	dup2(fd, 1);
+	char **sp;
+	if(arg)
+		sp=ft_split(arg,'=');
+	sp[0]=ft_strjoin(sp[0],"=");
+	if(arg && !here(export,sp[0]))
+		ft_error("No such file or directory");
+	char **sp2;
+	while (export[i])
+	{
+		sp2=ft_split(export[i],'=');
+		if(arg && here(export,sp[0]) && !ft_strncmp(export[i],sp[0],ft_strlen(sp[0])))
+		{
+			printf("declare -x %s=\"%s\"\n", sp[0],sp[1]);
+			i++;
+		}
+		printf("declare -x %s=\"%s\"\n", sp2[0],sp2[1]);
+		//ft_free(sp2);
+		i++;
+	}
+}
+
+void	ft_env(char **env, char *arg,int fd)
 {
 	int	i;
 
 	i = 0;
 	dup2(fd, 1);
+	char **sp;
+	if(arg)
+		sp=ft_split(arg,'=');
+	if(arg && !here(env,sp[0]))
+		ft_error("No such file or directory");
 	while (env[i])
 	{
-		printf("declare -x");
+		if(arg && here(env,sp[0]) && !ft_strncmp(env[i],sp[0],ft_strlen(sp[0])))
+		{
+			printf("%s\n",arg);
+			i++;
+		}
 		printf("%s\n", env[i]);
 		i++;
 	}

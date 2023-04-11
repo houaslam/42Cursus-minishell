@@ -6,7 +6,7 @@
 #    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/04 06:41:34 by aatki            ###   ########.fr        #
+#    Updated: 2023/04/11 02:23:15 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ all : ${NAME}
 OBJ = ${SRCS:.c=.o}
 B_OBJ = ${B_SRCS:.c=.o} 
 
-${NAME} : ${SRCS}
+${NAME} : ${SRCS} ${SRCL} ${BSRCL}
 	cc $(CFLAGS)  ${SRCS} ${SRCL} ${BSRCL} -o ${NAME}
 
 clean :
