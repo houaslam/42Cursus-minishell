@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/09 00:55:40 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:13:33 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int ac, char **av, char **en)
 			lexer(data);
 			aff1(data->exec);
 			free(data->s);
-			data->cmd_nb++;
+			free_exec(&data->exec);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:15 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/03 15:23:44 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/09 21:44:12 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ t_env	*ft_lstnew(char *name, char *path)
 		free(node);
 		return (NULL);
 	}
-	//change this one to ft_strcpy
-	strcpy(node->path, path);
-	strcpy(node->name, name);
+	ft_strcpy(node->path, path);
+	ft_strcpy(node->name, name);
 	node->next = NULL;
 	return (node);
 }
@@ -68,7 +67,6 @@ int	ft_lstsize(t_env *lst)
 	}
 	return (i);
 }
-
 
 t_env	*ft_lstlast(t_env *lst)
 {

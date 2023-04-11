@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:15 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/07 21:37:37 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/09 21:44:28 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ t_exec	*ft_lstnew_exec(char *value, int type)
 		free(node);
 		return (NULL);
 	}
-	//change this one to ft_strcpy
-	strcpy(node->value, value);
+	ft_strcpy(node->value, value);
 	node->type = type;
 	node->next = NULL;
 	return (node);

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/09 00:59:38 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:19:27 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # define RED_OUT  62
 # define D_QUOT  34
 # define S_QUOT  39
-# define STRING 1
 # define IN_FILE 2
-# define OUT_FILE 3
+# define STRING 1
 # define BUILTIN 4
+# define OUT_FILE 3
 # define HERE_DOC_IN 5
 # define HERE_DOC_OUT 6
 # define EXIT_STATUS 7
@@ -40,21 +40,22 @@ typedef struct env
 	char		*path;
 	char		*name;
 	struct env	*next;
+	struct env	*prev;
 }			t_env;
 
 typedef struct exec
 {
 	int			type;
 	char		*value;
-	char		*here_doc;
 	struct exec	*next;
+	struct exec	*prev;
 }			t_exec;
 
-typedef struct data
+typedef struct s_data
 {
+	int			g_exit_status;
 	t_env		*env;
 	t_exec		*exec;
-	int			cmd_nb;
 	char		*s;
 }			t_data;
 
@@ -87,18 +88,18 @@ void	aff1(t_exec *env);
 
 //tokens
 void	lexer(t_data *data);
+int		handle_pipe(t_data *data, int i);
+int		handle_redin(t_data *data, int i);
 int		handle_string(t_data *data, int i);
+int		handle_redout(t_data *data, int i);
 int		handle_d_quote(t_data *data, int i);
 int		handle_s_quote(t_data *data, int i);
-int		handle_redin(t_data *data, int i);
-int		handle_redout(t_data *data, int i);
 int		handle_here_doc_in(t_data *data, int i);
-int		handle_here_doc_out(t_data *data, int i);
-int		handle_pipe(t_data *data, int i);
 int		handle_dollar_sign(t_data *data, int i);
-void	handle_history(t_data *data);
+int		handle_here_doc_out(t_data *data, int i);
+int		handle_env_var(t_data *data, int i, int k);
 
-int		builtin(char *str);
-int		exact_type(char *str);
+//outils
+char	*seach_env_value(char *str, t_data *data);
 
 #endif
