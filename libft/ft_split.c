@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 17:34:09 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/11 02:30:31 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/11 02:44:35 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**ft_free(char **p, int len)
 		free(p[i]);
 		i++;
 	}
-	free (p);
+	free(p);
 	return (NULL);
 }
 
@@ -72,7 +72,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	len = compt1(s, c);
-	p = malloc (sizeof(char *) * (len + 1));
+	p = malloc(sizeof(char *) * (len + 1));
 	if (!p)
 		return (NULL);
 	while (*s && i < len)

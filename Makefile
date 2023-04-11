@@ -6,7 +6,7 @@
 #    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/11 02:23:15 by aatki            ###   ########.fr        #
+#    Updated: 2023/04/11 02:38:49 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ CFLAGS = #-Wall -Wextra -Werror -g3 -fsanitize=address
 
 SRCS =  main.c \
 		builtins.c\
-		utils.c
+		builtins2.c\
+		utils.c\
+		heeelp.c
 		
 
 SRCL = ./libft/ft_atoi.c ./libft/ft_calloc.c ./libft/ft_isalpha.c ./libft/ft_isdigit.c ./libft/ft_memchr.c ./libft/ft_memcpy.c \
