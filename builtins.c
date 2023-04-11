@@ -6,13 +6,34 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 05:24:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/11 03:48:16 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/11 23:26:15 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_export(char **env, char *arg, int fd)
+char **equal(char *s,char c)
+{
+	char **sp=malloc(sizeof(char*)*2);
+	int i=0;
+	sp[0]=malloc(ft_strlen(s));
+	// sp[0][ft_strlen(s)-1]='\0';
+	while(s[i])
+	{
+		sp[0][i]=s[i];
+		if(s[i]=='=')
+		{
+			sp[0][i + 1]='\0';
+			// free(sp[0]+i+2);
+			break;
+		}
+		i++;
+	}
+	sp[1]=ft_strchr(s,c)+1;
+	return sp;
+}
+
+void	ft_export(char **env, char *arg, int fd,char *plus)
 {
 	int		i;
 	char	**export;
@@ -20,25 +41,25 @@ void	ft_export(char **env, char *arg, int fd)
 	char	**sp2;
 
 	i = 0;
-	export = ft_envo(env);
+	export = ft_envoo(env,plus);
 	sort_env(export);
 	dup2(fd, 1);
 	if (arg)
-		sp = ft_split(arg, '=');
-	sp[0] = ft_strjoin(sp[0], "=");
+		sp = equal(arg, '=');
+	//sp[0] = ft_strjoin(sp[0], "=");
 	if (arg && !here(export, sp[0]))
 		ft_error("No such file or directory");
 	while (export[i])
 	{
-		sp2 = ft_split(export[i], '=');
 		if (arg && here(export, sp[0]) && !ft_strncmp(export[i], sp[0],
 				ft_strlen(sp[0])))
 		{
-			printf("declare -x %s=\"%s\"\n", sp[0], sp[1]);
+			printf("declare -xx %s\"%s\"\n", sp[0], sp[1]);
 			i++;
 		}
-		printf("declare -x %s=\"%s\"\n", sp2[0], sp2[1]);
-		ft_free(sp2, 2);
+		sp2 = equal(export[i], '=');
+		printf("declare -x %s\"%s\"\n", sp2[0], sp2[1]);
+		//ft_free(sp2, 2);
 		i++;
 	}
 }
@@ -51,7 +72,7 @@ void	ft_env(char **env, char *arg, int fd)
 	i = 0;
 	dup2(fd, 1);
 	if (arg)
-		sp = ft_split(arg, '=');
+		sp = equal(arg, '=');
 	if (arg && !here(env, sp[0]))
 		ft_error("No such file or directory");
 	while (env[i])
@@ -78,22 +99,25 @@ void	ft_pwd(int fd)
 		ft_error("no path");
 }
 
-void ft_unset(char **env,char *arg)
+void	ft_unset(char **env, char *arg)
 {
-	int i;
+	int	i;
 
-	i=0;
+	i = 0;
 	while ((env[i]))
 	{
-		if (!ft_strncmp(env[i], arg, ft_strlen(arg)))
+		if (arg && !ft_strncmp(env[i], arg, ft_strlen(arg)))
 			break;
 		i++;
 	}
-	while ((env[i+1]))
+	if(!env[i])
+		return;
+	while ((env[i + 1]))
 	{
-		env[i]=ft_strdup(env[i+1]);
+		free(env[i]);
+		env[i] = ft_strdup(env[i + 1]);
 		i++;
 	}
-	env[i]=NULL;
-	ft_env(env,NULL,1);
+	env[i] = NULL;
+	ft_env(env, NULL, 1);
 }
