@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 00:56:35 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/10 20:57:24 by aatki            ###   ########.fr       */
+/*   Created: 2022/10/06 22:56:19 by aatki             #+#    #+#             */
+/*   Updated: 2022/10/27 11:53:32 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int c, char **av, char **env)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	//ft_echo(av, 1, env);
-	//ft_pwd(1);
-	ft_cd(env,av[1]);
+	size_t				i;
+	unsigned char		*x;
+
+	i = 0;
+	x = (unsigned char *) b;
+	while (i < len)
+	{
+		x[i] = (unsigned char)c;
+		i++;
+	}
+	return ((void *)x);
 }

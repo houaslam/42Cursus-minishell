@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 00:56:35 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/10 20:57:24 by aatki            ###   ########.fr       */
+/*   Created: 2022/10/19 11:49:36 by aatki             #+#    #+#             */
+/*   Updated: 2022/10/23 16:05:30 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int c, char **av, char **env)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	//ft_echo(av, 1, env);
-	//ft_pwd(1);
-	ft_cd(env,av[1]);
+	t_list	*t;
+	t_list	*res;
+
+	t = NULL;
+	if (!lst || !del || !f)
+		return (NULL);
+	while (lst)
+	{
+		res = ft_lstnew(f(lst->content));
+		if (res == NULL)
+		{
+			ft_lstclear(&t, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&t, res);
+		lst = lst->next;
+	}
+	return (t);
 }

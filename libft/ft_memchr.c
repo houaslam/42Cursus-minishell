@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 00:56:35 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/10 20:57:24 by aatki            ###   ########.fr       */
+/*   Created: 2022/10/18 13:13:19 by aatki             #+#    #+#             */
+/*   Updated: 2022/10/23 17:44:31 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "./libft.h"
 
-int	main(int c, char **av, char **env)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	//ft_echo(av, 1, env);
-	//ft_pwd(1);
-	ft_cd(env,av[1]);
+	unsigned char	*g;
+	size_t			i;
+
+	g = (unsigned char *) s;
+	i = 0;
+	while (i < n)
+	{
+		if (g[i] == (unsigned char)c)
+			return (g + i);
+		i++;
+	}
+	return (NULL);
 }

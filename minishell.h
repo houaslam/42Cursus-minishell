@@ -6,54 +6,46 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/02 20:58:14 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/11 00:14:33 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include<unistd.h>
-# include<stdlib.h>
-# include<stdio.h>
-# include<string.h>
+# include "./libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
 
-typedef struct data
+typedef struct t_cmd
 {
-	char	**env;
-}			t_data;
+	char			*cmd;
+	struct t_cmd	*next_cmd;
+}					t_cmd;
 
-typedef struct env
+typedef struct t_pipe
 {
-	char		*path;
-	char		*name;
-	struct env	*next;
-}			t_env;
-
-//libft
-int		ft_dim1(char *s, char c);
-char	**ft_freestr(char **arr, int p);
-char	**ft_func(char **arr, char *s, char c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strchr(const char *str, int c);
-size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strdup(const char *s);
-void	ft_lstadd_back(t_env **lst, t_env *new);
-t_env	*ft_lstnew(char *name, char *path);
-int	ft_lstsize(t_env *lst);
-t_env	*ft_lstlast(t_env *lst);
-char	**ft_split(char *s, char c);
-//env
-void	creat_env(char **en, t_env **env);
-char    *name(char *env);
-char    *path(char *env);
-
-void	aff(t_env *env);
-void	aff(t_env *env);
-void	aff(t_env *env);
+	t_cmd			c;
+	struct t_pipe	*next_pipe;
+	char			*infile;
+	char			*outfile;
+	char			*heredoc;
+}					t_pipe;
 
 //execution
-void ft_echo(char *str, int fd,char **env);
+//builtins
+
+void				ft_echo(char **str, int fd, char **env);
+void				ft_pwd(int fd);
+void				ft_exit(int e);
+void				ft_env(char **env, int fd);
+void				ft_echo(char **s, int fd, char **env);
+void				found(char *sa, char **env);
+void				ft_cd(char **env, char *dir);
+//
+void				ft_error(char *s);
+char **ft_env(char **env);
 
 #endif

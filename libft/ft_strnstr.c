@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 00:56:35 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/10 20:57:24 by aatki            ###   ########.fr       */
+/*   Created: 2022/10/11 01:30:51 by aatki             #+#    #+#             */
+/*   Updated: 2022/10/27 22:25:05 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int c, char **av, char **env)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	//ft_echo(av, 1, env);
-	//ft_pwd(1);
-	ft_cd(env,av[1]);
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	if (needle[0] == '\0')
+		return ((char *)(haystack));
+	while (haystack[i] && i < len)
+	{
+		while (haystack[i + j] == needle[j] && (i + j) < len)
+		{
+			if (needle[j + 1] == '\0')
+				return ((char *)&haystack[i]);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (NULL);
 }

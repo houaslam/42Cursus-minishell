@@ -6,7 +6,7 @@
 #    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/02 20:32:10 by aatki            ###   ########.fr        #
+#    Updated: 2023/04/04 06:41:34 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,19 +15,27 @@ NAME = minishell
 CFLAGS = #-Wall -Wextra -Werror -g3 -fsanitize=address 
 
 SRCS =  main.c \
-		libft1.c \
-		libft2.c \
-		libft3.c \
-		creat_env.c\
+		builtins.c\
+		utils.c
 		
+
+SRCL = ./libft/ft_atoi.c ./libft/ft_calloc.c ./libft/ft_isalpha.c ./libft/ft_isdigit.c ./libft/ft_memchr.c ./libft/ft_memcpy.c \
+	./libft/ft_memset.c ./libft/ft_strdup.c ./libft/ft_strlcpy.c ./libft/ft_strncmp.c ./libft/ft_strrchr.c ./libft/ft_toupper.c \
+	./libft/ft_bzero.c ./libft/ft_isalnum.c ./libft/ft_isascii.c ./libft/ft_isprint.c ./libft/ft_memcmp.c ./libft/ft_memmove.c ./libft/ft_strchr.c \
+	./libft/ft_strlcat.c ./libft/ft_strlen.c ./libft/ft_strnstr.c ./libft/ft_tolower.c ./libft/ft_substr.c ./libft/ft_strtrim.c ./libft/ft_split.c \
+	./libft/ft_strjoin.c ./libft/ft_itoa.c ./libft/ft_strmapi.c ./libft/ft_striteri.c ./libft/ft_putchar_fd.c ./libft/ft_putstr_fd.c ./libft/ft_putendl_fd.c \
+	./libft/ft_putnbr_fd.c
+
+BSRCL = ./libft/ft_lstnew_bonus.c ./libft/ft_lstadd_front_bonus.c ./libft/ft_lstsize_bonus.c ./libft/ft_lstlast_bonus.c ./libft/ft_lstdelone_bonus.c ./libft/ft_lstclear_bonus.c \
+	./libft/ft_lstiter_bonus.c ./libft/ft_lstadd_back_bonus.c ./libft/ft_lstmap_bonus.c
 
 all : ${NAME}
 
 OBJ = ${SRCS:.c=.o}
-B_OBJ = ${B_SRCS:.c=.o}
+B_OBJ = ${B_SRCS:.c=.o} 
 
 ${NAME} : ${SRCS}
-	cc $(CFLAGS)  ${SRCS} -o ${NAME}
+	cc $(CFLAGS)  ${SRCS} ${SRCL} ${BSRCL} -o ${NAME}
 
 clean :
 	rm -f ${OBJ}
@@ -35,7 +43,7 @@ clean :
 push :
 	git add .
 	git commit -m minishell
-	git push
+	git push origin aicha
 
 fclean : clean
 	rm -f $(NAME)

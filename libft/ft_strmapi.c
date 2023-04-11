@@ -1,20 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 00:56:35 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/10 20:57:24 by aatki            ###   ########.fr       */
+/*   Created: 2022/10/18 11:52:34 by aatki             #+#    #+#             */
+/*   Updated: 2022/10/27 22:27:09 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int c, char **av, char **env)
+// char	f(unsigned int a, char b)
+// {
+// 	a = 1;
+// 	return (ft_toupper(b));
+// }
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	//ft_echo(av, 1, env);
-	//ft_pwd(1);
-	ft_cd(env,av[1]);
+	char			*mapi;
+	unsigned int	i;
+
+	if (!s && !f)
+		return (NULL);
+	i = 0;
+	mapi = malloc(ft_strlen(s) + 1);
+	if (!mapi)
+		return (NULL);
+	while (s[i])
+	{
+		mapi[i] = f(i, s[i]);
+		i++;
+	}
+	mapi[i] = '\0';
+	return (mapi);
 }

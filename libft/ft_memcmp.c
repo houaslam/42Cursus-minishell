@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 00:56:35 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/10 20:57:24 by aatki            ###   ########.fr       */
+/*   Created: 2022/10/12 02:46:57 by aatki             #+#    #+#             */
+/*   Updated: 2022/10/25 18:26:31 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int c, char **av, char **env)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	//ft_echo(av, 1, env);
-	//ft_pwd(1);
-	ft_cd(env,av[1]);
+	unsigned char	*s11;
+	unsigned char	*s22;
+
+	s11 = (unsigned char *)s1;
+	s22 = (unsigned char *)s2;
+	while (n)
+	{
+		if (*s11 != *s22)
+			return (*s11 - *s22);
+		s11 ++;
+		s22 ++;
+		n--;
+	}
+	return (0);
 }

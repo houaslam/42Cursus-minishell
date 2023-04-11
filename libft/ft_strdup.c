@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 00:56:35 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/10 20:57:24 by aatki            ###   ########.fr       */
+/*   Created: 2022/10/13 13:39:32 by aatki             #+#    #+#             */
+/*   Updated: 2022/10/22 17:55:51 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int c, char **av, char **env)
+char	*ft_strdup(const char *src)
 {
-	//ft_echo(av, 1, env);
-	//ft_pwd(1);
-	ft_cd(env,av[1]);
+	char	*depliquer;
+	int		len;
+	int		i;
+
+	len = 0;
+	i = 0;
+	while (src[len])
+		len++;
+	depliquer = (char *)malloc(sizeof (char) * (len + 1));
+	if (!depliquer)
+		return (0);
+	while (src[i])
+	{
+		depliquer[i] = src[i];
+		i++;
+	}
+	depliquer[i] = '\0';
+	return (depliquer);
 }
