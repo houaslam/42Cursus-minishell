@@ -6,34 +6,37 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 05:24:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/11 23:26:15 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/12 02:28:58 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char **equal(char *s,char c)
+char	**equal(char *s, char c)
 {
-	char **sp=malloc(sizeof(char*)*2);
-	int i=0;
-	sp[0]=malloc(ft_strlen(s));
+	char	**sp;
+	int		i;
+
+	sp = malloc(sizeof(char *) * 2);
+	i = 0;
+	sp[0] = malloc(ft_strlen(s));
 	// sp[0][ft_strlen(s)-1]='\0';
-	while(s[i])
+	while (s[i])
 	{
-		sp[0][i]=s[i];
-		if(s[i]=='=')
+		sp[0][i] = s[i];
+		if (s[i] == '=')
 		{
-			sp[0][i + 1]='\0';
+			sp[0][i + 1] = '\0';
 			// free(sp[0]+i+2);
-			break;
+			break ;
 		}
 		i++;
 	}
-	sp[1]=ft_strchr(s,c)+1;
-	return sp;
+	sp[1] = ft_strchr(s, c) + 1;
+	return (sp);
 }
 
-void	ft_export(char **env, char *arg, int fd,char *plus)
+void	ft_export(char **env, char *arg, int fd, char *plus)
 {
 	int		i;
 	char	**export;
@@ -41,7 +44,7 @@ void	ft_export(char **env, char *arg, int fd,char *plus)
 	char	**sp2;
 
 	i = 0;
-	export = ft_envoo(env,plus);
+	export = ft_envoo(env, plus);
 	sort_env(export);
 	dup2(fd, 1);
 	if (arg)
@@ -107,17 +110,19 @@ void	ft_unset(char **env, char *arg)
 	while ((env[i]))
 	{
 		if (arg && !ft_strncmp(env[i], arg, ft_strlen(arg)))
-			break;
+			break ;
 		i++;
 	}
-	if(!env[i])
-		return;
+	if (!env[i])
+		return ;
 	while ((env[i + 1]))
 	{
+		printf("vjkfdbh\n");
 		free(env[i]);
 		env[i] = ft_strdup(env[i + 1]);
 		i++;
 	}
+	exit(0);
 	env[i] = NULL;
 	ft_env(env, NULL, 1);
 }

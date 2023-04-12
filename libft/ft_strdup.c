@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 13:39:32 by aatki             #+#    #+#             */
-/*   Updated: 2022/10/22 17:55:51 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/12 00:42:40 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strdup(const char *src)
 
 	len = 0;
 	i = 0;
+	if(!src)
+		return NULL;
 	while (src[len])
 		len++;
 	depliquer = (char *)malloc(sizeof (char) * (len + 1));
