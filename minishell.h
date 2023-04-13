@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/11 14:19:27 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/11 21:34:59 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include<string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include"libft_/libft.h"
+# include"libft/libft.h"
 
 typedef struct env
 {
@@ -42,6 +42,14 @@ typedef struct env
 	struct env	*next;
 	struct env	*prev;
 }			t_env;
+
+typedef struct s_file
+{
+	int			type;
+	char		*file;
+	struct exec	*next;
+	struct exec	*prev;
+}			t_file;
 
 typedef struct exec
 {
@@ -101,5 +109,6 @@ int		handle_env_var(t_data *data, int i, int k);
 
 //outils
 char	*seach_env_value(char *str, t_data *data);
+int		print_token_er(t_data *data);
 
 #endif

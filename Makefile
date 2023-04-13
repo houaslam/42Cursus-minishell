@@ -6,7 +6,7 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/09 00:42:21 by houaslam         ###   ########.fr        #
+#    Updated: 2023/04/11 16:07:38 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ B_OBJ = ${B_SRCS:.c=.o}
 
 
 ${NAME} : ${OBJ}
-	cc $(CFLAGS)  libft_/libft.a ${OBJ}  -o ${NAME} -L/usr/local/lib -lreadline
+	cc $(CFLAGS)  libft/libft.a ${OBJ}  -o ${NAME} -L/usr/local/lib -lreadline
 
 clean :
 	rm -f ${OBJ}

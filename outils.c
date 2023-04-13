@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/11 14:17:07 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/11 21:34:53 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,11 @@ char	*seach_env_value(char *str, t_data *data)
 		tmp = tmp->next;
 	}
 	return (NULL);
+}
+
+int	print_token_er(t_data *data)
+{
+	printf("ERROR\n");
+	free_exec(&data->exec);
+	return (ft_strlen(data->s));
 }

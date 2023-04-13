@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/09 00:51:56 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/12 22:44:47 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,14 @@ int	handle_here_doc_in(t_data *data, int i)
 
 	i++;
 	i++;
-	printf("hbeghb\n");
 	k = i;
 	while (data->s[i] == 32 || data->s[i] == 9)
 		i++;
 	while (data->s[i] && ft_isstring(data->s[i]))
 		i++;
-	str = ft_substr(data->s, k, i - k + 1);
-	if (str[0] == '\0')
-	{
-		printf(("EROOR\n"));
-		free_exec(&data->exec);
-		return (ft_strlen(str));
-	}
+	str = ft_substr(data->s, k, i - k);
+	if (str[0] == '\0' || i - k == 0)
+		return (print_token_er(data));
 	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(str, HERE_DOC_IN));
 	free(str);
 	return (i);
@@ -51,11 +46,7 @@ int	handle_here_doc_out(t_data *data, int i)
 		i++;
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
-	{
-		printf("EROOR\n");
-		free_exec(&data->exec);
-		return (ft_strlen(data->s));
-	}
+		return (print_token_er(data));
 	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(str, HERE_DOC_OUT));
 	free(str);
 	return (i);
@@ -74,11 +65,7 @@ int	handle_redin(t_data *data, int i)
 		i++;
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
-	{
-		printf("EROOR\n");
-		free_exec(&data->exec);
-		return (ft_strlen(data->s));
-	}
+		return (print_token_er(data));
 	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(str, RED_IN));
 	free(str);
 	return (i);
@@ -97,11 +84,7 @@ int	handle_redout(t_data *data, int i)
 		i++;
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
-	{
-		printf("EROOR\n");
-		free_exec(&data->exec);
-		return (ft_strlen(data->s));
-	}
+		return (print_token_er(data));
 	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(str, RED_OUT));
 	free(str);
 	return (i);
@@ -109,37 +92,30 @@ int	handle_redout(t_data *data, int i)
 
 int	handle_pipe(t_data *data, int i)
 {
-	int	k;
-	int	c;
+	int		k;
+	int		c;
+	char	*str;
 
-	i++;
-	k = i;
+	k = i + 1;
 	c = 0;
 	while (data->s[c])
 	{
-		if (ft_isalpha(data->s[i]))
-		{
-			k = 5;
+		if (ft_isalpha(data->s[c]))
 			break ;
-		}
 		if (data->s[c] == PIPE)
-		{
-			printf("ERROR\n");
-			free_exec(&data->exec);
-			return (ft_strlen(data->s));
-		}
+			return (print_token_er(data));
 		c++;
 	}
-	while (data->s[i])
+	while (data->s[k])
 	{
-		if (ft_isalpha(data->s[i]))
-		{
-			k = 5;
+		if (ft_isstring(data->s[k]))
 			break ;
-		}
-		i++;
+		if (data->s[k] == '\0')
+			return (print_token_er(data));
+		k++;
 	}
-	if (k == 5 && c == 5)
-		ft_lstadd_back_exec(&data->exec, ft_lstnew_exec("|", PIPE));
+	str = ft_strdup("|");
+	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(str, PIPE));
+	free(str);
 	return (i);
 }
