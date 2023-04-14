@@ -6,11 +6,21 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/11 21:34:53 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/13 02:06:36 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// char	*ft_realloc(void *ptr, size_t size)
+// {
+// 	char	*res;
+
+// 	res = malloc(sizeof(ptr) + size);
+// 	ft_memcpy(res, ptr, ft_strlen(ptr));
+// 	free(ptr);
+// 	return (ptr);
+// }
 
 void	free_exec(t_exec **exec)
 {

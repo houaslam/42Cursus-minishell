@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/12 22:41:30 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/13 23:58:14 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	lexer(t_data *data)
 
 	i = 0;
 	data->exec = NULL;
+	data->join = NULL;
+	data->file = NULL;
 	while (data->s[i])
 	{
 		if (data->s[i] == RED_IN && data->s[i + 1] == RED_IN)
@@ -35,8 +37,14 @@ void	lexer(t_data *data)
 		else
 			i = handle_string(data, i);
 		i++;
+		if (data->s[i] == '\0')
+		{
+			if (data->join)
+				ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(data->join, PIPE));
+		}
 	}
 	aff1(data->exec);
+	aff2(data->file);
 }
 
 int	main(int ac, char **av, char **en)
@@ -48,6 +56,7 @@ int	main(int ac, char **av, char **en)
 	{
 		data = malloc(sizeof(t_data));
 		data->exec = malloc(sizeof(t_exec));
+		data->file = malloc(sizeof(t_file));
 		creat_env(en, &data);
 		while (1)
 		{

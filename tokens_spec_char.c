@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/12 22:44:47 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/14 00:04:02 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	handle_here_doc_in(t_data *data, int i)
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 		return (print_token_er(data));
-	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(str, HERE_DOC_IN));
+	ft_lstadd_back_file(&data->file, ft_lstnew_file(str, HERE_DOC_IN));
 	free(str);
 	return (i);
 }
@@ -47,7 +47,7 @@ int	handle_here_doc_out(t_data *data, int i)
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 		return (print_token_er(data));
-	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(str, HERE_DOC_OUT));
+	ft_lstadd_back_file(&data->file, ft_lstnew_file(str, HERE_DOC_OUT));
 	free(str);
 	return (i);
 }
@@ -66,7 +66,7 @@ int	handle_redin(t_data *data, int i)
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 		return (print_token_er(data));
-	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(str, RED_IN));
+	ft_lstadd_back_file(&data->file, ft_lstnew_file(str, RED_IN));
 	free(str);
 	return (i);
 }
@@ -85,7 +85,7 @@ int	handle_redout(t_data *data, int i)
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 		return (print_token_er(data));
-	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(str, RED_OUT));
+	ft_lstadd_back_file(&data->file, ft_lstnew_file(str, RED_OUT));
 	free(str);
 	return (i);
 }
@@ -94,7 +94,6 @@ int	handle_pipe(t_data *data, int i)
 {
 	int		k;
 	int		c;
-	char	*str;
 
 	k = i + 1;
 	c = 0;
@@ -114,8 +113,13 @@ int	handle_pipe(t_data *data, int i)
 			return (print_token_er(data));
 		k++;
 	}
-	str = ft_strdup("|");
-	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(str, PIPE));
-	free(str);
+	if (data->join)
+	{
+		printf("%s\n", data->join);
+		ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(data->join, PIPE));
+		free(data->join);
+		data->join = NULL;
+	}
+	free(data->join);
 	return (i);
 }

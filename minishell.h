@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/11 21:34:59 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:29:46 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,17 @@ typedef struct env
 
 typedef struct s_file
 {
-	int			type;
-	char		*file;
-	struct exec	*next;
-	struct exec	*prev;
+	int				type;
+	char			*file;
+	struct s_file	*next;
+	struct s_file	*prev;
 }			t_file;
 
 typedef struct exec
 {
 	int			type;
+	char		**cmd;
+	int			cmd_nb;
 	char		*value;
 	struct exec	*next;
 	struct exec	*prev;
@@ -62,6 +64,8 @@ typedef struct exec
 typedef struct s_data
 {
 	int			g_exit_status;
+	char		*join;
+	t_file		*file;
 	t_env		*env;
 	t_exec		*exec;
 	char		*s;
@@ -74,7 +78,7 @@ char	**ft_func(char **arr, char *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *str, int c);
 size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(const char *s);
 // linked list
 void	ft_lstadd_back(t_env **lst, t_env *new);
@@ -85,14 +89,22 @@ t_env	*ft_lstlast(t_env *lst);
 // linked list
 void	ft_lstadd_back_exec(t_exec **lst, t_exec *new);
 t_exec	*ft_lstnew_exec(char *value, int type);
-int		ft_lstsize_exe(t_exec *lst);
+int		ft_lstsize_exec(t_exec *lst);
 t_exec	*ft_lstlast_exec(t_exec *lst);
 void	free_exec(t_exec **exec);
+
+// linked list
+void	ft_lstadd_back_file(t_file **lst, t_file *new);
+t_file	*ft_lstnew_file(char *value, int type);
+int		ft_lstsize_file(t_file *lst);
+t_file	*ft_lstlast_file(t_file *lst);
+void	free_file(t_file **file);
 
 //env
 void	creat_env(char **en, t_data **data);
 void	aff(t_env *env);
 void	aff1(t_exec *env);
+void	aff2(t_file *env);
 
 //tokens
 void	lexer(t_data *data);

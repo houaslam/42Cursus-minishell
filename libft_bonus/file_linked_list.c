@@ -1,52 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_linked_list.c                                 :+:      :+:    :+:   */
+/*   file_linked_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:15 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/13 00:50:47 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:16:35 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_lstadd_back_exec(t_exec **lst, t_exec *new)
+void	ft_lstadd_back_file(t_file **lst, t_file *new)
 {
-	t_exec	*last;
+	t_file	*last;
 
 	if (!lst || !new)
 		return ;
 	if (*lst)
 	{
-		last = ft_lstlast_exec(*lst);
+		last = ft_lstlast_file(*lst);
 		last->next = new;
 	}
 	else
 		*lst = new;
 }
 
-t_exec	*ft_lstnew_exec(char *value, int type)
+t_file	*ft_lstnew_file(char *file, int type)
 {
-	t_exec	*node;
+	t_file	*node;
 
-	node = malloc(sizeof(t_exec));
+	node = malloc(sizeof(t_file));
 	if (!node)
 		return (NULL);
-	node->value = malloc(ft_strlen(value) + 1);
-	if (!node->value)
+	node->file = malloc(ft_strlen(file) + 1);
+	if (!node->file)
 	{
 		free(node);
 		return (NULL);
 	}
-	ft_strcpy(node->value, value);
+	ft_strcpy(node->file, file);
 	node->type = type;
 	node->next = NULL;
 	return (node);
 }
 
-int	ft_lstsize_exec(t_exec *lst)
+int	ft_lstsize_file(t_file *lst)
 {
 	int	i;
 
@@ -61,9 +61,9 @@ int	ft_lstsize_exec(t_exec *lst)
 	return (i);
 }
 
-t_exec	*ft_lstlast_exec(t_exec *lst)
+t_file	*ft_lstlast_file(t_file *lst)
 {
-	t_exec	*tmp;
+	t_file	*tmp;
 
 	tmp = lst;
 	if (!lst)

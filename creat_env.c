@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:04:34 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/07 21:38:36 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:30:16 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,18 @@ void	aff1(t_exec *env)
 	while (tmp)
 	{
 		printf("---->type = %d value = |%s|\n", tmp->type, tmp->value);
+		tmp = tmp->next;
+	}
+}
+
+void	aff2(t_file *env)
+{
+	t_file	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		printf("---->type = %d file = |%s|\n", tmp->type, tmp->file);
 		tmp = tmp->next;
 	}
 }
