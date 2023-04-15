@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/02 21:13:29 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/14 20:21:56 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,46 +17,35 @@ void	lexer(t_data *data)
 	int	i;
 
 	i = 0;
+	data->exec = NULL;
+	data->join = NULL;
+	data->file = NULL;
 	while (data->s[i])
 	{
-		if (data->s[i] >= 97 && data->s[i] <= 122)
-			i += handle_string(data);
-		else if (data->s[i] == PIPE)
-			i += handle_pipe(data);
-		else if (data->s[i] == RED_IN && data->s[i + 1] == RED_IN)
-			i += handle_here_doc_in(data);
+		if (data->s[i] == RED_IN && data->s[i + 1] == RED_IN)
+			i = handle_here_doc_in(data, i);
 		else if (data->s[i] == RED_OUT && data->s[i + 1] == RED_OUT)
-			i += handle_here_doc_out(data);
+			i = handle_here_doc_out(data, i);
 		else if (data->s[i] == RED_IN)
-			i += handle_redin(data);
+			i = handle_redin(data, i);
 		else if (data->s[i] == RED_OUT)
-			i += handle_redout(data);
+			i = handle_redout(data, i);
+		else if (data->s[i] == PIPE)
+			i = handle_pipe(data, i);
+		else if (data->s[i] == '$')
+			i = handle_dollar_sign(data, i);
+		else
+			i = handle_string(data, i);
 		i++;
+		if (data->s[i] == '\0')
+		{
+			if (data->join)
+				ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(data->join, PIPE));
+		}
 	}
+	aff1(data->exec);
+	aff2(data->file);
 }
-
-// void	lexer(t_data *data)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (data->s[i])
-// 	{
-// 		if (data->s[i] >= 97 && data->s[i] <= 122)
-// 			{printf("char\n");}
-// 		else if (data->s[i] == PIPE)
-// 			{printf("pipe\n");}
-// 		else if (data->s[i] == RED_IN && data->s[i + 1] == RED_IN)
-// 			{printf("here_doc\n"); i++;}
-// 		else if (data->s[i] == RED_OUT && data->s[i + 1] == RED_OUT)
-// 			{printf("here_doc\n"); i++;}
-// 		else if (data->s[i] == RED_IN)
-// 			{printf("red\n");}
-// 		else if (data->s[i] == RED_OUT)
-// 			{printf("red\n");}
-// 		i++;
-// 	}
-// }
 
 int	main(int ac, char **av, char **en)
 {
@@ -66,16 +55,19 @@ int	main(int ac, char **av, char **en)
 	if (ac == 1)
 	{
 		data = malloc(sizeof(t_data));
+		data->exec = malloc(sizeof(t_exec));
+		data->file = malloc(sizeof(t_file));
 		creat_env(en, &data);
 		while (1)
 		{
-			write(1, "minishell> ", 11);
-			data->s = get_next_line(0);
+			data->s = readline("minishell>");
 			if (!data->s)
 				exit(0);
-			printf("%s\n", data->s);
-			// lexer(data);
+			add_history(data->s);
+			lexer(data);
+			command(data,en);
 			free(data->s);
+			free_exec(&data->exec);
 		}
 	}
 }

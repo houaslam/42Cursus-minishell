@@ -1,61 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft2.c                                           :+:      :+:    :+:   */
+/*   file_linked_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:15 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/01 22:27:16 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:16:35 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_lstadd_back(t_env **lst, t_env *new)
+void	ft_lstadd_back_file(t_file **lst, t_file *new)
 {
-	t_env	*last;
+	t_file	*last;
 
 	if (!lst || !new)
 		return ;
 	if (*lst)
 	{
-		last = ft_lstlast(*lst);
+		last = ft_lstlast_file(*lst);
 		last->next = new;
 	}
 	else
 		*lst = new;
 }
 
-t_env	*ft_lstnew(char *name, char *path)
+t_file	*ft_lstnew_file(char *file, int type)
 {
-	t_env	*node;
+	t_file	*node;
 
-	node = malloc(sizeof(t_env));
+	node = malloc(sizeof(t_file));
 	if (!node)
 		return (NULL);
-	//change this one to ft_strlen
-	node->path = malloc(strlen(path) + 1);
-	if (!node->path)
+	node->file = malloc(ft_strlen(file) + 1);
+	if (!node->file)
 	{
 		free(node);
 		return (NULL);
 	}
-	node->name = malloc(strlen(name) + 1);
-	if (!node->name)
-	{
-		free(node->path);
-		free(node);
-		return (NULL);
-	}
-	//change this one to ft_strcpy
-	strcpy(node->path, path);
-	strcpy(node->name, name);
+	ft_strcpy(node->file, file);
+	node->type = type;
 	node->next = NULL;
 	return (node);
 }
 
-int	ft_lstsize(t_env *lst)
+int	ft_lstsize_file(t_file *lst)
 {
 	int	i;
 
@@ -70,10 +61,9 @@ int	ft_lstsize(t_env *lst)
 	return (i);
 }
 
-
-t_env	*ft_lstlast(t_env *lst)
+t_file	*ft_lstlast_file(t_file *lst)
 {
-	t_env	*tmp;
+	t_file	*tmp;
 
 	tmp = lst;
 	if (!lst)

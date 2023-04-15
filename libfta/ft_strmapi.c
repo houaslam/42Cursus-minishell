@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens.c                                           :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/02 21:15:29 by houaslam         ###   ########.fr       */
+/*   Created: 2022/10/20 12:46:06 by houaslam          #+#    #+#             */
+/*   Updated: 2022/10/30 11:26:37 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	handle_string(t_data *data)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	i;
+	size_t	i;
+	char	*p;
+	size_t	len;
 
-	while (data->s[i])
+	if (!s || !f)
+		return (NULL);
+	i = 0;
+	len = ft_strlen((char *)s);
+	p = (char *)malloc(sizeof(char) * len + 1);
+	if (!p)
+		return (NULL);
+	while (i < len)
 	{
-		if (!is_alpha(data->s[i]))
-			break ;
+		p[i] = f(i, s[i]);
 		i++;
 	}
-	return (i);
+	p[i] = '\0';
+	return (p);
 }
