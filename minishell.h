@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/13 03:29:46 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/14 23:56:21 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct env
 	char		*path;
 	char		*name;
 	struct env	*next;
-	struct env	*prev;
 }			t_env;
 
 typedef struct s_file
@@ -48,7 +47,6 @@ typedef struct s_file
 	int				type;
 	char			*file;
 	struct s_file	*next;
-	struct s_file	*prev;
 }			t_file;
 
 typedef struct exec
@@ -57,15 +55,14 @@ typedef struct exec
 	char		**cmd;
 	int			cmd_nb;
 	char		*value;
+	t_file		*file;
 	struct exec	*next;
-	struct exec	*prev;
 }			t_exec;
 
 typedef struct s_data
 {
 	int			g_exit_status;
 	char		*join;
-	t_file		*file;
 	t_env		*env;
 	t_exec		*exec;
 	char		*s;
