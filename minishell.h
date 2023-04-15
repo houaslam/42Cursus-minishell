@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/14 23:56:21 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:03:58 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_data
 {
 	int			g_exit_status;
 	char		*join;
+	int			pipe;
 	t_env		*env;
 	t_exec		*exec;
 	char		*s;
@@ -100,7 +101,7 @@ void	free_file(t_file **file);
 //env
 void	creat_env(char **en, t_data **data);
 void	aff(t_env *env);
-void	aff1(t_exec *env);
+void	aff1(t_exec *env, t_file *file);
 void	aff2(t_file *env);
 
 //tokens

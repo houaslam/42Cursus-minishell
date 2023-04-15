@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/15 00:03:18 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:30:42 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,24 +105,24 @@ int	handle_dollar_sign(t_data *data, int i)
 	return (i);
 }
 
-// int	handle_env_var(t_data *data, int i, int k)
-// {
-// 	char	*str;
-// 	char	*res;
-// 	char	*ptr;
+int	handle_env_var(t_data *data, int i, int k)
+{
+	char	*str;
+	char	*res;
+	char	*ptr;
 
-// 	while (data->s[i] && ft_isstring(data->s[i]))
-// 		i++;
-// 	str = ft_substr(data->s, k, i - k);
-// 	ptr = ft_strtrim(str, " ");
-// 	res = seach_env_value(ptr, data);
-// 	if (!res)
-// 		return (print_token_er(data));
-// 	data->join = ft_strjoin(data->join, " ");
-// 	data->join = ft_strjoin(data->join, res);
-// 	// ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(res, ENV_VAR));
-// 	free(str);
-// 	free(ptr);
-// 	free(res);
-// 	return (i);
-// }
+	while (data->s[i] && ft_isstring(data->s[i]))
+		i++;
+	str = ft_substr(data->s, k, i - k);
+	ptr = ft_strtrim(str, " ");
+	res = seach_env_value(ptr, data);
+	if (!res)
+		return (print_token_er(data));
+	data->join = ft_strjoin(data->join, " ");
+	data->join = ft_strjoin(data->join, res);
+	// ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(res, ENV_VAR));
+	free(str);
+	free(ptr);
+	free(res);
+	return (i);
+}

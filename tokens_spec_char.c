@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/14 23:47:57 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:51:17 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	handle_here_doc_out(t_data *data, int i)
 		i++;
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
-		return (print_token_er(data));
+		return (print_token_er(data) - 1);
 	ft_lstadd_back_file(&data->exec->file, ft_lstnew_file(str, HERE_DOC_OUT));
 	free(str);
 	return (i);
@@ -66,6 +66,9 @@ int	handle_redin(t_data *data, int i)
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 		return (print_token_er(data));
+	if (!data->join)
+		ft_lstadd_back_exec(&data->exec, ft_lstnew_exec \
+		(ft_strjoin(data->join, " "), STRING));
 	ft_lstadd_back_file(&data->exec->file, ft_lstnew_file(str, RED_IN));
 	free(str);
 	return (i);
@@ -84,6 +87,8 @@ int	handle_redout(t_data *data, int i)
 		i++;
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
+		return (print_token_er(data));
+	if (!data->join)
 		return (print_token_er(data));
 	ft_lstadd_back_file(&data->exec->file, ft_lstnew_file(str, RED_OUT));
 	free(str);
@@ -117,6 +122,7 @@ int	handle_pipe(t_data *data, int i)
 	{
 		printf("%s\n", data->join);
 		ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(data->join, PIPE));
+		data->pipe = 1;
 		free(data->join);
 		data->join = NULL;
 	}

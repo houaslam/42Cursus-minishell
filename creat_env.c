@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:04:34 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/13 03:30:16 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:31:24 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,21 @@ void	creat_env(char **en, t_data **data)
 	}
 }
 
-void	aff1(t_exec *env)
+void	aff1(t_exec *env, t_file *file)
 {
 	t_exec	*tmp;
+	t_file *tmp_;
 
 	tmp = env;
+	tmp_ = file;
 	while (tmp)
 	{
 		printf("---->type = %d value = |%s|\n", tmp->type, tmp->value);
+		while (tmp_)
+		{
+			printf("---->type = %d file = |%s|\n", tmp_->type, tmp_->file);
+			tmp_ = tmp_->next;
+		}
 		tmp = tmp->next;
 	}
 }
