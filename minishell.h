@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/15 01:03:58 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:24:47 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct exec
 {
 	int			type;
 	char		**cmd;
-	int			cmd_nb;
 	char		*value;
 	t_file		*file;
 	struct exec	*next;

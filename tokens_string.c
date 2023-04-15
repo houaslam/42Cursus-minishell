@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/15 00:30:42 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:12:46 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	handle_string(t_data *data, int i)
 		i++;
 	}
 	str[k] = '\0';
-	data->join = ft_strjoin(data->join, " ");
+	data->join = ft_strjoin(data->join, "*");
 	data->join = ft_strjoin(data->join, str);
 	free(str);
 	if (!ft_isstring_(data -> s[i]))

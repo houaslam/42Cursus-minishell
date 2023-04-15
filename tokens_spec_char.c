@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/15 01:51:17 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:47:31 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	handle_redin(t_data *data, int i)
 {
 	int		k;
 	char	*str;
+	t_file	*file;
 
 	i++;
 	while (data->s[i] == 32)
@@ -66,10 +67,12 @@ int	handle_redin(t_data *data, int i)
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 		return (print_token_er(data));
-	if (!data->join)
-		ft_lstadd_back_exec(&data->exec, ft_lstnew_exec \
-		(ft_strjoin(data->join, " "), STRING));
-	ft_lstadd_back_file(&data->exec->file, ft_lstnew_file(str, RED_IN));
+	printf("=====%s=====\n", str);
+	// if (!data->join)
+	// 	ft_lstadd_back_exec(&data->exec, ft_lstnew_exec \
+	// 	(ft_strjoin(data->join, " "), STRING));
+	file = ft_lstnew_file(str, RED_IN);
+	ft_lstadd_back_file(&data->exec->file, file);
 	free(str);
 	return (i);
 }
