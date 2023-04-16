@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/15 20:28:43 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/16 09:31:02 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ void	aff2(t_file *env);
 
 //spec char tokens
 void	lexer(t_data *data);
-int		handle_redin(t_data *data, int i);
-int		handle_redout(t_data *data, int i);
-int		handle_here_doc_in(t_data *data, int i);
-int		handle_here_doc_out(t_data *data, int i);
+int		handle_redin(t_data *data, int i, t_exec *tmp);
+int		handle_redout(t_data *data, int i, t_exec *tmp);
+int		handle_here_doc_in(t_data *data, int i, t_exec *tmp);
+int		handle_here_doc_out(t_data *data, int i, t_exec *tmp);
 
 //string tokens
 int		handle_pipe(t_data *data, int i, t_exec *exec);
@@ -121,6 +121,6 @@ int		handle_env_var(t_data *data, int i, int k);
 
 //outils
 char	*seach_env_value(char *str, t_data *data);
-int		print_token_er(t_data *data);
+int		print_token_er(t_data *data, int i, t_exec *tmp);
 
 #endif

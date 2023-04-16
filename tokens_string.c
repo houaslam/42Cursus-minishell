@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/16 06:12:43 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/16 10:03:48 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	handle_string(t_data *data, int i, t_exec *tmp)
 			str = NULL;
 			o = handle_quote(data, i, (int)data->s[i]);
 			if (data->s[o] == '\0')
-				return (print_token_er(data));
+				return (print_token_er(data, 127, tmp));
 			i++;
 			str = ft_strjoin(str, ft_substr(data->s, i, o - i));
 			k += o - i - 1;
@@ -54,6 +54,7 @@ int	handle_string(t_data *data, int i, t_exec *tmp)
 		i++;
 	}
 	str[k] = '\0';
+	printf("%s\n", str);
 	tmp->value = ft_strjoin(tmp->value, str);
 	tmp->value = ft_strjoin(tmp->value, "*");
 	free(str);
