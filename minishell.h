@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/15 17:24:47 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/15 20:28:43 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ typedef struct exec
 typedef struct s_data
 {
 	int			g_exit_status;
-	char		*join;
+	// char		*join;
 	int			pipe;
+	t_exec		*tmp;
 	t_env		*env;
 	t_exec		*exec;
 	char		*s;
@@ -103,17 +104,19 @@ void	aff(t_env *env);
 void	aff1(t_exec *env, t_file *file);
 void	aff2(t_file *env);
 
-//tokens
+//spec char tokens
 void	lexer(t_data *data);
-int		handle_pipe(t_data *data, int i);
 int		handle_redin(t_data *data, int i);
-int		handle_string(t_data *data, int i);
 int		handle_redout(t_data *data, int i);
+int		handle_here_doc_in(t_data *data, int i);
+int		handle_here_doc_out(t_data *data, int i);
+
+//string tokens
+int		handle_pipe(t_data *data, int i, t_exec *exec);
+int		handle_string(t_data *data, int i, t_exec *tmp);
 int		handle_d_quote(t_data *data, int i);
 int		handle_s_quote(t_data *data, int i);
-int		handle_here_doc_in(t_data *data, int i);
 int		handle_dollar_sign(t_data *data, int i);
-int		handle_here_doc_out(t_data *data, int i);
 int		handle_env_var(t_data *data, int i, int k);
 
 //outils

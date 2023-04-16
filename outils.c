@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/13 02:06:36 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/16 05:17:49 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,36 @@ int	print_token_er(t_data *data)
 	printf("ERROR\n");
 	free_exec(&data->exec);
 	return (ft_strlen(data->s));
+}
+
+void	aff1(t_exec *exec, t_file *file)
+{
+	t_exec	*tmp;
+	t_file	*tmp_;
+
+	tmp = exec;
+	tmp_ = file;
+	while (tmp)
+	{
+		printf("---->type = %d value = |%s|\n", tmp->type, tmp->value);
+		while (tmp_)
+		{
+			printf("---->type = %d file = |%s|\n", tmp_->type, tmp_->file);
+			tmp_ = tmp_->next;
+		}
+		tmp = tmp->next;
+	}
+	printf("HERE\n");
+}
+
+void	aff2(t_file *env)
+{
+	t_file	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		printf("---->type = %d file = |%s|\n", tmp->type, tmp->file);
+		tmp = tmp->next;
+	}
 }

@@ -6,12 +6,12 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/15 17:44:23 by houaslam         ###   ########.fr        #
+#    Updated: 2023/04/16 05:25:44 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 SRCS =  main.c \
 		creat_env.c \

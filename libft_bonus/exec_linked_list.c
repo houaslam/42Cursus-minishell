@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:15 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/15 18:06:04 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/16 06:21:42 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	ft_lstadd_back_exec(t_exec **lst, t_exec *new)
 		return ;
 	if (*lst)
 	{
+		printf("HERE\n");
 		last = ft_lstlast_exec(*lst);
 		last->next = new;
+		printf("---->%s\n", new -> value);
 	}
 	else
 		*lst = new;
@@ -69,6 +71,8 @@ t_exec	*ft_lstlast_exec(t_exec *lst)
 	if (!lst)
 		return (NULL);
 	while (tmp->next != NULL)
+	{
 		tmp = tmp->next;
+	}
 	return (tmp);
 }
