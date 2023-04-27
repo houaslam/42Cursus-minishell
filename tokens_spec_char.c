@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/16 12:19:33 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/27 21:10:33 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	handle_pipe(t_data *data, int i, t_exec *tmp)
 
 	k = i + 1;
 	c = i - 1;
+	printf("DKHEL\n");
 	while (data->s[c])
 	{
 		if (ft_isalpha(data->s[c]))
