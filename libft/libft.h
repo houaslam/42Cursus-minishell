@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 12:42:33 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/16 04:36:18 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:06:48 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ void	ft_putstr_fd(char *s, int fd);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_isstring(char c);
-int		ft_isstring_(char c);
-int		ft_isstring__(char c);
 int		ft_strcmp(char *str, char *str_2);
 void	ft_strcpy(char *dest, char *src);
 

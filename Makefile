@@ -6,7 +6,7 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/16 08:52:26 by houaslam         ###   ########.fr        #
+#    Updated: 2023/04/28 15:07:07 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS =  main.c \
 		libft_bonus/file_linked_list.c \
 		tokens_string.c \
 		tokens_spec_char.c \
-		outils.c
+		outils.c \
+		ft_isstring.c
 		
 
 all : ${NAME}

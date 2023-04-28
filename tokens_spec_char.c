@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/27 21:10:33 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:28:46 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	handle_here_doc_in(t_data *data, int i, t_exec *tmp)
 		return (print_token_er(data, 1, tmp));
 	ft_lstadd_back_file(&tmp->file, ft_lstnew_file(str, RED_OUT));
 	free(str);
-	free(tmp->file->file);
 	return (i);
 }
 
@@ -49,9 +48,7 @@ int	handle_here_doc_out(t_data *data, int i, t_exec *tmp)
 	if (str[0] == '\0' || i - k == 0)
 		return (print_token_er(data - 1, 1, tmp));
 	ft_lstadd_back_file(&tmp->file, ft_lstnew_file(str, RED_OUT));
-	printf("HERE\n");
 	free(str);
-	free(tmp->file->file);
 	return (i);
 }
 
@@ -62,7 +59,7 @@ int	handle_redin(t_data *data, int i, t_exec *tmp)
 	t_file	*file;
 
 	i++;
-	while (data->s[i] == 32)
+	while (data->s[i] == 32 || data->s[i] == 9)
 		i++;
 	k = i;
 	while (data->s[i] && ft_isstring(data->s[i]))
@@ -73,8 +70,7 @@ int	handle_redin(t_data *data, int i, t_exec *tmp)
 	file = ft_lstnew_file(str, RED_IN);
 	ft_lstadd_back_file(&tmp->file, ft_lstnew_file(str, RED_IN));
 	free(str);
-	free(tmp->file->file);
-	return (i);
+	return (i - 1);
 }
 
 int	handle_redout(t_data *data, int i, t_exec *tmp)
@@ -83,7 +79,7 @@ int	handle_redout(t_data *data, int i, t_exec *tmp)
 	char	*str;
 
 	i++;
-	while (data->s[i] == 32)
+	while (data->s[i] == 32 || data->s[i] == 9)
 		i++;
 	k = i;
 	while (data->s[i] && ft_isstring(data->s[i]))
@@ -93,8 +89,7 @@ int	handle_redout(t_data *data, int i, t_exec *tmp)
 		return (print_token_er(data, 1, tmp));
 	ft_lstadd_back_file(&tmp->file, ft_lstnew_file(str, RED_OUT));
 	free(str);
-	free(tmp->file->file);
-	return (i);
+	return (i - 1);
 }
 
 int	handle_pipe(t_data *data, int i, t_exec *tmp)
@@ -104,7 +99,6 @@ int	handle_pipe(t_data *data, int i, t_exec *tmp)
 
 	k = i + 1;
 	c = i - 1;
-	printf("DKHEL\n");
 	while (data->s[c])
 	{
 		if (ft_isalpha(data->s[c]))
@@ -124,6 +118,7 @@ int	handle_pipe(t_data *data, int i, t_exec *tmp)
 	if (tmp -> value)
 	{
 		ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(tmp->value, PIPE));
+		tmp->file = NULL;
 		free(tmp->value);
 		tmp->value = "*";
 	}

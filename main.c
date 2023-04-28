@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/16 12:17:04 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/28 18:07:29 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ void	lexer(t_data *data)
 			i = handle_redout(data, i, tmp);
 		else if (data->s[i] == PIPE)
 			i = handle_pipe(data, i, tmp);
+		else if (data->s[i] == D_QUOT || data->s[i] == S_QUOT)
+			i = handle_s_quote(data, i, tmp, (int)data->s[i]);
 		else
 			i = handle_string(data, i, tmp);
+		i++;
 		if (data->s[i] == '\0')
 			ft_lstadd_back_exec(&data->exec, tmp);
-		i++;
+		// printf("||%c||\n", data->s[i]);
 	}
 	aff1(data->exec, data->exec->file);
 }

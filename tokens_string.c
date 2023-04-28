@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/16 10:03:48 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:55:24 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,99 +30,56 @@ int	handle_quote(t_data *data, int i, int type)
 int	handle_string(t_data *data, int i, t_exec *tmp)
 {
 	int		k;
-	int		o;
+	char	*res;
 	char	*str;
 
-	k = 0;
-	str = malloc(sizeof(char *));
-	while (data->s[i] && ft_isstring__(data->s[i]))
-	{
-		if (data->s[i] == D_QUOT || data->s[i] == S_QUOT)
-		{
-			str = NULL;
-			o = handle_quote(data, i, (int)data->s[i]);
-			if (data->s[o] == '\0')
-				return (print_token_er(data, 127, tmp));
-			i++;
-			str = ft_strjoin(str, ft_substr(data->s, i, o - i));
-			k += o - i - 1;
-			i = o;
-		}
-		else
-			str[k] = data->s[i];
-		k++;
+	str = NULL;
+	k = i;
+	while (data->s[i] && ft_isstring(data->s[i]))
 		i++;
-	}
-	str[k] = '\0';
-	printf("%s\n", str);
+	res = ft_substr(data->s, k, i - k);
+	str = ft_strjoin(str, res);
 	tmp->value = ft_strjoin(tmp->value, str);
-	tmp->value = ft_strjoin(tmp->value, "*");
 	free(str);
+	if (data->s[i] && (data->s[i] == \
+	D_QUOT || data->s[i + 1] == S_QUOT))
+	{
+		i++;
+		i = handle_s_quote(data, i, tmp, (int)data->s[i]);
+	}
+	if (!ft_isstring_w_s(data->s[i]))
+		return (i - 1);
+	tmp->value = ft_strjoin(tmp->value, "*");
 	return (i);
 }
-// int	handle_s_quote(t_data *data, int i)
-// {
-// 	int		k;
-// 	char	*str;
-// 	char	*res;
 
-// 	i++;
-// 	k = i;
-// 	while (data->s[i] != S_QUOT)
-// 	{
-// 		if (data->s[i] == '\0')
-// 		{
-// 			printf(("EROOR\n"));
-// 			free_exec(&data->exec);
-// 			return (ft_strlen(data->s));
-// 		}
-// 		i++;
-// 	}
-// 	str = ft_substr(data->s, k, i - k);
-// 	res = ft_strtrim(str, " ");
-// 	data->join = ft_strjoin(data->join, str);
-// 	// ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(res, STRING));
-// 	free(str);
-// 	free(res);
-// 	return (i + 1);
-// }
+int	handle_s_quote(t_data *data, int i, t_exec *tmp, int type)
+{
+	int		k;
+	char	*str;
+	char	*res;
 
-// int	handle_dollar_sign(t_data *data, int i)
-// {
-// 	int		k;
-
-// 	i++;
-// 	k = i;
-// 	if (data->s[i] == '?')
-// 	{
-// 		ft_lstadd_back_exec(&data->exec, ft_lstnew_exec("$?", EXIT_STATUS));
-// 		return (i + 1);
-// 	}
-// 	else if (ft_isalpha(data->s[i]))
-// 		return (handle_env_var(data, i, k));
-// 	else
-// 		return (print_token_er(data));
-// 	return (i);
-// }
-
-// int	handle_env_var(t_data *data, int i, int k)
-// {
-// 	char	*str;
-// 	char	*res;
-// 	char	*ptr;
-
-// 	while (data->s[i] && ft_isstring(data->s[i]))
-// 		i++;
-// 	str = ft_substr(data->s, k, i - k);
-// 	ptr = ft_strtrim(str, " ");
-// 	res = seach_env_value(ptr, data);
-// 	if (!res)
-// 		return (print_token_er(data));
-// 	data->join = ft_strjoin(data->join, " ");
-// 	data->join = ft_strjoin(data->join, res);
-// 	// ft_lstadd_back_exec(&data->exec, ft_lstnew_exec(res, ENV_VAR));
-// 	free(str);
-// 	free(ptr);
-// 	free(res);
-// 	return (i);
-// }
+	i++;
+	k = i;
+	str = NULL;
+	while (data->s[i] != type)
+	{
+		if (data->s[i] == '\0')
+			print_token_er(data, i, tmp);
+		i++;
+	}
+	res = ft_substr(data->s, k, i - k);
+	str = ft_strjoin(str, res);
+	tmp->value = ft_strjoin(tmp->value, str);
+	free(res);
+	free(str);
+	i++;
+	printf("---->||%c||\n", data->s[i]);
+	if (ft_isstring(data->s[i]) && data->s[i])
+	{
+		i++;
+		i = handle_string(data, i, tmp);
+	}
+	tmp->value = ft_strjoin(tmp->value, "*");
+	return (i);
+}

@@ -6,11 +6,11 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:23:47 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/15 23:19:52 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:12:14 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
 int	ft_isstring(char c)
 {
@@ -20,14 +20,14 @@ int	ft_isstring(char c)
 	return (1);
 }
 
-int	ft_isstring_(char c)
+int	ft_isstring_w_s(char c)
 {
 	if (c == 124 || c == 60 || c == 62 || c == 34 || c == 39)
 		return (0);
 	return (1);
 }
 
-int	ft_isstring__(char c)
+int	ft_isstring_w_q(char c)
 {
 	if (c == 124 || c == 60 || c == 62 || c == 32 || c == 9)
 		return (0);

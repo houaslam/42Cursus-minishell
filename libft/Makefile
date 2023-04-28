@@ -6,7 +6,7 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/29 18:01:50 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/09 21:39:42 by houaslam         ###   ########.fr        #
+#    Updated: 2023/04/28 15:14:13 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ SRCS =  ft_atoi.c \
 		ft_substr.c \
 		ft_tolower.c \
 		ft_toupper.c \
-		ft_isstring.c \
 		ft_strcmp.c \
 		ft_strcpy.c
 

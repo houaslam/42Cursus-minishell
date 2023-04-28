@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/16 09:31:02 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:07:32 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct exec
 typedef struct s_data
 {
 	int			g_exit_status;
-	// char		*join;
 	int			pipe;
 	t_exec		*tmp;
 	t_env		*env;
@@ -115,12 +114,15 @@ int		handle_here_doc_out(t_data *data, int i, t_exec *tmp);
 int		handle_pipe(t_data *data, int i, t_exec *exec);
 int		handle_string(t_data *data, int i, t_exec *tmp);
 int		handle_d_quote(t_data *data, int i);
-int		handle_s_quote(t_data *data, int i);
+int		handle_s_quote(t_data *data, int i, t_exec *tmp, int type);
 int		handle_dollar_sign(t_data *data, int i);
 int		handle_env_var(t_data *data, int i, int k);
 
 //outils
 char	*seach_env_value(char *str, t_data *data);
 int		print_token_er(t_data *data, int i, t_exec *tmp);
+int		ft_isstring(char c);
+int		ft_isstring_w_s(char c);
+int		ft_isstring_w_q(char c);
 
 #endif
