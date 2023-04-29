@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:50 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/28 08:11:03 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/29 16:31:27 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	ft_export(char ***export, char ***env, char **arg, int fd)
 		{
 			sp = equal(arg[i], '=');
 			if (!check_arg(sp[0]))
-				ft_errorb("bash: export: `", sp[0], "': not a valid identifier",
+				ft_errorb("bash: export: `", sp[0], "': not a valid identifier\n",
 						1);
 			c = ft_cases(*env, *export, sp[0]);
 			change(export, env, arg[i], c);

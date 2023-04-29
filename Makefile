@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
+#    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/29 17:12:41 by houaslam         ###   ########.fr        #
+#    Created: 2023/04/16 22:26:16 by aatki             #+#    #+#              #
+#    Updated: 2023/04/29 14:49:22 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+NAME = execution
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
-	
-LIBFT = ./libft/ft_atoi.c \
+NAMEB = execution.a
+
+LIBFT =  ./libft/ft_atoi.c \
 		./libft/ft_bzero.c \
 		./libft/ft_calloc.c \
 		./libft/ft_isalnum.c \
@@ -51,54 +51,51 @@ LIBFT = ./libft/ft_atoi.c \
 		./libft/ft_strcmp.c \
 		./libft/ft_strcpy.c
 
-BUILTINS = ./executionn/builtins/utils.c\
-			./executionn/builtins/cd.c\
-			./executionn/builtins/echo.c\
-			./executionn/builtins/env.c\
-			./executionn/builtins/exit.c\
-			./executionn/builtins/export.c\
-			./executionn/builtins/pwd.c\
-			./executionn/builtins/unset.c\
-			./executionn/builtins/export_utils.c
+BUILTINS = ./builtins/utils.c\
+			./builtins/cd.c\
+			./builtins/echo.c\
+			./builtins/env.c\
+			./builtins/exit.c\
+			./builtins/export.c\
+			./builtins/pwd.c\
+			./builtins/unset.c\
+			./builtins/export_utils.c
 
-PIPEX =./executionn/pipex/pipex_bonus.c\
-		./executionn/pipex/pipex_utils_bonus.c\
-		./executionn/pipex/ft_split_bonus.c\
-		./executionn/pipex/here_doc.c\
-		./executionn/pipex/get_next_line.c\
-		./executionn/pipex/get_next_line_utils.c\
-		./executionn/pipex/open_files.c
+PIPEX =./pipex/pipex_bonus.c\
+		./pipex/pipex_utils_bonus.c\
+		./pipex/ft_split_bonus.c\
+		./pipex/here_doc.c\
+		./pipex/get_next_line.c\
+		./pipex/get_next_line_utils.c\
+		./pipex/open_files.c
 
-SRC =   global/main.c \
-		global/transmetter.c \
-		./parsing/libft_bonus/env_linked_list.c \
-		./parsing/libft_bonus/exec_linked_list.c \
-		./parsing/libft_bonus/file_linked_list.c \
-		./parsing/lexer/tokens_string.c \
-		./parsing/lexer/tokens_spec_char.c \
-		./parsing/lexer/outils.c \
-		./parsing/lexer/ft_isstring.c
+OBJ1 = ${BUILTINS:.c=.o}
 
-SRCS= ${SRC} ${PIPEX} ${BUILTINS} ${LIBFT}
+OBJ2 = ${PIPEX:.c=.o}
 
-all : ${NAME}
+SRC= ${PIPEX} ${BUILTINS} ${LIBFT}
 
-OBJ = ${SRCS:.c=.o}
-B_OBJ = ${B_SRCS:.c=.o}
+OBJ = ${SRC.c=.o}
 
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
 
-${NAME} : ${SRCS}
-	cc $(CFLAGS) ${SRCS} -o ${NAME} -L/usr/local/lib -lreadline
+all: ${NAME} biblio
 
-clean :
-	rm -f ${OBJ}
+${NAME}: ${OBJ} main.c
+	gcc ${CFLAGS}  main.c ${OBJ} -o ${NAME}
 
-push :
-	git add .
-	git commit -m minishell
-	git push origin master
+biblio: ${NAMEB}
 
-fclean : clean
-	rm -f $(NAME)
+${NAMEB}: ${OBJ}
+	ar rcs ${NAMEB} ${OBJ}
+
+clean:
+	rm -f ${OBJ1} ${OBJ2}
+
+fclean: clean
+	rm -f ${NAME} ${NAMEB}
 
 re: fclean all
+
+git:
+	git add . && git commit -m "hfghkf" && git push origin master

@@ -1,29 +1,29 @@
-
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*           pwd.c                                      :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 05:24:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/17 00:57:02 by aatki            ###   ########.fr       */
+/*   Created: 2023/04/25 11:50:27 by aatki             #+#    #+#             */
+/*   Updated: 2023/04/29 21:42:39 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	ft_pwd(int fd,char **env)
+void	ft_errorb(char *s,char *s1,char *s2,int ext)
 {
-	char	buff[1024];
-	char *arg[]={"$PWD",NULL};
-	(void)arg;
-	(void)env;
-	(void)fd;
-	ft_echo(arg,fd,env);
-	if (getcwd(buff, 1024))
-		printf("%s\n", buff);
-	else
-		ft_errorb("no path",NULL,NULL,4);
+	write(2,s,ft_strlen(s));
+	write(2,s1,ft_strlen(s1));
+	write(2,s2,ft_strlen(s2));
+	char *t[]={ft_itoa(ext),NULL};
+	ft_exit(t);
+}
+
+void	ft_exit(char **arg)
+{
+	int ext=atoi(arg[0]);
+	g_exit_status=ext;
+	exit(ext);
 }

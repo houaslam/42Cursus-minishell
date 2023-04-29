@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:45 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/26 09:08:36 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/29 21:32:51 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_echo(char **s, int fd, char **env)
 		if (s[i][0] == '$')
 		{
 			if(s[i][1]=='?')
-				printf("%d",exit_status);	
+				printf("%d",g_exit_status);	
 			if (s[i][1] == '\'' || s[i][1] == '\"')
 				printf("%s", s[i] + 2);
 			else

@@ -1,0 +1,15 @@
+#include "./pipex/pipex_bonus.h"
+void	ft_lstadd_back(t_pipe **lst, t_pipe *new)
+	t_pipe	*temp;
+void in(char **av,t_pipe **pipe)
+    t_pipe *tmp;
+        tmp=malloc(sizeof(t_pipe));
+        ft_lstadd_back(pipe,tmp);
+    (*pipe)->cmd[1]=NULL;
+    // (*pipe)->next->infile=NULL;
+    t_pipe *pipe;
+    in(av,&pipe);
+    pipex(pipe,&menv,&export);
+    // while(pipe)
+    //     printf("s1=%s s2=%s\n",pipe->cmd[0],pipe->cmd[1]);
+    //     pipe=pipe->next;

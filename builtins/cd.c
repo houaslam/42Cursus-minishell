@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:01:30 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/29 12:16:16 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/29 16:31:17 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	ft_cd(char **env, char **export,char **dir)
 	(void)dir;
 	i = 0;
 	if(dir[1])
-		ft_errorb("cd: string not in pwd: ",dir[0],NULL,1);
+		ft_errorb("cd: string not in pwd: \n",dir[0],NULL,1);
 	if (!getcwd(buff, 1024))
-		ft_errorb("no path",NULL,NULL,1);
+		ft_errorb("no path\n",NULL,NULL,1);
 	if(!chdir(dir[0]))
-		ft_errorb("no path",NULL,NULL,1);
+		ft_errorb("no path\n",NULL,NULL,1);
 	util_fun(env,dir[0],buff);
 	util_fun(export,dir[0],buff);
 }

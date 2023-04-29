@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/29 16:57:27 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/29 21:03:46 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-# include "../../libft/libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -37,7 +37,7 @@ typedef struct tj_pipe
 //execution
 //builtins
 
-int					exit_status;
+int					g_exit_status;
 void				ft_echo(char **str, int fd, char **env);
 void				ft_pwd(int fd,char **env);
 void				ft_exit(char **s);
