@@ -6,7 +6,7 @@
 #    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/29 15:54:19 by aatki            ###   ########.fr        #
+#    Updated: 2023/04/29 15:59:41 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,7 +97,7 @@ clean :
 push :
 	git add .
 	git commit -m minishell
-	git push origin hajar
+	git push origin master
 
 fclean : clean
 	rm -f $(NAME)
