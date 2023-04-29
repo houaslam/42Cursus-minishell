@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creat_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:04:34 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/13 03:30:16 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:30:31 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	creat_env(char **en, t_data **data)
 		{
 			if (en[i][j] == '=')
 			{
-				name = ft_substr(en[i], 0, j);
-				path = ft_substr(en[i], j + 1, ft_strlen(en[i]));
+				name = ft_substr2(en[i], 0, j);
+				path = ft_substr2(en[i], j + 1, ft_strlen(en[i]));
 				new_node = ft_lstnew(name, path);
 				ft_lstadd_back(&(*data)->env, new_node);
 				free(path);
@@ -56,26 +56,3 @@ void	creat_env(char **en, t_data **data)
 	}
 }
 
-void	aff1(t_exec *env)
-{
-	t_exec	*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		printf("---->type = %d value = |%s|\n", tmp->type, tmp->value);
-		tmp = tmp->next;
-	}
-}
-
-void	aff2(t_file *env)
-{
-	t_file	*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		printf("---->type = %d file = |%s|\n", tmp->type, tmp->file);
-		tmp = tmp->next;
-	}
-}

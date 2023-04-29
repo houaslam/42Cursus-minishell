@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
+#    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/29 18:01:50 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/09 21:39:42 by houaslam         ###   ########.fr        #
+#    Updated: 2023/04/29 12:50:04 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,18 +47,17 @@ SRCS =  ft_atoi.c \
 		ft_substr.c \
 		ft_tolower.c \
 		ft_toupper.c \
-		ft_isstring.c \
 		ft_strcmp.c \
 		ft_strcpy.c
 
-		
+
 all : ${NAME}
 
 OBJ = ${SRCS:.c=.o}
 
 ${NAME} : ${OBJ}
 	ar -rc ${NAME} ${OBJ}
-	
+
 clean :
 	rm -f ${OBJ}
 
