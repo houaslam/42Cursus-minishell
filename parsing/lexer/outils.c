@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   outils.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/29 14:55:29 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/29 17:10:28 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	free_exec(t_exec **exec)
 {
@@ -49,7 +49,7 @@ int	print_token_er(t_data *data, int status, t_exec *tmp)
 	free_exec(&tmp);
 	data->g_exit_status = status;
 	printf("exit status = %d\n", data->g_exit_status);
-	return (ft_strlen(data->s));
+	return (ft_strlen(data->s) - 1);
 }
 
 void	aff1(t_exec *exec, t_file *file)

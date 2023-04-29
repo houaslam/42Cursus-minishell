@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/29 16:18:49 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/29 17:07:22 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@
 # include<string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-//# include"libft/libft.h"
-#include "./executionn/pipex/pipex_bonus.h"
+# include"../libft/libft.h"
+# include "../executionn/builtins/builtins.h"
+# include "../executionn/pipex/pipex_bonus.h"
 
 typedef struct env
 {
@@ -73,11 +74,11 @@ typedef struct s_data
 int		ft_dim1(char *s, char c);
 char	**ft_freestr(char **arr, int p);
 char	**ft_func(char **arr, char *s, char c);
-char	*ft_substr2(char const *s, unsigned int start, size_t len);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *str, int c);
-//size_t	ft_strlen(const char *str);
-//char	*ft_strjoin(char *s1, char *s2);
-//char	*ft_strdup2(const char *s);
+size_t	ft_strlen(const char *str);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(const char *s);
 // linked list
 void	ft_lstadd_back(t_env **lst, t_env *new);
 t_env	*ft_lstnew(char *name, char *path);
@@ -125,6 +126,6 @@ int		print_token_er(t_data *data, int i, t_exec *tmp);
 int		ft_isstring(char c);
 int		ft_isstring_w_s(char c);
 int		ft_isstring_w_q(char c);
+void transmettre(t_data *data,char ***env,char ***export);
 
-void	transmettre(t_data *data,char ***env,char ***export);
 #endif

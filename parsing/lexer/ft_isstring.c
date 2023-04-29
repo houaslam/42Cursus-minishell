@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_isstring.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 12:46:06 by houaslam          #+#    #+#             */
-/*   Updated: 2022/10/30 11:26:37 by houaslam         ###   ########.fr       */
+/*   Created: 2023/04/03 17:23:47 by houaslam          #+#    #+#             */
+/*   Updated: 2023/04/29 17:10:25 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+int	ft_isstring(char c)
 {
-	size_t	i;
-	char	*p;
-	size_t	len;
+	if (c == 124 || c == 60 || c == 62 || c == 34 || \
+	c == 39 || c == 32 || c == 9)
+		return (0);
+	return (1);
+}
 
-	if (!s || !f)
-		return (NULL);
-	i = 0;
-	len = ft_strlen((char *)s);
-	p = (char *)malloc(sizeof(char) * len + 1);
-	if (!p)
-		return (NULL);
-	while (i < len)
-	{
-		p[i] = f(i, s[i]);
-		i++;
-	}
-	p[i] = '\0';
-	return (p);
+int	ft_isstring_w_s(char c)
+{
+	if (c == 124 || c == 60 || c == 62 || c == 34 || c == 39)
+		return (0);
+	return (1);
+}
+
+int	ft_isstring_w_q(char c)
+{
+	if (c == 124 || c == 60 || c == 62 || c == 32 || c == 9)
+		return (0);
+	return (1);
 }

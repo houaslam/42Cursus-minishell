@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   transmetter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/29 16:17:39 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/29 17:12:23 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../parsing/minishell.h"
 
 void	ft_lstadd_back2(t_pipe **lst, t_pipe *new)
 {
 	t_pipe	*temp;
 
-	if(!new)
-		return;
-	if(*lst)
+	if (!new)
+		return ;
+	if (*lst)
 	{
 		temp = (*lst);
 		while (temp->next)
@@ -32,7 +32,7 @@ void	ft_lstadd_back2(t_pipe **lst, t_pipe *new)
 void transmettre(t_data *data,char ***env,char ***export)
 {
 	t_pipe	*tmp;
-    t_pipe *pipe;
+    t_pipe	*pipe;
 
 	pipe = NULL;
 	tmp = NULL;
@@ -55,7 +55,6 @@ void transmettre(t_data *data,char ***env,char ***export)
 		ft_lstadd_back2(&pipe, tmp);
 	}
 	exit_status = data->g_exit_status;
-	//ft_free(data);
 	printf("**%s\n***", tmp->cmd[0]);
 	printf("**%s\n***", tmp->cmd[1]);
 	printf("**%s\n***", tmp->cmd[2]);
