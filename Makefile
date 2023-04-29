@@ -6,7 +6,7 @@
 #    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/29 15:59:41 by aatki            ###   ########.fr        #
+#    Updated: 2023/04/29 16:18:33 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,60 +14,60 @@ NAME = minishell
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
-LIBFT =  ./execution/libft/ft_atoi.c \
-		./execution/libft/ft_bzero.c \
-		./execution/libft/ft_calloc.c \
-		./execution/libft/ft_isalnum.c \
-		./execution/libft/ft_isalpha.c \
-		./execution/libft/ft_isascii.c \
-		./execution/libft/ft_isdigit.c \
-		./execution/libft/ft_isprint.c \
-		./execution/libft/ft_itoa.c \
-		./execution/libft/ft_memchr.c \
-		./execution/libft/ft_memcmp.c \
-		./execution/libft/ft_memcpy.c \
-		./execution/libft/ft_memmove.c \
-		./execution/libft/ft_memset.c \
-		./execution/libft/ft_putchar_fd.c \
-		./execution/libft/ft_putendl_fd.c \
-		./execution/libft/ft_putnbr_fd.c \
-		./execution/libft/ft_putstr_fd.c \
-		./execution/libft/ft_split.c \
-		./execution/libft/ft_strchr.c \
-		./execution/libft/ft_strdup.c \
-		./execution/libft/ft_striteri.c \
-		./execution/libft/ft_strjoin.c \
-		./execution/libft/ft_strlcat.c \
-		./execution/libft/ft_strlcpy.c \
-		./execution/libft/ft_strlen.c \
-		./execution/libft/ft_strmapi.c \
-		./execution/libft/ft_strncmp.c \
-		./execution/libft/ft_strnstr.c \
-		./execution/libft/ft_strrchr.c \
-		./execution/libft/ft_strtrim.c \
-		./execution/libft/ft_substr.c \
-		./execution/libft/ft_tolower.c \
-		./execution/libft/ft_toupper.c \
-		./execution/libft/ft_strcmp.c \
-		./execution/libft/ft_strcpy.c
+LIBFT =  ./executionn/libft/ft_atoi.c \
+		./executionn/libft/ft_bzero.c \
+		./executionn/libft/ft_calloc.c \
+		./executionn/libft/ft_isalnum.c \
+		./executionn/libft/ft_isalpha.c \
+		./executionn/libft/ft_isascii.c \
+		./executionn/libft/ft_isdigit.c \
+		./executionn/libft/ft_isprint.c \
+		./executionn/libft/ft_itoa.c \
+		./executionn/libft/ft_memchr.c \
+		./executionn/libft/ft_memcmp.c \
+		./executionn/libft/ft_memcpy.c \
+		./executionn/libft/ft_memmove.c \
+		./executionn/libft/ft_memset.c \
+		./executionn/libft/ft_putchar_fd.c \
+		./executionn/libft/ft_putendl_fd.c \
+		./executionn/libft/ft_putnbr_fd.c \
+		./executionn/libft/ft_putstr_fd.c \
+		./executionn/libft/ft_split.c \
+		./executionn/libft/ft_strchr.c \
+		./executionn/libft/ft_strdup.c \
+		./executionn/libft/ft_striteri.c \
+		./executionn/libft/ft_strjoin.c \
+		./executionn/libft/ft_strlcat.c \
+		./executionn/libft/ft_strlcpy.c \
+		./executionn/libft/ft_strlen.c \
+		./executionn/libft/ft_strmapi.c \
+		./executionn/libft/ft_strncmp.c \
+		./executionn/libft/ft_strnstr.c \
+		./executionn/libft/ft_strrchr.c \
+		./executionn/libft/ft_strtrim.c \
+		./executionn/libft/ft_substr.c \
+		./executionn/libft/ft_tolower.c \
+		./executionn/libft/ft_toupper.c \
+		./executionn/libft/ft_strcmp.c \
+		./executionn/libft/ft_strcpy.c
 
-BUILTINS = ./execution/builtins/utils.c\
-			./execution/builtins/cd.c\
-			./execution/builtins/echo.c\
-			./execution/builtins/env.c\
-			./execution/builtins/exit.c\
-			./execution/builtins/export.c\
-			./execution/builtins/pwd.c\
-			./execution/builtins/unset.c\
-			./execution/builtins/export_utils.c
+BUILTINS = ./executionn/builtins/utils.c\
+			./executionn/builtins/cd.c\
+			./executionn/builtins/echo.c\
+			./executionn/builtins/env.c\
+			./executionn/builtins/exit.c\
+			./executionn/builtins/export.c\
+			./executionn/builtins/pwd.c\
+			./executionn/builtins/unset.c\
+			./executionn/builtins/export_utils.c
 
-PIPEX =./execution/pipex/pipex_bonus.c\
-		./execution/pipex/pipex_utils_bonus.c\
-		./execution/pipex/ft_split_bonus.c\
-		./execution/pipex/here_doc.c\
-		./execution/pipex/get_next_line.c\
-		./execution/pipex/get_next_line_utils.c\
-		./execution/pipex/open_files.c
+PIPEX =./executionn/pipex/pipex_bonus.c\
+		./executionn/pipex/pipex_utils_bonus.c\
+		./executionn/pipex/ft_split_bonus.c\
+		./executionn/pipex/here_doc.c\
+		./executionn/pipex/get_next_line.c\
+		./executionn/pipex/get_next_line_utils.c\
+		./executionn/pipex/open_files.c
 
 SRC =  main.c \
 		creat_env.c \
