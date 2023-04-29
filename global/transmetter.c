@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/29 17:12:23 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:18:57 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	ft_lstadd_back2(t_pipe **lst, t_pipe *new)
 		*lst = new;
 }
 
-void transmettre(t_data *data,char ***env,char ***export)
+void	transmettre(t_data *data, char ***env, char ***export)
 {
 	t_pipe	*tmp;
-    t_pipe	*pipe;
+	t_pipe	*pipe;
 
 	pipe = NULL;
 	tmp = NULL;
@@ -55,10 +55,7 @@ void transmettre(t_data *data,char ***env,char ***export)
 		ft_lstadd_back2(&pipe, tmp);
 	}
 	exit_status = data->g_exit_status;
-	printf("**%s\n***", tmp->cmd[0]);
-	printf("**%s\n***", tmp->cmd[1]);
-	printf("**%s\n***", tmp->cmd[2]);
-    pipex(pipe,env,export);
+	pipex(pipe, env, export);
 }
 
 char	*ft_substr2(char const *s, unsigned int start, size_t len)
@@ -83,5 +80,3 @@ char	*ft_substr2(char const *s, unsigned int start, size_t len)
 	p[i] = '\0';
 	return (p);
 }
-
-

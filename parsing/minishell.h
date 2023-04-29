@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/29 17:07:22 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/29 21:54:33 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_file
 typedef struct exec
 {
 	int			type;
-	char		**cmd;
+	// char		**cmd;
 	char		*value;
 	t_file		*file;
 	struct exec	*next;
@@ -64,7 +64,8 @@ typedef struct s_data
 {
 	int			g_exit_status;
 	int			pipe;
-	t_exec		*tmp;
+	// t_exec		*tmp;
+	// t_file		*tmp_f;
 	t_env		*env;
 	t_exec		*exec;
 	char		*s;
@@ -107,13 +108,14 @@ void	aff2(t_file *env);
 
 //spec char tokens
 void	lexer(t_data *data);
-int		handle_redin(t_data *data, int i, t_exec *tmp);
-int		handle_redout(t_data *data, int i, t_exec *tmp);
-int		handle_here_doc_in(t_data *data, int i, t_exec *tmp);
-int		handle_here_doc_out(t_data *data, int i, t_exec *tmp);
+int		handle_redin(t_data *data, int i, t_file *tmp);
+int		handle_redout(t_data *data, int i, t_file *tmp);
+int		handle_here_doc_in(t_data *data, int i, t_file *tmp);
+int		handle_here_doc_out(t_data *data, int i, t_file *tmp);
+int		chek_pipe(t_data *data, int i);
 
 //string tokens
-int		handle_pipe(t_data *data, int i, t_exec *exec);
+int		handle_pipe(t_data *data, int i, t_exec *exec, t_file *tmp_f);
 int		handle_string(t_data *data, int i, t_exec *tmp);
 int		handle_d_quote(t_data *data, int i);
 int		handle_s_quote(t_data *data, int i, t_exec *tmp, int type);
@@ -126,6 +128,6 @@ int		print_token_er(t_data *data, int i, t_exec *tmp);
 int		ft_isstring(char c);
 int		ft_isstring_w_s(char c);
 int		ft_isstring_w_q(char c);
-void transmettre(t_data *data,char ***env,char ***export);
+void	transmettre(t_data *data, char ***env, char ***export);
 
 #endif
