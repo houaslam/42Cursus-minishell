@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 09:44:16 by aatki             #+#    #+#             */
-/*   Updated: 2022/10/27 11:51:06 by aatki            ###   ########.fr       */
+/*   Created: 2023/04/25 11:50:27 by aatki             #+#    #+#             */
+/*   Updated: 2023/04/29 21:42:39 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "builtins.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_errorb(char *s,char *s1,char *s2,int ext)
 {
-	t_list	*tmp;
+	write(2,s,ft_strlen(s));
+	write(2,s1,ft_strlen(s1));
+	write(2,s2,ft_strlen(s2));
+	char *t[]={ft_itoa(ext),NULL};
+	ft_exit(t);
+}
 
-	if (!*lst || !del)
-		return ;
-	while (*lst)
-	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		ft_lstdelone(tmp, del);
-	}
+void	ft_exit(char **arg)
+{
+	int ext=atoi(arg[0]);
+	g_exit_status=ext;
+	exit(ext);
 }

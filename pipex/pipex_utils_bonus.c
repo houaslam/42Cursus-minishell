@@ -6,28 +6,11 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:28 by aatki             #+#    #+#             */
-/*   Updated: 2023/03/10 19:55:42 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/29 16:32:55 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (s1[i] && s2[i] && i < n - 1 && s1[i] == s2[i])
-		i++;
-	if ((unsigned char)s1[i] < (unsigned char)s2[i])
-		return (-1);
-	else if ((unsigned char)s1[i] > (unsigned char)s2[i])
-		return (1);
-	else
-		return (0);
-}
 
 void	ft_error(char *s)
 {
@@ -49,7 +32,7 @@ char	**ft_ret(char **env)
 			ret = ft_split(env[i] + 5, ':');
 	}
 	if (!ret)
-		ft_error("path not found");
+		ft_errorb("path not found\n",NULL,NULL,1);
 	return (ret);
 }
 
@@ -72,7 +55,7 @@ char	*check_env(char **env, char **cmd)
 			free(path);
 	}
 	if (access(path, R_OK) == -1)
-		ft_error("no access to the command\n");
+		ft_errorb("no access to the command\n",NULL,NULL,1);
 	free(ret);
 	return (path);
 }

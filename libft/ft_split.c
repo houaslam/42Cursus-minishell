@@ -5,86 +5,86 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 17:34:09 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/11 02:44:35 by aatki            ###   ########.fr       */
+/*   Created: 2022/10/14 11:18:44 by houaslam          #+#    #+#             */
+/*   Updated: 2023/04/29 12:23:22 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	compt1(char const *s, char c)
+static int	ft_dim1(char *s, char c)
 {
 	int	i;
-	int	cmpt;
+	int	j;
 
 	i = 0;
-	cmpt = 0;
-	if (!s)
+	j = 0;
+	while (s[i] == c)
+		i++;
+	if (s[i] == '\0')
 		return (0);
 	while (s[i])
 	{
-		if ((s[0] != c && i == 0) || (s[i] != c && s[i - 1] == c))
-			cmpt++;
-		i++;
+		if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
+			j++;
+	i++;
 	}
-	return (cmpt);
+	return (j + 1);
 }
 
-static int	word(char const *s, char c)
+static char	**ft_freestr(char **arr, int p)
 {
-	int	k;
-
-	k = 0;
-	if (!s)
-		return (0);
-	while (s[k] && s[k] != c)
+	while (p >= 0)
 	{
-		k++;
+		free(arr[p]);
+		p--;
 	}
-	return (k);
+	free(arr);
+	return (NULL);
 }
 
-char	**ft_free(char **p, int len)
+static char	**ft_func(char **arr, char *s, char c)
 {
 	int	i;
+	int	p;
+	int	k;
 
-	if (!p)
-		return (NULL);
 	i = 0;
-	while (i < len)
+	p = 0;
+	k = 0;
+	while (p < ft_dim1(s, c) && s[i])
 	{
-		free(p[i]);
-		i++;
+		while (s[k] == c && s[k] != '\0')
+			k++;
+		i = k;
+		while (s[i] != c && s[i] != '\0')
+			i++;
+		arr[p] = ft_substr(s, k, i - k);
+		k = i;
+		if (!arr[p])
+			return (ft_freestr(arr, p - 1));
+		p++;
 	}
-	free(p);
-	return (NULL);
+	arr[p] = NULL;
+	return (arr);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		j;
 	char	**p;
-	int		len;
+	int		j;
+	size_t	i;
+	size_t	size ;
 
-	i = 0;
 	j = 0;
+	i = 0;
 	if (!s)
 		return (NULL);
-	len = compt1(s, c);
-	p = malloc(sizeof(char *) * (len + 1));
+	size = ft_dim1((char *)s, c);
+	p = malloc((size + 1) * sizeof(char *));
 	if (!p)
 		return (NULL);
-	while (*s && i < len)
-	{
-		while (*s == c)
-			s++;
-		p[i] = ft_substr(s, 0, word(s, c));
-		if (!p[i])
-			return (ft_free(p, i));
-		s += word(s, c);
-		i++;
-	}
-	p[i] = NULL;
+	if (!ft_func(p, (char *)s, c))
+		return (NULL);
 	return (p);
 }

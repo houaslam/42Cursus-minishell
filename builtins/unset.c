@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 08:33:35 by aatki             #+#    #+#             */
-/*   Updated: 2022/10/23 16:05:38 by aatki            ###   ########.fr       */
+/*   Created: 2023/04/25 11:50:55 by aatki             #+#    #+#             */
+/*   Updated: 2023/04/28 09:20:39 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "builtins.h"
 
-int	ft_lstsize(t_list *lst)
+void	ft_unset(char **env, char **arg)
 {
 	int	i;
 
-	i = 0;
-	while (lst)
+	int j=0;
+	while(arg[j])
 	{
-		lst = lst->next;
-		i++;
+		i=0;
+		while ((env[i]))
+		{
+			if (arg && !ft_strncmp(env[i], arg[j], ft_strlen(arg[j])))
+				break ;
+			i++;
+		}
+		if (!env[i])
+			return ;
+		while ((env[i + 1]))
+		{
+			free(env[i]);
+			env[i] = ft_strdup(env[i + 1]);
+			i++;
+		}
+		env[i] = NULL;
+		j++;
 	}
-	return (i);
 }

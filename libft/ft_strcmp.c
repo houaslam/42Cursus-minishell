@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 01:37:29 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/11 01:14:19 by aatki            ###   ########.fr       */
+/*   Created: 2023/04/09 21:28:17 by houaslam          #+#    #+#             */
+/*   Updated: 2023/04/09 21:34:42 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_error(char *s)
+int	ft_strcmp(char *str, char *str_2)
 {
-	dup2(2, 1);
-	printf("%s\n", s);
-	exit(1);
+	int	i;
+
+	i = 0;
+	while (str[i] && str_2[i])
+	{
+		if (str[i] != str_2[i])
+			return (str[i] - str_2[i]);
+		i++;
+	}
+	return (0);
 }

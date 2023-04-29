@@ -1,56 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins2.c                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 02:37:52 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/11 02:38:34 by aatki            ###   ########.fr       */
+/*   Created: 2023/04/25 11:50:45 by aatki             #+#    #+#             */
+/*   Updated: 2023/04/29 21:32:51 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minishell.h"
 
-void	ft_cd(char **env, char *dir)
+#include "builtins.h"
+
+void	found(char *sa, char **env)
 {
 	int	i;
-	char	buff[1024];
 
 	i = 0;
-	printf("%s>>>\n", dir);
-	if (!getcwd(buff, 1024))
-		ft_error("no path");
 	while (env[i])
 	{
-		if(!ft_strncmp(env[i],"PWD=",4))
-		{
-			env[i]=ft_strjoin("PWD=",dir);
-			printf("%s\n", env[i]);
-		}
-		if(!ft_strncmp(env[i],"OLDPWD=",7))
-		{
-			env[i]=ft_strjoin("OLDPWD=",buff);
-			printf("%s\n", env[i]);
-		}
+		if (!ft_strncmp(env[i], sa, ft_strlen(sa)))
+			printf("%s", env[i] + ft_strlen(sa) + 1);
 		i++;
 	}
-	//ft_env(env,1);
+	return ;
 }
 
 void	ft_echo(char **s, int fd, char **env)
 {
 	int	i;
 
-	dup2(fd, 1);
-	// char **s=ft_split(str,' ');
-	i = 1;
+	(void)fd;
+	//dup2(fd, 1);
+	i = 0;
 	if (!ft_strncmp(s[0], "-n", 2))
 		i++;
 	while (s[i])
 	{
 		if (s[i][0] == '$')
 		{
+			if(s[i][1]=='?')
+				printf("%d",g_exit_status);	
 			if (s[i][1] == '\'' || s[i][1] == '\"')
 				printf("%s", s[i] + 2);
 			else
@@ -64,9 +55,3 @@ void	ft_echo(char **s, int fd, char **env)
 	if (ft_strncmp(s[0], "-n", 2))
 		printf("\n");
 }
-
-void	ft_exit(int e)
-{
-	exit(e);
-}
-

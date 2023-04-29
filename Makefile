@@ -5,49 +5,97 @@
 #                                                     +:+ +:+         +:+      #
 #    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/12 02:29:17 by aatki            ###   ########.fr        #
+#    Created: 2023/04/16 22:26:16 by aatki             #+#    #+#              #
+#    Updated: 2023/04/29 14:49:22 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+NAME = execution
 
-CFLAGS = #-g3 -fsanitize=address #-Wall -Wextra -Werror 
+NAMEB = execution.a
 
-SRCS =  main.c \
-		builtins.c\
-		builtins2.c\
-		utils.c\
-		heeelp.c
-		
+LIBFT =  ./libft/ft_atoi.c \
+		./libft/ft_bzero.c \
+		./libft/ft_calloc.c \
+		./libft/ft_isalnum.c \
+		./libft/ft_isalpha.c \
+		./libft/ft_isascii.c \
+		./libft/ft_isdigit.c \
+		./libft/ft_isprint.c \
+		./libft/ft_itoa.c \
+		./libft/ft_memchr.c \
+		./libft/ft_memcmp.c \
+		./libft/ft_memcpy.c \
+		./libft/ft_memmove.c \
+		./libft/ft_memset.c \
+		./libft/ft_putchar_fd.c \
+		./libft/ft_putendl_fd.c \
+		./libft/ft_putnbr_fd.c \
+		./libft/ft_putstr_fd.c \
+		./libft/ft_split.c \
+		./libft/ft_strchr.c \
+		./libft/ft_strdup.c \
+		./libft/ft_striteri.c \
+		./libft/ft_strjoin.c \
+		./libft/ft_strlcat.c \
+		./libft/ft_strlcpy.c \
+		./libft/ft_strlen.c \
+		./libft/ft_strmapi.c \
+		./libft/ft_strncmp.c \
+		./libft/ft_strnstr.c \
+		./libft/ft_strrchr.c \
+		./libft/ft_strtrim.c \
+		./libft/ft_substr.c \
+		./libft/ft_tolower.c \
+		./libft/ft_toupper.c \
+		./libft/ft_strcmp.c \
+		./libft/ft_strcpy.c
 
-SRCL = ./libft/ft_atoi.c ./libft/ft_calloc.c ./libft/ft_isalpha.c ./libft/ft_isdigit.c ./libft/ft_memchr.c ./libft/ft_memcpy.c \
-	./libft/ft_memset.c ./libft/ft_strdup.c ./libft/ft_strlcpy.c ./libft/ft_strncmp.c ./libft/ft_strrchr.c ./libft/ft_toupper.c \
-	./libft/ft_bzero.c ./libft/ft_isalnum.c ./libft/ft_isascii.c ./libft/ft_isprint.c ./libft/ft_memcmp.c ./libft/ft_memmove.c ./libft/ft_strchr.c \
-	./libft/ft_strlcat.c ./libft/ft_strlen.c ./libft/ft_strnstr.c ./libft/ft_tolower.c ./libft/ft_substr.c ./libft/ft_strtrim.c ./libft/ft_split.c \
-	./libft/ft_strjoin.c ./libft/ft_itoa.c ./libft/ft_strmapi.c ./libft/ft_striteri.c ./libft/ft_putchar_fd.c ./libft/ft_putstr_fd.c ./libft/ft_putendl_fd.c \
-	./libft/ft_putnbr_fd.c
+BUILTINS = ./builtins/utils.c\
+			./builtins/cd.c\
+			./builtins/echo.c\
+			./builtins/env.c\
+			./builtins/exit.c\
+			./builtins/export.c\
+			./builtins/pwd.c\
+			./builtins/unset.c\
+			./builtins/export_utils.c
 
-BSRCL = ./libft/ft_lstnew_bonus.c ./libft/ft_lstadd_front_bonus.c ./libft/ft_lstsize_bonus.c ./libft/ft_lstlast_bonus.c ./libft/ft_lstdelone_bonus.c ./libft/ft_lstclear_bonus.c \
-	./libft/ft_lstiter_bonus.c ./libft/ft_lstadd_back_bonus.c ./libft/ft_lstmap_bonus.c
+PIPEX =./pipex/pipex_bonus.c\
+		./pipex/pipex_utils_bonus.c\
+		./pipex/ft_split_bonus.c\
+		./pipex/here_doc.c\
+		./pipex/get_next_line.c\
+		./pipex/get_next_line_utils.c\
+		./pipex/open_files.c
 
-all : ${NAME}
+OBJ1 = ${BUILTINS:.c=.o}
 
-OBJ = ${SRCS:.c=.o}
-B_OBJ = ${B_SRCS:.c=.o} 
+OBJ2 = ${PIPEX:.c=.o}
 
-${NAME} : ${SRCS} ${SRCL} ${BSRCL}
-	cc $(CFLAGS)  ${SRCS} ${SRCL} ${BSRCL} -o ${NAME}
+SRC= ${PIPEX} ${BUILTINS} ${LIBFT}
 
-clean :
-	rm -f ${OBJ}
+OBJ = ${SRC.c=.o}
 
-push :
-	git add .
-	git commit -m minishell
-	git push origin aicha
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
 
-fclean : clean
-	rm -f $(NAME)
+all: ${NAME} biblio
+
+${NAME}: ${OBJ} main.c
+	gcc ${CFLAGS}  main.c ${OBJ} -o ${NAME}
+
+biblio: ${NAMEB}
+
+${NAMEB}: ${OBJ}
+	ar rcs ${NAMEB} ${OBJ}
+
+clean:
+	rm -f ${OBJ1} ${OBJ2}
+
+fclean: clean
+	rm -f ${NAME} ${NAMEB}
 
 re: fclean all
+
+git:
+	git add . && git commit -m "hfghkf" && git push origin master

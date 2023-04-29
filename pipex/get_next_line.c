@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 02:01:17 by aatki             #+#    #+#             */
-/*   Updated: 2023/03/06 19:10:29 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/29 14:56:39 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ int	new_line(char *s)
 	return (1);
 }
 
-int	ft_strlen(char *s)
-{
-	int	i;
+// int	ft_strlen(char *s)
+// {
+// 	int	i;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (s[i])
+// 		i++;
+// 	return (i);
+// }
 
 int	init_get_next_line(char **string, char **tmp_string, char **tmp, char **s)
 {
