@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/29 15:53:09 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/29 16:12:18 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void transmettre(t_data *data,char ***env,char ***export)
 		(tmp)->cmd = ft_split(data->exec->value, '*');
 		while (data->exec->file)
 		{
+			printf("bdfjbgjkrtgk\n");
 			if (data->exec->file->type == 2)
 				(tmp)->infile = data->exec->file->file;
 			if (data->exec->file->type == 3 || data->exec->file->type == 6)
