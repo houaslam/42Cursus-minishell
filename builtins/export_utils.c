@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 08:41:51 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/28 09:18:36 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/30 13:38:52 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,12 @@ void	change(char ***export, char ***env, char *arg, int cas)
 		i=position(*export,arg);
 		free(*export[i]);
 		*export[i] = ft_strdup(arg);
+		arg=ft_strjoin(arg,"=");
 		*env= add_str(*env, arg);
 	}
 	else if (cas == 3)
-	{
+	{	
+		arg=ft_strjoin(arg,"=");
 		*env= add_str(*env, arg);
 		*export= add_str(*export, arg);
 		sort_export(*export);
@@ -92,6 +94,7 @@ void	change(char ***export, char ***env, char *arg, int cas)
 		return;
 	else if (cas == 5 )
 	{
+		arg=ft_strjoin(arg,"=");
 		*export = add_str(*export, arg);
 		sort_export(*export);
 	}

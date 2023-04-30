@@ -6,43 +6,72 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:01:30 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/29 16:31:17 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/30 13:34:28 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void util_fun(char **env,char *dir,char *buff)
+void	util_fun(char **env, char *buff)
 {
-	int i=0;
+	int		i;
+	char	buff2[1024];
+
+	i = 0;
+	if (!getcwd(buff2, 1024))
+		ft_errorb("no path1\n", NULL, NULL, 1);
 	while (env[i])
 	{
-		if(!ft_strncmp(env[i],"PWD=",4))
+		if (!ft_strncmp(env[i], "PWD=", 4))
 		{
-			env[i]=ft_strjoin("PWD=",dir);
-			printf("%s\n", env[i]);
+			env[i] = ft_strjoin("PWD=", buff2);
 		}
-		if(!ft_strncmp(env[i],"OLDPWD=",7))
+		if (!ft_strncmp(env[i], "OLDPWD=", 7))
 		{
-			env[i]=ft_strjoin("OLDPWD=",buff);
-			printf("%s\n", env[i]);
+			env[i] = ft_strjoin("OLDPWD=", buff);
 		}
 		i++;
 	}
+	// free(buff);
+	// free(buff2);
 }
 
-void	ft_cd(char **env, char **export,char **dir)
+char *telda(char *s)
 {
-	int	i;
+	int i=0;
+	char *r;
+	while(s[i])
+	{
+		if(s[i]=='~')
+		{
+			r=ft_strjoin(ft_substr(s,0,i),"/Users/aatki");
+			s=ft_strjoin(r,s+i+1);
+			//free(r);
+			break;
+		}
+		i++;
+	}
+	return s;
+}
+
+void	ft_cd(char **env, char **export, char **arg)
+{
+	int		i;
 	char	buff[1024];
-	(void)dir;
+	char	*dir=NULL;
+
 	i = 0;
-	if(dir[1])
-		ft_errorb("cd: string not in pwd: \n",dir[0],NULL,1);
+	if (arg[0] && arg[1])
+		ft_errorb("cd: string not in pwd: ", arg[0], "\n", 1);
+	if (!arg[0])
+		dir = ft_strdup("/Users/aatki");
+	else
+		dir=arg[0];
+	dir=telda(dir);
 	if (!getcwd(buff, 1024))
-		ft_errorb("no path\n",NULL,NULL,1);
-	if(!chdir(dir[0]))
-		ft_errorb("no path\n",NULL,NULL,1);
-	util_fun(env,dir[0],buff);
-	util_fun(export,dir[0],buff);
+		ft_errorb("no path1\n", NULL, NULL, 1);
+	if (chdir(dir))
+		ft_errorb("bash: cd: ", dir, ": No such file or directory\n", 1);
+	util_fun(env, buff);
+	util_fun(export, buff);
 }

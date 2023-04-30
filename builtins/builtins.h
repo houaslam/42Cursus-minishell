@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/29 21:03:46 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/30 11:19:04 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ typedef struct t_cmd
 	struct t_cmd	*next_cmd;
 }					t_cmd;
 
-typedef struct tj_pipe
-{
-	t_cmd			**c;
-	char			*infile;
-	char			*outfile;
-	char			*here_doc;
-	struct t_pipe	*next_pipe;
-}					tp_pipe;
+// typedef struct t_pipe
+// {
+// 	t_cmd			**c;
+// 	char			*infile;
+// 	char			*outfile;
+// 	char			*here_doc;
+// 	struct t_pipe	*next_pipe;
+// }					t_pipe;
 
 //execution
 //builtins
@@ -52,7 +52,7 @@ void				sort_export(char **env);
 void				ft_export(char ***export, char ***env, char **arg, int fd);
 int					here(char **env, char *arg);
 void				found(char *sa, char **env);
-void				ft_unset(char **env, char **arg);
+void				ft_unset(char **env,char **arg);
 char				**add_str(char **env, char *plus);
 char				**ft_free(char **p);
 char				**equal(char *s, char c);

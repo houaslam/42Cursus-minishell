@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:28 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/29 16:32:55 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/30 13:45:39 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*check_env(char **env, char **cmd)
 			free(path);
 	}
 	if (access(path, R_OK) == -1)
-		ft_errorb("no access to the command\n",NULL,NULL,1);
+		ft_errorb("bash: ",NULL,"command not found\n",127);
 	free(ret);
 	return (path);
 }

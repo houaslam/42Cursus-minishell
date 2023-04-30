@@ -6,10 +6,9 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:45 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/29 21:32:51 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/30 12:09:45 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "builtins.h"
 
@@ -20,7 +19,7 @@ void	found(char *sa, char **env)
 	i = 0;
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], sa, ft_strlen(sa)))
+		if (!ft_strncmp(env[i], sa, ft_strlen(sa))&& env[i][ft_strlen(sa)]=='=')
 			printf("%s", env[i] + ft_strlen(sa) + 1);
 		i++;
 	}
@@ -41,7 +40,7 @@ void	ft_echo(char **s, int fd, char **env)
 		if (s[i][0] == '$')
 		{
 			if(s[i][1]=='?')
-				printf("%d",g_exit_status);	
+				printf("%d",g_exit_status);
 			if (s[i][1] == '\'' || s[i][1] == '\"')
 				printf("%s", s[i] + 2);
 			else

@@ -6,7 +6,7 @@
 #    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 22:26:16 by aatki             #+#    #+#              #
-#    Updated: 2023/04/29 14:49:22 by aatki            ###   ########.fr        #
+#    Updated: 2023/04/30 13:50:36 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,4 +98,4 @@ fclean: clean
 re: fclean all
 
 git:
-	git add . && git commit -m "hfghkf" && git push origin master
+	git add . && git commit -m "execution" && git push origin aicha

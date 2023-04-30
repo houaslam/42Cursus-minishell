@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/29 21:01:21 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/30 11:40:48 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 	else if (!strncmp(cmd_arg[0], "unset", 5))
 	{
 		ft_unset(*env, ++cmd_arg);
-		ft_unset(*export, ++cmd_arg);
+		ft_unset(*export, cmd_arg);
 	}
 	else if (!strncmp(cmd_arg[0], "pwd", 3))
 		ft_pwd(fdout, *env);
@@ -65,7 +65,6 @@ void	child_one(t_pipe **pipee, int *fd, char ***env, char ***export)
 	// ph[0]=0;
 	// ph[1]=1;
 	//fd[0] = ft_infile((*pipee)->infile);
-	int exit_status;
 	while ((*pipee)->next)
 	{
 		if (pipe(ph) < 0)
@@ -81,7 +80,7 @@ void	child_one(t_pipe **pipee, int *fd, char ***env, char ***export)
 		}
 		close(ph[1]);
 		*pipee = (*pipee)->next;
-		waitpid(id, &exit_status, 0);
+		waitpid(id, &g_exit_status, 0);
 	}
 }
 

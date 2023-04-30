@@ -21,7 +21,6 @@ void	ft_pwd(int fd,char **env)
 	(void)arg;
 	(void)env;
 	(void)fd;
-	ft_echo(arg,fd,env);
 	if (getcwd(buff, 1024))
 		printf("%s\n", buff);
 	else
