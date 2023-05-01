@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/01 13:35:39 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/01 18:02:03 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	aff1(t_exec *env, t_file *file);
 void	aff2(t_file *env);
 
 //spec char tokens
-void	lexer(t_data *data);
+void	lexer(t_data **data);
 int		handle_redin(t_data *data, int i, t_file *tmp);
 int		handle_redout(t_data *data, int i, t_file *tmp);
 int		handle_here_doc_in(t_data *data, int i, t_file *tmp);

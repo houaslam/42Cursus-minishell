@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/01 13:50:09 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/01 17:53:06 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ char	*seach_env_value(char *str, t_data *data)
 int	print_token_er(t_data *data, int status, t_exec *tmp)
 {
 	printf("ERROR\n");
-	free_exec(&data->exec);
-	if (tmp)
-		free_exec(&tmp);
+	(void)tmp;
+	// free_exec(&data->exec);
+	// if (tmp)
+	// 	free_exec(&tmp);
 	data->g_exit_status = status;
 	printf("exit status = %d\n", data->g_exit_status);
 	return (ft_strlen(data->s) - 1);

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/01 13:45:59 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/01 16:27:32 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ int	handle_string(t_data *data, int i, t_exec *tmp)
 		i++;
 	res = ft_substr(data->s, k, i - k);
 	str = ft_strjoin(str, res);
-	tmp->value = ft_strjoin(tmp->value, str);
+	tmp->value = ft_strjoin_free(tmp->value, str);
 	free(str);
+	free(res);
 	if (data->s[i] && (data->s[i] == \
 	D_QUOT || data->s[i + 1] == S_QUOT))
 	{
@@ -49,7 +50,7 @@ int	handle_string(t_data *data, int i, t_exec *tmp)
 	}
 	if (!ft_isstring_w_s(data->s[i]))
 		return (i - 1);
-	tmp->value = ft_strjoin(tmp->value, "*");
+	tmp->value = ft_strjoin_free(tmp->value, "*");
 	return (i);
 }
 
@@ -65,7 +66,7 @@ int	handle_s_quote(t_data *data, int i, t_exec *tmp, int type)
 	while (data->s[i] != type)
 	{
 		if (data->s[i] == '\0')
-			print_token_er(data, i, tmp);
+			return(print_token_er(data, 1, tmp));
 		i++;
 	}
 	res = ft_substr(data->s, k, i - k);
