@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/01 13:17:16 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/01 13:46:33 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,14 @@ int	handle_here_doc_in(t_data *data, int i, t_file *tmp_f)
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 		return (print_token_er(data, 1, NULL));
-	ft_lstadd_back_file(&tmp_f, ft_lstnew_file(str, HERE_DOC_IN));
+		if (data->f == 0)
+	{
+		tmp_f->file = ft_strjoin(tmp_f->file, str);
+		tmp_f->type = HERE_DOC_IN;
+		data->f = 1;
+	}
+	else
+		ft_lstadd_back_file(&tmp_f, ft_lstnew_file(str, HERE_DOC_IN));
 	free(str);
 	return (i);
 }
@@ -47,7 +54,14 @@ int	handle_here_doc_out(t_data *data, int i, t_file *tmp_f)
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 		return (print_token_er(data - 1, 1, NULL));
-	ft_lstadd_back_file(&tmp_f, ft_lstnew_file(str, HERE_DOC_OUT));
+		if (data->f == 0)
+	{
+		tmp_f->file = ft_strjoin(tmp_f->file, str);
+		tmp_f->type = HERE_DOC_OUT;
+		data->f = 1;
+	}
+	else
+		ft_lstadd_back_file(&tmp_f, ft_lstnew_file(str, HERE_DOC_OUT));
 	free(str);
 	return (i);
 }
@@ -66,8 +80,14 @@ int	handle_redin(t_data *data, int i, t_file *tmp_f)
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 		return (print_token_er(data, 1, NULL));
-	ft_lstadd_back_file(&tmp_f, ft_lstnew_file(str, RED_IN));
-	printf("=====%s====\n", tmp_f->file);
+	if (data->f == 0)
+	{
+		tmp_f->file = ft_strjoin(tmp_f->file, str);
+		tmp_f->type = RED_IN;
+		data->f = 1;
+	}
+	else
+		ft_lstadd_back_file(&tmp_f, ft_lstnew_file(str, RED_IN));
 	free(str);
 	return (i - 1);
 }
@@ -86,7 +106,14 @@ int	handle_redout(t_data *data, int i, t_file *tmp_f)
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 		return (print_token_er(data, 1, NULL));
-	ft_lstadd_back_file(&tmp_f, ft_lstnew_file(str, RED_OUT));
+	if (data->f == 0)
+	{
+		tmp_f->file = ft_strjoin(tmp_f->file, str);
+		tmp_f->type = RED_OUT;
+		data->f = 1;
+	}
+	else
+		ft_lstadd_back_file(&tmp_f, ft_lstnew_file(str, RED_OUT));
 	free(str);
 	return (i - 1);
 }
@@ -124,14 +151,11 @@ int	handle_pipe(t_data *data, int i, t_exec *tmp, t_file *tmp_f)
 		return (print_token_er(data, 1, tmp));
 	if (tmp -> value)
 	{
-		// tmp->file = tmp_f;
-		printf("***%s****\n", tmp_f->file);
 		ft_lstadd_back_exec(&data->exec, \
 		ft_lstnew_exec(ft_strdup(tmp->value), PIPE, tmp_f));
 		free(tmp->value);
 		tmp->value = NULL;
 		tmp = ft_lstnew_exec("*", STRING, tmp_f);
-
 	}
 	return (i);
 }

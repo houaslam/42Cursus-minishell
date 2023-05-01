@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/29 22:57:24 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/01 13:35:39 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_data
 	// t_file		*tmp_f;
 	t_env		*env;
 	t_exec		*exec;
+	int			f;
 	char		*s;
 }			t_data;
 

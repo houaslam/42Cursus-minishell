@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/01 13:08:23 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/01 13:50:09 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	aff1(t_exec *exec, t_file *file)
 	while (tmp != NULL)
 	{
 		printf("---->type = %d value = |%s|\n", tmp->type, tmp->value);
-		while (tmp_ != NULL)
+		while (tmp_ != NULL && tmp_->file[0] != '\0')
 		{
 			printf("---->type = %d file = |%s|\n", tmp_->type, tmp_->file);
 			tmp_ = tmp_->next;
