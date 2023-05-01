@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/01 14:53:48 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/01 15:10:07 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,29 +107,6 @@ void	transmettre(t_data *data, char ***env, char ***export)
 	//affiche_pipe(pipe);
 	//ft_free_data(data);
 	pipex(pipe, env, export);
-	free_pipe(pipe);
+	//free_pipe(pipe);
 	//system("leaks minishell");
-}
-
-char	*ft_substr2(char const *s, unsigned int start, size_t len)
-{
-	unsigned int	i;
-	char			*p;
-	size_t			k;
-
-	if (!s)
-		return (NULL);
-	k = ft_strlen((char *)s);
-	if (start > k)
-		return (ft_strdup(""));
-	if (len > ft_strlen((char *)s + start))
-		len = ft_strlen((char *)s + start);
-	p = (char *)malloc(sizeof(char) * (len + 1));
-	i = 0;
-	if (!p)
-		return (NULL);
-	while (i < len && start < k)
-		p[i++] = s[start++];
-	p[i] = '\0';
-	return (p);
 }
