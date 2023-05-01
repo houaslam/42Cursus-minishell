@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/29 16:57:27 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:52:16 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-# include "../../libft/libft.h"
+# include"../../libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -25,28 +25,28 @@ typedef struct t_cmd
 	struct t_cmd	*next_cmd;
 }					t_cmd;
 
-typedef struct tj_pipe
-{
-	t_cmd			**c;
-	char			*infile;
-	char			*outfile;
-	char			*here_doc;
-	struct t_pipe	*next_pipe;
-}					tp_pipe;
+// typedef struct t_pipe
+// {
+// 	t_cmd			**c;
+// 	char			*infile;
+// 	char			*outfile;
+// 	char			*here_doc;
+// 	struct t_pipe	*next_pipe;
+// }					t_pipe;
 
 //execution
 //builtins
 
-int					exit_status;
+int					g_exit_status;
 void				ft_echo(char **str, int fd, char **env);
-void				ft_pwd(int fd,char **env);
+void				ft_pwd(int fd, char **env);
 void				ft_exit(char **s);
 void				ft_echo(char **s, int fd, char **env);
 void				found(char *sa, char **env);
-void				ft_cd(char **env, char **export,char **dir);
+void				ft_cd(char **env, char **export, char **dir);
 //
 void				ft_errorb(char *s, char *s1, char *s2, int ext);
-void				ft_env(char **env, int fd);
+void				ft_env(char **env, int fd, char **arg);
 char				**ft_envo(char **env);
 void				sort_export(char **env);
 void				ft_export(char ***export, char ***env, char **arg, int fd);

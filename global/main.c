@@ -64,9 +64,12 @@ int	main(int ac, char **av, char **en)
 			add_history(data->s);
 			lexer(data);
 			if (data->g_exit_status)
+            //system("leaks minishell");
 			// transmettre(data, &menv, &export);
 			free(data->s);
 			// free_exec(&data->exec);
 		}
 	}
+    ft_free(menv);
+    ft_free(export);
 }

@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:42 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/28 08:26:04 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/01 12:51:54 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,18 @@ char	**ft_envo(char **env)
 	return (menv);
 }
 
-void	ft_env(char **env, int fd)
+void	ft_env(char **env, int fd,char **arg)
 {
 	int		i=0;
 
 	(void)fd;
+	// (void)arg;
+	if(*arg)
+	{
+		return;
+		//ft_free(arg);
+		ft_errorb("there is an argument\n",NULL,NULL,1);
+	}
 	while(env[i])
 	{
 		printf("%s\n",env[i]);

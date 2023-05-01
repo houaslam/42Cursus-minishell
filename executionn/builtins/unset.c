@@ -6,13 +6,13 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:55 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/28 09:20:39 by aatki            ###   ########.fr       */
+/*   Updated: 2023/04/30 11:18:40 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	ft_unset(char **env, char **arg)
+void	ft_unset(char **env,char **arg)
 {
 	int	i;
 
