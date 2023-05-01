@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/29 22:01:19 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/01 13:12:36 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	lexer(t_data *data)
 
 	i = 0;
 	data->exec = NULL;
-	tmp = ft_lstnew_exec("*", STRING);
 	tmp_f = NULL;
+	tmp = ft_lstnew_exec("*", STRING, NULL);
 	while (data->s[i])
 	{
 		if (data->s[i] == RED_IN && data->s[i + 1] == RED_IN)
@@ -40,10 +40,7 @@ void	lexer(t_data *data)
 			i = handle_string(data, i, tmp);
 		i++;
 		if (data->s[i] == '\0')
-		{
-			tmp->file = tmp_f;
-			ft_lstadd_back_exec(&data->exec, tmp);
-		}
+			ft_lstnew_exec(ft_strdup(tmp->value), STRING, tmp_f);
 	}
 	aff1(data->exec, data->exec->file);
 }

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/29 21:54:33 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/04/29 22:57:24 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_env	*ft_lstlast(t_env *lst);
 
 // linked list
 void	ft_lstadd_back_exec(t_exec **lst, t_exec *new);
-t_exec	*ft_lstnew_exec(char *value, int type);
+t_exec	*ft_lstnew_exec(char *value, int type, t_file *file);
 int		ft_lstsize_exec(t_exec *lst);
 t_exec	*ft_lstlast_exec(t_exec *lst);
 void	free_exec(t_exec **exec);
