@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:50 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/29 16:31:27 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/02 11:44:36 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**add_str(char **env, char *plus)
 		i++;
 	}
 	menv[i] = NULL;
-	ft_free(env);
+	//ft_free(env);
 	return (menv);
 }
 

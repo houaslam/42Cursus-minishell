@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:45 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/30 12:09:45 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/01 12:40:03 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,33 @@ void	found(char *sa, char **env)
 	return ;
 }
 
-void	ft_echo(char **s, int fd, char **env)
+void	ft_echo(char **arg, int fd, char **env)
 {
 	int	i;
 
 	(void)fd;
 	//dup2(fd, 1);
 	i = 0;
-	if (!ft_strncmp(s[0], "-n", 2))
+	if (*arg && !ft_strncmp(arg[0], "-n", 2))
 		i++;
-	while (s[i])
+	while (arg[i])
 	{
-		if (s[i][0] == '$')
+		if (arg[i][0] == '$')
 		{
-			if(s[i][1]=='?')
+			if(arg[i][1]=='?')
 				printf("%d",g_exit_status);
-			if (s[i][1] == '\'' || s[i][1] == '\"')
-				printf("%s", s[i] + 2);
+			if (arg[i][1] == '\'' || arg[i][1] == '\"')
+				printf("%s", arg[i] + 2);
 			else
-				found(s[i] + 1, env);
+				found(arg[i] + 1, env);
 		}
 		else
-			printf("%s", s[i]);
+			printf("%s", arg[i]);
 		i++;
 		printf(" ");
 	}
-	if (ft_strncmp(s[0], "-n", 2))
+	if (*arg && !ft_strncmp(arg[0], "-n", 2))
+		return;
 		printf("\n");
+	//ft_free(arg);
 }
