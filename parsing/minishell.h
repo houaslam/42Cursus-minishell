@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/01 18:02:03 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/03 20:42:26 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include<unistd.h>
 # include<stdlib.h>
 # include<stdio.h>
+# include <signal.h>
 # include<string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -54,7 +55,6 @@ typedef struct s_file
 typedef struct exec
 {
 	int			type;
-	// char		**cmd;
 	char		*value;
 	t_file		*file;
 	struct exec	*next;
@@ -64,8 +64,8 @@ typedef struct s_data
 {
 	int			g_exit_status;
 	int			pipe;
-	// t_exec		*tmp;
-	// t_file		*tmp_f;
+	t_exec		*tmp;
+	t_file		*tmp_f;
 	t_env		*env;
 	t_exec		*exec;
 	int			f;
@@ -73,14 +73,14 @@ typedef struct s_data
 }			t_data;
 
 //libft
-int		ft_dim1(char *s, char c);
-char	**ft_freestr(char **arr, int p);
-char	**ft_func(char **arr, char *s, char c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strchr(const char *str, int c);
-size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strdup(const char *s);
+// int		ft_dim1(char *s, char c);
+// char	**ft_freestr(char **arr, int p);
+// char	**ft_func(char **arr, char *s, char c);
+// char	*ft_substr(char const *s, unsigned int start, size_t len);
+// char	*ft_strchr(const char *str, int c);
+// size_t	ft_strlen(const char *str);
+// char	*ft_strjoin(char *s1, char *s2);
+// char	*ft_strdup(const char *s);
 // linked list
 void	ft_lstadd_back(t_env **lst, t_env *new);
 t_env	*ft_lstnew(char *name, char *path);
@@ -109,18 +109,17 @@ void	aff2(t_file *env);
 
 //spec char tokens
 void	lexer(t_data **data);
-int		handle_redin(t_data *data, int i, t_file *tmp);
-int		handle_redout(t_data *data, int i, t_file *tmp);
-int		handle_here_doc_in(t_data *data, int i, t_file *tmp);
-int		handle_here_doc_out(t_data *data, int i, t_file *tmp);
+int		handle_redin(t_data *data, int i);
+int		handle_redout(t_data *data, int i);
+int		handle_here_doc_in(t_data *data, int i);
+int		handle_here_doc_out(t_data *data, int i);
 int		chek_pipe(t_data *data, int i);
 
 //string tokens
-int		handle_pipe(t_data *data, int i, t_exec *exec, t_file *tmp_f);
-int		handle_string(t_data *data, int i, t_exec *tmp);
-int		handle_d_quote(t_data *data, int i);
-int		handle_s_quote(t_data *data, int i, t_exec *tmp, int type);
-int		handle_dollar_sign(t_data *data, int i);
+int		handle_pipe(t_data *data, int i);
+int		handle_string(t_data *data, int i);
+int		handle_quote(t_data *data, int i, int type);
+int		handle_dollar(t_data *data, int i, int k);
 int		handle_env_var(t_data *data, int i, int k);
 
 //outils

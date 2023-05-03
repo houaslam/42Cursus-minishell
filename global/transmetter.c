@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transmetter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/01 15:10:07 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/03 15:40:02 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	transmettre(t_data *data, char ***env, char ***export)
 		(tmp)->here_doc = NULL;
 		while (data->exec->file)
 		{
-			printf("file type=<%d>\n", data->exec->file->type);
+			// printf("file type=<%d>\n", data->exec->file->type);
+			printf("file type=<%s>\n", data->exec->file->file);
 			if (data->exec->file->type == 60)
 				(tmp)->infile = data->exec->file->file;
 			else if (data->exec->file->type == 62

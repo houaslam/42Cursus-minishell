@@ -6,50 +6,17 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/01 18:03:43 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/03 21:16:46 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing/minishell.h"
 
-void	lexer(t_data **data)
-{
-	int		i;
-	t_exec	*tmp;
-	t_file	*tmp_f;
-
-	i = 0;
-	(*data)->exec = NULL;
-	(*data)->f = 0;
-	tmp_f = ft_lstnew_file("", IN_FILE);
-	tmp = ft_lstnew_exec("*", STRING, NULL);
-	tmp->file = NULL;
-	while ((*data)->s[i])
-	{
-		if ((*data)->s[i] == RED_IN && (*data)->s[i + 1] == RED_IN)
-			i = handle_here_doc_in(*data, i, tmp_f);
-		else if ((*data)->s[i] == RED_OUT && (*data)->s[i + 1] == RED_OUT)
-			i = handle_here_doc_out(*data, i, tmp_f);
-		else if ((*data)->s[i] == RED_IN)
-			i = handle_redin(*data, i, tmp_f);
-		else if ((*data)->s[i] == RED_OUT)
-			i = handle_redout(*data, i, tmp_f);
-		else if ((*data)->s[i] == PIPE)
-			i = handle_pipe(*data, i, tmp, tmp_f);
-		else if ((*data)->s[i] == D_QUOT || (*data)->s[i] == S_QUOT)
-			i = handle_s_quote(*data, i, tmp, (int)(*data)->s[i]);
-		else
-			i = handle_string(*data, i, tmp);
-		i++;
-		if ((*data)->s[i] == '\0' && (*data)->g_exit_status == 0)
-		{
-			ft_lstadd_back_exec(&(*data)->exec, \
-			ft_lstnew_exec(tmp->value, STRING, tmp_f));
-		}
-	}
-	aff1((*data)->exec, NULL);
-	free_exec(&tmp);
-}
+// void	ctrl_c(int i)
+// {
+// 	i = 0;
+	
+// }
 
 int	main(int ac, char **av, char **en)
 {
@@ -58,24 +25,31 @@ int	main(int ac, char **av, char **en)
 	char	**export;
 
 	(void)av;
-	menv = ft_envo(en);
-	export = ft_envo(en);
-	sort_export(export);
 	if (ac == 1)
 	{
+		menv = ft_envo(en);
+		export = ft_envo(en);
+		sort_export(export);
 		data = malloc(sizeof(t_data));
 		data->g_exit_status = 0;
+		// signal(SIGINT, ctrl_c);
 		while (1)
 		{
-			data->s = readline("minishell>");
+			data->s = readline("\e[92mMINISHELL>\e[0m");
+			// data->s = readline("minishell>");
 			add_history(data->s);
-			lexer(&data);
-			if (data->g_exit_status == 0)
-				transmettre(data, &menv, &export);
-			free(data->s);
-			// free_exec(&data->exec);
+			if (data->s[0] != '\0' && data->s)
+			{
+				lexer(&data);
+				if (data->g_exit_status == 0)
+					transmettre(data, &menv, &export);
+				free_file(&data->tmp_f);
+				free_exec(&data->tmp);
+				free_exec(&data->exec);
+				free(data->s);
+			}
 		}
+		ft_free(menv);
+		ft_free(export);
 	}
-    ft_free(menv);
-    ft_free(export);
 }
