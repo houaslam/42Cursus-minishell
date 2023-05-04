@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/03 20:42:26 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/04 18:39:25 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,6 @@ typedef struct s_data
 	char		*s;
 }			t_data;
 
-//libft
-// int		ft_dim1(char *s, char c);
-// char	**ft_freestr(char **arr, int p);
-// char	**ft_func(char **arr, char *s, char c);
-// char	*ft_substr(char const *s, unsigned int start, size_t len);
-// char	*ft_strchr(const char *str, int c);
-// size_t	ft_strlen(const char *str);
-// char	*ft_strjoin(char *s1, char *s2);
-// char	*ft_strdup(const char *s);
 // linked list
 void	ft_lstadd_back(t_env **lst, t_env *new);
 t_env	*ft_lstnew(char *name, char *path);

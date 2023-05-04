@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/03 21:07:51 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/04 18:42:00 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	handle_string(t_data *data, int i)
 	free(str);
 	free(res);
 	if (data->s[i] && (data->s[i] == \
-	D_QUOT || data->s[i + 1] == S_QUOT))
+	D_QUOT || data->s[i] == S_QUOT))
 		i = handle_quote(data, i, (int)data->s[i]);
 	if (!ft_isstring_w_s(data->s[i]))
 		return (i - 1);

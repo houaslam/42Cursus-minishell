@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 12:42:33 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/28 15:06:48 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/01 15:30:15 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		ft_atoi(const char *str);
 void	*ft_calloc(size_t n, size_t s);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	ft_putchar_fd(char c, int fd);

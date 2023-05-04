@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:47:21 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/29 20:53:49 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/01 18:09:19 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	duping(t_pipe *pipe, int *fd, int *ph)
 		if (dup2(ph[0], 0) < 0)
 			ft_errorb("cant dup  infile\n", NULL, NULL, 1);
 	}
-	else if (dup2(*fd, 0) < 0)
+	else 
+	if (dup2(*fd, 0) < 0)
 		ft_errorb("cant dup pipe[0]\n", NULL, NULL, 1);
 	if ((pipe)->outfile)
 	{
@@ -83,6 +84,49 @@ void	duping(t_pipe *pipe, int *fd, int *ph)
 		if (dup2(ph[1], 1) < 0)
 			ft_errorb("cant dup outfile\n", NULL, NULL, 1);
 	}
-	else if (dup2(ph[1], 1) < 0)
+	else
+	 if (dup2(ph[1], 1) < 0)
 		ft_errorb("cant dup pipe[1]\n", NULL, NULL, 1);
 }
+
+// void	duping(t_pipe *pipe, int *fd, int *ph)
+// {
+//     int fd_in = 0; // to store the original value of ph[0]
+//     int fd_out = 1; // to store the original value of ph[1]
+
+// 	if (pipe->here_doc)
+// 		here_docc(pipe->here_doc, ph);
+// 	else if ((pipe)->infile)
+// 	{
+// 		fd_in = dup(ph[0]); // save the original value of ph[0]
+// 		ph[0] = ft_infile((pipe)->infile);
+// 		if (dup2(ph[0], 0) < 0)
+// 			ft_errorb("cant dup  infile\n", NULL, NULL, 1);
+//         close(ph[0]); // close the file descriptor returned by ft_infile()
+// 	}
+// 	else if (dup2(*fd, 0) < 0)
+// 		ft_errorb("cant dup pipe[0]\n", NULL, NULL, 1);
+// 	if ((pipe)->outfile)
+// 	{
+// 		fd_out = dup(ph[1]); // save the original value of ph[1]
+// 		ph[1] = ft_outfile((pipe)->outfile);
+// 		if (dup2(ph[1], 1) < 0)
+// 			ft_errorb("cant dup outfile\n", NULL, NULL, 1);
+//         close(ph[1]); // close the file descriptor returned by ft_outfile()
+// 	}
+// 	else if (dup2(ph[1], 1) < 0)
+// 		ft_errorb("cant dup pipe[1]\n", NULL, NULL, 1);
+
+//     // call command() with the modified file descriptors
+//     //command(pipe->cmd, export, ph[1], env);
+
+//     // restore the original file descriptors
+//     if ((pipe)->infile)
+//     {
+//         if (dup2(fd_in, 0) < 0)
+//             ft_errorb("cant restore original ph[0]\n", NULL, NULL, 1);
+//         close(fd_in);
+//     }
+//     else if (dup2(*fd, 0) < 0)
+//         ft_errorb("cant dup pipe[0]\n", NULL,NULL,2);
+// }

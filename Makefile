@@ -6,7 +6,7 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/04/29 17:12:41 by houaslam         ###   ########.fr        #
+#    Updated: 2023/05/04 19:11:31 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ LIBFT = ./libft/ft_atoi.c \
 		./libft/ft_strdup.c \
 		./libft/ft_striteri.c \
 		./libft/ft_strjoin.c \
+		./libft/ft_strjoin_free.c \
 		./libft/ft_strlcat.c \
 		./libft/ft_strlcpy.c \
 		./libft/ft_strlen.c \
@@ -51,7 +52,7 @@ LIBFT = ./libft/ft_atoi.c \
 		./libft/ft_strcmp.c \
 		./libft/ft_strcpy.c
 
-BUILTINS = ./executionn/builtins/utils.c\
+BUILTINS =  ./executionn/builtins/utils.c\
 			./executionn/builtins/cd.c\
 			./executionn/builtins/echo.c\
 			./executionn/builtins/env.c\
@@ -77,6 +78,7 @@ SRC =   global/main.c \
 		./parsing/lexer/tokens_string.c \
 		./parsing/lexer/tokens_spec_char.c \
 		./parsing/lexer/outils.c \
+		./parsing/lexer/lexer.c \
 		./parsing/lexer/ft_isstring.c
 
 SRCS= ${SRC} ${PIPEX} ${BUILTINS} ${LIBFT}

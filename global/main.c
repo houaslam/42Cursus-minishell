@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/03 21:16:46 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/04 21:20:06 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(int ac, char **av, char **en)
 		while (1)
 		{
 			data->s = readline("\e[92mMINISHELL>\e[0m");
-			// data->s = readline("minishell>");
 			add_history(data->s);
 			if (data->s[0] != '\0' && data->s)
 			{
