@@ -6,42 +6,43 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:47:21 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/01 18:09:19 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/05 13:46:02 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	here_docc(char *stop, int *ph)
+int	here_docc(t_pipe *pipe, int *ph)
 {
 	int		infile;
 	char	*tmp;
 	infile = 0;
 	tmp = NULL;
-	// infile = open("../.file.tmp", O_RDWR | O_CREAT, 0777);
-	// if (infile < 0)
-	// 	ft_errorb("file can't open\n", NULL, NULL, 1);
+	infile = open("../.file.tmp", O_RDWR | O_CREAT, 0777);
+	if (infile < 0)
+		ft_errorb("file can't open\n", NULL, NULL, 1);
 	write(1, "here_doc> ", 10);
 	tmp = get_next_line(0);
 	while (tmp)
 	{
-		if ((ft_strncmp(tmp, stop, ft_strlen(tmp) - 1) == 0) && ft_strlen(tmp)
-			- 1 == ft_strlen(stop))
+		if ((ft_strncmp(tmp, pipe->here_doc, ft_strlen(tmp) - 1) == 0) && ft_strlen(tmp)
+			- 1 == ft_strlen(pipe->here_doc))
 		{
 			free(tmp);
 			break ;
 		}
 		write(1, "here_doc> ", 10);
-		write(ph[1], tmp, ft_strlen(tmp));
+		write(infile, tmp, ft_strlen(tmp));
 		free(tmp);
 		tmp = get_next_line(0);
 	}
-	close(ph[1]);
+	close(infile);
 	// infile = open("../.file.tmp", O_RDONLY);
 	// if (infile < 0)
 	// 	ft_errorb("file can't open", NULL, NULL, 1);
 	if (dup2(ph[0], 0) < 0)
 		ft_errorb("cant dup in here_doc\n", NULL, NULL, 1);
+	after_here_doc(pipe,ph);
 	return (infile);
 }
 
@@ -65,18 +66,47 @@ int	ft_outfile(char *s)
 	return (outfile);
 }
 
+int	ft_outfile_heredoc(char *s)
+{
+	int	outfile;
+
+	outfile = open(s, O_CREAT | O_RDWR | O_APPEND, 0644);
+	if (outfile < 0)
+		ft_errorb("outfile here_doc can't open\n", NULL, NULL, 1);
+	return (outfile);
+}
+
+void after_here_doc(t_pipe *pipe,int *ph)
+{
+	char *s;
+	if((pipe)->here_doc_out )
+			s = (pipe)->here_doc_out;
+		else if ((pipe)->outfile)
+			s = (pipe)->outfile;
+		else
+			s = NULL;
+		if (s)
+		{
+			ph[1]=dup(ft_outfile_heredoc((pipe)->here_doc_out));
+			if (dup2(ph[1], 1) < 0)
+				ft_errorb("cant dup outfile\n", NULL, NULL, 1);
+		}
+		else if (dup2(2, 1) < 0)
+				ft_errorb("cant dup pipe[1]\n", NULL, NULL, 1);
+}
+
 void	duping(t_pipe *pipe, int *fd, int *ph)
 {
+	
 	if (pipe->here_doc)
-		here_docc(pipe->here_doc, ph);
+		here_docc(pipe, ph);
 	else if ((pipe)->infile)
 	{
 		ph[0]=dup(ft_infile((pipe)->infile));
 		if (dup2(ph[0], 0) < 0)
 			ft_errorb("cant dup  infile\n", NULL, NULL, 1);
 	}
-	else 
-	if (dup2(*fd, 0) < 0)
+	else if (dup2(*fd, 0) < 0)
 		ft_errorb("cant dup pipe[0]\n", NULL, NULL, 1);
 	if ((pipe)->outfile)
 	{
@@ -84,10 +114,52 @@ void	duping(t_pipe *pipe, int *fd, int *ph)
 		if (dup2(ph[1], 1) < 0)
 			ft_errorb("cant dup outfile\n", NULL, NULL, 1);
 	}
-	else
-	 if (dup2(ph[1], 1) < 0)
+	else if ((pipe)->here_doc_out)
+	{
+		ph[1]=dup(ft_outfile_heredoc((pipe)->here_doc_out));
+		if (dup2(ph[1], 1) < 0)
+			ft_errorb("cant dup outfile\n", NULL, NULL, 1);
+	}
+	else if (dup2(ph[1], 1) < 0)
 		ft_errorb("cant dup pipe[1]\n", NULL, NULL, 1);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // void	duping(t_pipe *pipe, int *fd, int *ph)
 // {

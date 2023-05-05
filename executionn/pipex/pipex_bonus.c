@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/02 13:16:07 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/04 19:52:31 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ void	pipex(t_pipe *pipe, char ***env, char ***export)
 	int	fd;
 
 	fd = 0;
-
 	if (!pipe->next && builtin(*pipe->cmd))
 	{
 		builtin_exec(pipe, env, export);

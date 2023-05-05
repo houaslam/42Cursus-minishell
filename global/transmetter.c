@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transmetter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/03 15:40:02 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:38:18 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	affiche_pipe(t_pipe *pipe)
 		i = 0;
 		while (pipe->cmd[i])
 		{
-			printf("cmd[%d]=%s\n", i, pipe->cmd[i]);
+			//printf("cmd[%d]=%s\n", i, pipe->cmd[i]);
 			i++;
 		}
 		printf("infile=%s\n", pipe->infile);
@@ -87,17 +87,19 @@ void	transmettre(t_data *data, char ***env, char ***export)
 		(tmp)->infile = NULL;
 		(tmp)->outfile = NULL;
 		(tmp)->here_doc = NULL;
+		(tmp)->here_doc_out=NULL;
 		while (data->exec->file)
 		{
 			// printf("file type=<%d>\n", data->exec->file->type);
-			printf("file type=<%s>\n", data->exec->file->file);
+			//printf("file type=<%s>\n", data->exec->file->file);
 			if (data->exec->file->type == 60)
 				(tmp)->infile = data->exec->file->file;
-			else if (data->exec->file->type == 62
-					|| data->exec->file->type == 6)
+			else if (data->exec->file->type == 62)
 				(tmp)->outfile = data->exec->file->file;
 			else if (data->exec->file->type == 5)
 				(tmp)->here_doc = data->exec->file->file;
+			else if (data->exec->file->type == 6)
+				(tmp)->here_doc_out=data->exec->file->file;
 			data->exec->file = data->exec->file->next;
 		}
 		tmp->next = NULL;

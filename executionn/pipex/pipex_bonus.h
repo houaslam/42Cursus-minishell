@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:19:23 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/01 14:52:28 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/05 13:29:51 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_pipe
 	char			*infile;
 	char			*outfile;
 	char			*here_doc;
+	char			*here_doc_out;
 	struct s_pipe	*next;
 }					t_pipe;
 
@@ -41,7 +42,7 @@ char				**ft_free(char **p);
 //int					ft_strlen(char *s);
 int					here_doc(char **av, int *infile);
 //void	ft_error(char *s);
-int					here_docc(char *stop, int *ph);
+int					here_docc(t_pipe *pipe, int *ph);
 void				here_doc_child(int *fd, char **av, char **env);
 void				execution(char **cmd, char **env);
 void				herep(char **av, char **env, int ac);
@@ -58,4 +59,5 @@ int					ft_outfile(char *s);
 void				command(char **cmd_arg, char ***export, int fdout,
 						char ***env);
 void				pipex(t_pipe *pipe, char ***env, char ***export);
+void after_here_doc(t_pipe *pipe,int *ph);
 #endif
