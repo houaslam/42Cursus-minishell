@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/04 18:39:25 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:17:33 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int		handle_env_var(t_data *data, int i, int k);
 
 //outils
 char	*seach_env_value(char *str, t_data *data);
-int		print_token_er(t_data *data, int i, t_exec *tmp);
+int		print_token_er(t_data *data, int status, char *s1);
 int		ft_isstring(char c);
 int		ft_isstring_w_s(char c);
 int		ft_isstring_w_q(char c);

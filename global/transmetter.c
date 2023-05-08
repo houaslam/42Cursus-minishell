@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transmetter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/05 13:38:18 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/08 15:18:14 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	transmettre(t_data *data, char ***env, char ***export)
 	while (data->exec)
 	{
 		tmp = malloc(sizeof(t_pipe));
-		(tmp)->cmd = ft_split(data->exec->value, '*');
+		(tmp)->cmd = ft_split(data->exec->value, '@');
 		(tmp)->infile = NULL;
 		(tmp)->outfile = NULL;
 		(tmp)->here_doc = NULL;

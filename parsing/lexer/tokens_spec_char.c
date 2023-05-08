@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/03 21:04:21 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:19:28 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ int	handle_here_doc_in(t_data *data, int i)
 	char	*str;
 
 	i += 2;
-	k = i;
 	while (data->s[i] == 32 || data->s[i] == 9)
 		i++;
+	k = i;
 	while (data->s[i] && ft_isstring(data->s[i]))
 		i++;
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 	{
 		free(str);
-		return (print_token_er(data, 1, NULL));
+		return (print_token_er(data, 258, "`newline'\n"));
 	}
 	if (data->f == 0)
 	{
@@ -47,16 +47,16 @@ int	handle_here_doc_out(t_data *data, int i)
 	char	*str;
 
 	i += 2;
-	k = i;
 	while (data->s[i] == 32 || data->s[i] == 9)
 		i++;
+	k = i;
 	while (data->s[i] && ft_isstring(data->s[i]))
 		i++;
 	str = ft_substr(data->s, k, i - k);
 	if (str[0] == '\0' || i - k == 0)
 	{
 		free(str);
-		return (print_token_er(data, 1, NULL));
+		return (print_token_er(data, 258, "`newline'\n"));
 	}
 	if (data->f == 0)
 	{
@@ -85,7 +85,7 @@ int	handle_redin(t_data *data, int i)
 	if (str[0] == '\0' || i - k == 0)
 	{
 		free(str);
-		return (print_token_er(data, 1, NULL));
+		return (print_token_er(data, 258, "`newline'\n"));
 	}
 	if (data->f == 0)
 	{
@@ -114,7 +114,7 @@ int	handle_redout(t_data *data, int i)
 	if (str[0] == '\0' || i - k == 0)
 	{
 		free(str);
-		return (print_token_er(data, 1, NULL));
+		return (print_token_er(data, 258, "`newline'\n"));
 	}
 	if (data->f == 0)
 	{
@@ -134,9 +134,9 @@ int	handle_dollar(t_data *data, int i, int k)
 
 	res = ft_substr(data->s, k, i - k);
 	data -> tmp->value = ft_strjoin_free(data -> tmp->value, res);
-	data -> tmp->value = ft_strjoin_free(data -> tmp->value, "*");
+	data -> tmp->value = ft_strjoin_free(data -> tmp->value, "@");
 	data -> tmp->value = ft_strjoin_free(data -> tmp->value, "$");
-	data -> tmp->value = ft_strjoin_free(data -> tmp->value, "*");
+	data -> tmp->value = ft_strjoin_free(data -> tmp->value, "@");
 	k = i + 1;
 	return (k);
 }

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/03 20:58:36 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:11:16 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,22 @@ char	*seach_env_value(char *str, t_data *data)
 	return (NULL);
 }
 
-int	print_token_er(t_data *data, int status, t_exec *tmp)
+// int	print_token_er(t_data *data, int status, char *err_msg)
+// {
+// 	write(2, err_msg, ft_strlen(err_msg));
+// 	printf("ERROR\n");
+// 	data->g_exit_status = status;
+// 	printf("exit status = %d\n", data->g_exit_status);
+// 	return (ft_strlen(data->s) - 1);
+// }
+
+
+int	print_token_er(t_data *data, int status, char *s1)
 {
-	(void)tmp;
-	printf("ERROR\n");
+	write(2, "bash: syntax error near unexpected token", 42);
+	if (s1)
+		write(2, s1, ft_strlen(s1));
 	data->g_exit_status = status;
-	printf("exit status = %d\n", data->g_exit_status);
 	return (ft_strlen(data->s) - 1);
 }
 
@@ -82,18 +92,6 @@ void	aff1(t_exec *exec, t_file *file)
 			printf("---->type = %d file = |%s|\n", tmp_->type, tmp_->file);
 			tmp_ = tmp_->next;
 		}
-		tmp = tmp->next;
-	}
-}
-
-void	aff2(t_file *env)
-{
-	t_file	*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		printf("---->type = %d file = |%s|\n", tmp->type, tmp->file);
 		tmp = tmp->next;
 	}
 }

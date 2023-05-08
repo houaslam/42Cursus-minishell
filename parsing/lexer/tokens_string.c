@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/04 18:42:00 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:16:29 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	handle_string(t_data *data, int i)
 		i = handle_quote(data, i, (int)data->s[i]);
 	if (!ft_isstring_w_s(data->s[i]))
 		return (i - 1);
-	data -> tmp->value = ft_strjoin_free(data -> tmp->value, "*");
+	data -> tmp->value = ft_strjoin_free(data -> tmp->value,  "@");
 	return (i);
 }
 
@@ -46,7 +46,7 @@ int	handle_quote(t_data *data, int i, int type)
 	while (data->s[i] != type)
 	{
 		if (data->s[i] == '\0')
-			return (print_token_er(data, 1, data -> tmp));
+			return (print_token_er(data, 258, "`\"'\n"));
 		if (data->s[i] == '$')
 			k = handle_dollar(data, i, k);
 		i++;
@@ -57,7 +57,7 @@ int	handle_quote(t_data *data, int i, int type)
 	i++;
 	if (ft_isstring(data->s[i]) && data->s[i])
 		i = handle_string(data, i);
-	data -> tmp->value = ft_strjoin_free(data -> tmp -> value, "*");
+	data -> tmp->value = ft_strjoin_free(data -> tmp -> value, "@");
 	return (i);
 }
 
@@ -92,13 +92,13 @@ int	check_pipe(t_data *data, int i)
 int	handle_pipe(t_data *data, int i)
 {
 	if (check_pipe(data, i) == 1)
-		return (print_token_er(data, 258, data -> tmp));
+		return (print_token_er(data, 258, "`|'\n"));
 	if (data -> tmp -> value)
 	{
 		ft_lstadd_back_exec(&data->exec, \
 		ft_lstnew_exec(data -> tmp->value, PIPE, data -> tmp_f));
 		free_exec(&data -> tmp);
-		data -> tmp = ft_lstnew_exec("*", STRING, data -> tmp_f);
+		data -> tmp = ft_lstnew_exec("@", STRING, data -> tmp_f);
 	}
 	return (i);
 }

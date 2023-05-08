@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:41:48 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/03 20:48:13 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:15:23 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	lexer(t_data **data)
 	(*data)->exec = NULL;
 	(*data)->f = 0;
 	(*data)->tmp_f = ft_lstnew_file("", IN_FILE);
-	(*data)->tmp = ft_lstnew_exec("*", STRING, NULL);
+	(*data)->tmp = ft_lstnew_exec("@", STRING, NULL);
 	(*data)->tmp->file = NULL;
 	while ((*data)->s[i])
 	{
