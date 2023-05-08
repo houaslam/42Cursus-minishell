@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/08 14:11:16 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:30:26 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*seach_env_value(char *str, t_data *data)
 
 int	print_token_er(t_data *data, int status, char *s1)
 {
-	write(2, "bash: syntax error near unexpected token", 42);
+	write(2, "bash: syntax error near unexpected token", 41);
 	if (s1)
 		write(2, s1, ft_strlen(s1));
 	data->g_exit_status = status;
