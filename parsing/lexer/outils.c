@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/08 15:30:26 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/11 13:49:15 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,37 +44,30 @@ void	free_file(t_file **file)
 	head = NULL;
 }
 
-char	*seach_env_value(char *str, t_data *data)
-{
-	t_env	*tmp;
-
-	tmp = data->env;
-	while (tmp)
-	{
-		if (!ft_strcmp(str, tmp->name))
-			return (tmp->path);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
-// int	print_token_er(t_data *data, int status, char *err_msg)
+// void	put_the_value(t_exec *lexer, int i)
 // {
-// 	write(2, err_msg, ft_strlen(err_msg));
-// 	printf("ERROR\n");
-// 	data->g_exit_status = status;
-// 	printf("exit status = %d\n", data->g_exit_status);
-// 	return (ft_strlen(data->s) - 1);
+// 	int	k;
+
+// 	k = 0;
+// 	if (i == 1)
+// 	{
+// 		while (lexer -> value[k])
+// 		{
+// 			if (lexer -> value[k] == DOLLAR)
+// 			{
+// 				find_value(&(lexer)-> value + k);
+// 			}
+// 		}
+// 	}
 // }
 
-
-int	print_token_er(t_data *data, int status, char *s1)
+t_exec	*print_token_er(t_data *data, int status, char *s1)
 {
 	write(2, "bash: syntax error near unexpected token", 41);
 	if (s1)
 		write(2, s1, ft_strlen(s1));
 	data->g_exit_status = status;
-	return (ft_strlen(data->s) - 1);
+	return (ft_lstlast_exec(data->lexer));
 }
 
 void	aff1(t_exec *exec, t_file *file)

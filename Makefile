@@ -6,14 +6,15 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/05/04 19:11:31 by houaslam         ###   ########.fr        #
+#    Updated: 2023/05/11 11:33:01 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
-	
+EXTRA_CFLAGS = -I ~/Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/include  -L /Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/lib -lreadline
+
 LIBFT = ./libft/ft_atoi.c \
 		./libft/ft_bzero.c \
 		./libft/ft_calloc.c \
@@ -89,8 +90,8 @@ OBJ = ${SRCS:.c=.o}
 B_OBJ = ${B_SRCS:.c=.o}
 
 
-${NAME} : ${SRCS}
-	cc $(CFLAGS) ${SRCS} -o ${NAME} -L/usr/local/lib -lreadline
+${NAME} : ${OBJ}
+	cc $(CFLAGS) ${OBJ} -o ${NAME} $(EXTRA_CFLAGS)
 
 clean :
 	rm -f ${OBJ}
