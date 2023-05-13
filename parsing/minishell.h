@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/12 15:25:57 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/12 20:28:33 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ t_exec	*handle_dollar(t_data *data, t_exec *lexer);
 t_exec	*handle_env_var(t_data *data, t_exec *lexer);
 
 //outils
+char	*find_ex(char *sa, char **env);
 char	*seach_env_value(char *str, t_data *data);
 t_exec	*print_token_er(t_data *data, int status, char *s1);
 int		ft_isstring(char c);

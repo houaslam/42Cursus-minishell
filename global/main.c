@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/11 13:38:45 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/13 12:20:26 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,12 @@ int	main(int ac, char **av, char **en)
 	(void)av;
 	if (ac == 1)
 	{
+		g_exit_status = 0;
 		menv = ft_envo(en);
 		export = ft_envo(en);
 		sort_export(export);
 		data = malloc(sizeof(t_data));
-		data->g_exit_status = 0;
+		g_exit_status = 0;
 		data -> env = menv;
 		// signal(SIGINT, ctrl_c);
 		signal(SIGQUIT, ctrl_d);
@@ -64,14 +65,14 @@ int	main(int ac, char **av, char **en)
 			if (data->s[0] != '\0' && data->s)
 			{
 				lexer(&data);
-				// if (data->g_exit_status == 0)
-				// 	transmettre(data, &menv, &export);
-				// free_file(&data->tmp_f);
-				// free_exec(&data->tmp);
-				// free_exec(&data->exec);
+				if (data->g_exit_status == 0)
+					transmettre(data, &menv, &export);
+				free_file(&data->tmp_f);
+				free_exec(&data->tmp);
+				free_exec(&data->lexer);
+				free_exec(&data->exec);
 				free(data->s);
 			}
-			data->g_exit_status = 0;
 		}
 		ft_free(menv);
 		ft_free(export);

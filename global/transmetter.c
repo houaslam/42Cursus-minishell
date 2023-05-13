@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/08 15:18:14 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/13 12:05:52 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	transmettre(t_data *data, char ***env, char ***export)
 		data->exec = data->exec->next;
 		ft_lstadd_back2(&pipe, tmp);
 	}
-	g_exit_status = data->g_exit_status;
+	// g_exit_status = g_exit_status;
 	//affiche_pipe(pipe);
 	//ft_free_data(data);
 	pipex(pipe, env, export);

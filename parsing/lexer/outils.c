@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/11 13:49:15 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/13 10:51:18 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,31 @@ void	free_file(t_file **file)
 	head = NULL;
 }
 
-// void	put_the_value(t_exec *lexer, int i)
-// {
-// 	int	k;
+char	*find_ex(char *sa, char **env)
+{
+	int		i;
+	char	*s;
 
-// 	k = 0;
-// 	if (i == 1)
-// 	{
-// 		while (lexer -> value[k])
-// 		{
-// 			if (lexer -> value[k] == DOLLAR)
-// 			{
-// 				find_value(&(lexer)-> value + k);
-// 			}
-// 		}
-// 	}
-// }
+	s = NULL;
+	i = 0;
+	while (env[i])
+	{
+		if (!ft_strncmp(env[i], sa, ft_strlen(sa))
+			&& env[i][ft_strlen(sa)] == '=')
+			s = ft_substr(env[i], ft_strlen(sa) + 1 \
+			, ft_strlen(env[i]) - ft_strlen(sa));
+		i++;
+	}
+	return (s);
+}
 
 t_exec	*print_token_er(t_data *data, int status, char *s1)
 {
 	write(2, "bash: syntax error near unexpected token", 41);
 	if (s1)
 		write(2, s1, ft_strlen(s1));
-	data->g_exit_status = status;
+	g_exit_status = status;
+	data->g_exit_status = 1;
 	return (ft_lstlast_exec(data->lexer));
 }
 

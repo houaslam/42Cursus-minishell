@@ -6,11 +6,36 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:41:48 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/12 15:29:02 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/13 12:08:02 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	check_pipe(t_exec *lexer)
+{
+	t_exec	*tmp;
+
+	tmp = lexer;
+	while (tmp)
+	{
+		if (tmp->type == STRING)
+			return (0);
+		if (tmp->prev == NULL)
+			return (1);
+		tmp = tmp->prev;
+	}
+	tmp = lexer;
+	while (tmp)
+	{
+		if (tmp->type == STRING)
+			return (0);
+		if (tmp->next == NULL)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (1);
+}
 
 void	add(t_data **data, int *i, int type)
 {
@@ -31,11 +56,13 @@ void	add(t_data **data, int *i, int type)
 
 void	the_lexer(t_data **data)
 {
-	static int	doubl;
-	static int	singl;
-	int			i;
+	int	doubl;
+	int	singl;
+	int	i;
 
 	i = -1;
+	doubl = 0;
+	singl = 0;
 	while ((*data)->s[++i])
 	{
 		if ((*data)->s[i] == SPACE || (*data)->s[i] == TAB)
@@ -61,11 +88,10 @@ void	the_lexer(t_data **data)
 			add(data, &i, DOLLAR);
 		}
 		else
-			add(data, &i, DOLLAR);
+			add(data, &i, STRING);
 	}
-	if (singl %2 != 0 || doubl %2 != 0)
+	if (singl % 2 != 0 || doubl % 2 != 0)
 		print_token_er(*data, 285, "'\"`\n");
-	aff1((*data)->lexer, NULL);
 }
 
 void	options(t_data *data)
@@ -95,12 +121,15 @@ void	options(t_data *data)
 			ft_lstnew_exec(data->tmp->value, STRING, data->tmp_f, data->lexer));
 		data -> lexer = data -> lexer -> next;
 	}
+	// aff1(data->exec, NULL);
 }
 
 void	lexer(t_data **data)
 {
+	(*data)->g_exit_status = 0;
 	(*data)->lexer = NULL;
 	the_lexer(data);
+	// aff1((*data)->lexer, NULL);
 	(*data)->exec = NULL;
 	(*data)->f = 0;
 	(*data)->tmp_f = NULL;
