@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:45 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/01 12:40:03 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/13 11:01:16 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_echo(char **arg, int fd, char **env)
 	{
 		if (arg[i][0] == '$')
 		{
+			printf("YESS\n");
 			if(arg[i][1]=='?')
 				printf("%d",g_exit_status);
 			if (arg[i][1] == '\'' || arg[i][1] == '\"')

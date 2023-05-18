@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/13 12:04:11 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/13 13:38:25 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_exec	*handle_here_doc_in(t_data *data, t_exec *lexer)
 	lexer = lexer->next;
 	while (lexer->type == SPACE)
 		lexer = lexer->next;
-	printf("HERE == %s\n", lexer -> value);
 	if (lexer ->type == STRING)
 	{
 		ft_lstadd_back_file(&data -> tmp_f, ft_lstnew_file \

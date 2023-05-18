@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/12 20:28:33 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/13 14:43:14 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,30 +80,30 @@ typedef struct s_data
 }			t_data;
 
 // linked list
-void	ft_lstadd_back(t_env **lst, t_env *new);
-t_env	*ft_lstnew(char *name, char *path);
-int		ft_lstsize(t_env *lst);
-t_env	*ft_lstlast(t_env *lst);
+void		ft_lstadd_back(t_env **lst, t_env *new);
+t_env		*ft_lstnew(char *name, char *path);
+int			ft_lstsize(t_env *lst);
+t_env		*ft_lstlast(t_env *lst);
 
 // linked list exec
-void	ft_lstadd_back_exec(t_exec **lst, t_exec *new);
-t_exec	*ft_lstnew_exec(char *value, int type, t_file *file, t_exec *curr);
-int		ft_lstsize_exec(t_exec *lst);
-t_exec	*ft_lstlast_exec(t_exec *lst);
-void	free_exec(t_exec **exec);
+void		ft_lstadd_back_exec(t_exec **lst, t_exec *new);
+t_exec		*ft_lstnew_exec(char *value, int type, t_file *file, t_exec *curr);
+int			ft_lstsize_exec(t_exec *lst);
+t_exec		*ft_lstlast_exec(t_exec *lst);
+void		free_exec(t_exec **exec);
 
 // linked list file
-void	ft_lstadd_back_file(t_file **lst, t_file *new);
-t_file	*ft_lstnew_file(char *value, int typem, int expand);
-int		ft_lstsize_file(t_file *lst);
-t_file	*ft_lstlast_file(t_file *lst);
-void	free_file(t_file **file);
+void		ft_lstadd_back_file(t_file **lst, t_file *new);
+t_file		*ft_lstnew_file(char *value, int typem, int expand);
+int			ft_lstsize_file(t_file *lst);
+t_file		*ft_lstlast_file(t_file *lst);
+void		free_file(t_file **file);
 
 //env
-void	creat_env(char **en, t_data **data);
-void	aff(t_env *env);
-void	aff1(t_exec *env, t_file *file);
-void	aff2(t_file *env);
+void		creat_env(char **en, t_data **data);
+void		aff(t_env *env);
+void		aff1(t_exec *env, t_file *file);
+void		aff2(t_file *env);
 
 extern void	rl_replace_line(const char *str, int n);
 
@@ -116,20 +116,20 @@ t_exec		*handle_here_doc_out(t_data *data, t_exec *lexer);
 int			check_pipe(t_exec *lexer);
 
 //string tokens
-t_exec	*handle_pipe(t_data *data, t_exec *lexer);
-t_exec	*handle_string(t_data *data, t_exec *lexer);
-t_exec	*handle_s_quote(t_data *data, t_exec *lexer);
-t_exec	*handle_d_quote(t_data *data, t_exec *lexer);
-t_exec	*handle_dollar(t_data *data, t_exec *lexer);
-t_exec	*handle_env_var(t_data *data, t_exec *lexer);
+t_exec		*handle_pipe(t_data *data, t_exec *lexer);
+t_exec		*handle_string(t_data *data, t_exec *lexer);
+t_exec		*handle_s_quote(t_data *data, t_exec *lexer);
+t_exec		*handle_d_quote(t_data *data, t_exec *lexer);
+t_exec		*handle_dollar(t_data *data, t_exec *lexer);
+t_exec		*handle_env_var(t_data *data, t_exec *lexer);
 
 //outils
-char	*find_ex(char *sa, char **env);
-char	*seach_env_value(char *str, t_data *data);
-t_exec	*print_token_er(t_data *data, int status, char *s1);
-int		ft_isstring(char c);
-int		ft_isstring_w_s(char c);
-int		ft_isstring_w_q(char c);
-void	transmettre(t_data *data, char ***env, char ***export);
+char		*find_ex(char *sa, char **env);
+char		*seach_env_value(char *str, t_data *data);
+t_exec		*print_token_er(t_data *data, int status, char *s1);
+int			ft_isstring(char c);
+int			ft_isstring_w_s(char c);
+int			ft_isstring_w_q(char c);
+void		transmettre(t_data *data, char ***env, char ***export);
 
 #endif

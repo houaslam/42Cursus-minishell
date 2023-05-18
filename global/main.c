@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/13 12:20:26 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/13 13:42:37 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ void	ctrl_d(int i)
 	}
 }
 
-// void	ctrl_slash(int i)
-// {
-	
-// }
-
 int	main(int ac, char **av, char **en)
 {
 	t_data	*data;
@@ -55,9 +50,6 @@ int	main(int ac, char **av, char **en)
 		data = malloc(sizeof(t_data));
 		g_exit_status = 0;
 		data -> env = menv;
-		// signal(SIGINT, ctrl_c);
-		signal(SIGQUIT, ctrl_d);
-		// signal(SIGTSTP, ctrl_slash);
 		while (1)
 		{
 			data->s = readline("\e[92mMINISHELL>\e[0m");
@@ -65,12 +57,12 @@ int	main(int ac, char **av, char **en)
 			if (data->s[0] != '\0' && data->s)
 			{
 				lexer(&data);
-				if (data->g_exit_status == 0)
-					transmettre(data, &menv, &export);
+				// if (data->g_exit_status == 0)
+				// 	transmettre(data, &menv, &export);
 				free_file(&data->tmp_f);
 				free_exec(&data->tmp);
-				free_exec(&data->lexer);
 				free_exec(&data->exec);
+				free_exec(&data->lexer);
 				free(data->s);
 			}
 		}

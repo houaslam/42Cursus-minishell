@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:50 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/02 11:44:36 by aatki            ###   ########.fr       */
+/*   Updated: 2023/05/10 11:55:31 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sort_export(char **export)
 			change = ft_strdup(export[i]);
 			free(export[i]);
 			export[i] = ft_strdup(export[i + 1]);
-			free(export[i+1]);
+			free(export[i + 1]);
 			export[i + 1] = ft_strdup(change);
 			free(change);
 			i = -1;
