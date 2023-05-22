@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/13 13:42:37 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:53:18 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,25 @@ void	ctrl_c(int i)
 	}
 }
 
-void	ctrl_d(int i)
+void	the_while(t_data *data, char **menv, char **export)
 {
-	if (i == SIGQUIT)
+	while (1)
 	{
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		exit(0);
+		data->s = readline("\e[92mMINISHELL>\e[0m");
+		add_history(data->s);
+		if (!data->s)
+			exit(0);
+		if (data->s[0] != '\0' && data->s)
+		{
+			lexer(&data);
+			if (data->g_exit_status == 0)
+				transmettre(data, &menv, &export);
+			free_file(&data->tmp_f);
+			free_exec(&data->tmp);
+			free_exec(&data->exec);
+			free_exec(&data->lexer);
+			free(data->s);
+		}
 	}
 }
 
@@ -50,23 +61,27 @@ int	main(int ac, char **av, char **en)
 		data = malloc(sizeof(t_data));
 		g_exit_status = 0;
 		data -> env = menv;
-		while (1)
-		{
-			data->s = readline("\e[92mMINISHELL>\e[0m");
-			add_history(data->s);
-			if (data->s[0] != '\0' && data->s)
-			{
-				lexer(&data);
-				// if (data->g_exit_status == 0)
-				// 	transmettre(data, &menv, &export);
-				free_file(&data->tmp_f);
-				free_exec(&data->tmp);
-				free_exec(&data->exec);
-				free_exec(&data->lexer);
-				free(data->s);
-			}
-		}
+		the_while(data, menv, export);
 		ft_free(menv);
 		ft_free(export);
+	}
+}
+
+void	aff1(t_exec *exec, t_file *file)
+{
+	t_exec	*tmp;
+	t_file	*tmp_;
+
+	tmp = exec;
+	tmp_ = file;
+	while (tmp != NULL)
+	{
+		printf("---->type = %d value = |%s|\n", tmp->type, tmp->value);
+		while (tmp_ != NULL)
+		{
+			printf("---->type = %d file = |%s|\n", tmp_->type, tmp_->file);
+			tmp_ = tmp_->next;
+		}
+		tmp = tmp->next;
 	}
 }

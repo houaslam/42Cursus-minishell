@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/13 14:39:09 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:51:46 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,7 @@ t_exec	*handle_d_quote(t_data *data, t_exec *lexer)
 {
 	lexer = lexer->next;
 	while (lexer -> type != D_QUOT)
-	{
-		// if (!lexer)
-		// 	return (print_token_er(data, 258, "`\"'\n"));
-		// if (lexer -> type == DOLLAR)
-		// 	lexer = handle_dollar(data, lexer);
-		// else
-		// 	data->tmp->value = ft_strjoin_free(data->tmp->value, lexer->value);
 		lexer = lexer->next;
-	}
 	if (lexer->next && lexer->next->type == STRING)
 		lexer = handle_string(data, lexer);
 	data -> tmp->value = ft_strjoin_free(data -> tmp -> value, "@");

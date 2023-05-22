@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/13 14:43:14 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:57:59 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,6 @@ int			ft_isstring(char c);
 int			ft_isstring_w_s(char c);
 int			ft_isstring_w_q(char c);
 void		transmettre(t_data *data, char ***env, char ***export);
+void		add(t_data **data, int *i, int type);
 
 #endif

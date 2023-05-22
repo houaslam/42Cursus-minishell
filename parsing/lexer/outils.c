@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/13 10:51:18 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:53:26 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,19 @@ t_exec	*print_token_er(t_data *data, int status, char *s1)
 	return (ft_lstlast_exec(data->lexer));
 }
 
-void	aff1(t_exec *exec, t_file *file)
+void	add(t_data **data, int *i, int type)
 {
-	t_exec	*tmp;
-	t_file	*tmp_;
+	int		k;
+	char	*str;
 
-	tmp = exec;
-	tmp_ = file;
-	while (tmp != NULL)
-	{
-		printf("---->type = %d value = |%s|\n", tmp->type, tmp->value);
-		while (tmp_ != NULL)
-		{
-			printf("---->type = %d file = |%s|\n", tmp_->type, tmp_->file);
-			tmp_ = tmp_->next;
-		}
-		tmp = tmp->next;
-	}
+	k = *i;
+	(*i)++;
+	while ((*data)->s[*i] && ft_isstring \
+	((*data)->s[*i]) && (*data)->s[*i] != '$')
+		(*i)++;
+	str = ft_substr((*data)->s, k, *i - k);
+	ft_lstadd_back_exec(&(*data)->lexer, \
+	ft_lstnew_exec(str, type, NULL, (*data)->lexer));
+	free(str);
+	(*i)--;
 }

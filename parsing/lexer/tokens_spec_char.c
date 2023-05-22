@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/13 13:38:25 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:53:01 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ t_exec	*handle_redin(t_data *data, t_exec *lexer)
 	lexer = lexer->next;
 	while (lexer->type == SPACE)
 		lexer = lexer->next;
-	if (data -> lexer ->type == STRING)
+	if (lexer ->type == STRING)
 	{
 		ft_lstadd_back_file(&data -> tmp_f, \
 		ft_lstnew_file(data -> lexer->value, R_IN, 0));
 		return (lexer);
 	}
-	else if (data -> lexer ->type == S_QUOT || data -> lexer ->type == D_QUOT)
+	else if (lexer ->type == S_QUOT || lexer ->type == D_QUOT)
 	{
 		str = ft_substr(lexer->value, 1, \
 		ft_strlen(lexer->value) - 1);
@@ -108,4 +108,29 @@ t_exec	*handle_redin(t_data *data, t_exec *lexer)
 	}
 	else
 		return (print_token_er(data, 258, "`newline'\n"));
+}
+
+int	check_pipe(t_exec *lexer)
+{
+	t_exec	*tmp;
+
+	tmp = lexer;
+	while (tmp)
+	{
+		if (tmp->type == STRING)
+			return (0);
+		if (tmp->prev == NULL)
+			return (1);
+		tmp = tmp->prev;
+	}
+	tmp = lexer;
+	while (tmp)
+	{
+		if (tmp->type == STRING)
+			return (0);
+		if (tmp->next == NULL)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (1);
 }
