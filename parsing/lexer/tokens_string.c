@@ -6,13 +6,13 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/22 15:51:46 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:59:29 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_exec	*handle_dollar(t_data *data, t_exec *lexer)
+t_exec	*handle_dollar(t_data *data, t_exec *lexer, int sep)
 {
 	char	*str;
 	int		k;
@@ -22,7 +22,8 @@ t_exec	*handle_dollar(t_data *data, t_exec *lexer)
 	{
 		str = ft_substr(lexer->value, 1, ft_strlen(lexer->value) - 1);
 		data -> tmp -> value = ft_strjoin_free(data->tmp->value, lexer->value);
-		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "@");
+		if (sep!= 1)
+			data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
 	}
 	else
 	{
@@ -32,23 +33,25 @@ t_exec	*handle_dollar(t_data *data, t_exec *lexer)
 		str = find_ex(ft_substr(lexer->value, k, \
 		ft_strlen(lexer->value) - 1), data->env);
 		data -> tmp -> value = ft_strjoin_free(data->tmp->value, str);
-		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "@");
+		if (sep!= 1)
+			data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
 	}
 	return (lexer);
 }
 
-t_exec	*handle_string(t_data *data, t_exec *lexer)
+t_exec	*handle_string(t_data *data, t_exec *lexer, int sep)
 {
 	data -> tmp -> value = ft_strjoin_free(data->tmp->value, lexer->value);
-	data -> tmp -> value = ft_strjoin_free(data->tmp->value, "@");
+	if (sep != 1)
+		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
 	if (lexer->next && lexer->next->type == S_QUOT)
-		lexer = handle_s_quote(data, lexer -> next);
+		lexer = handle_s_quote(data, lexer -> next, 0);
 	else if (lexer->next && lexer->next->type == D_QUOT)
-		lexer = handle_d_quote(data, lexer -> next);
+		lexer = handle_d_quote(data, lexer -> next, 0);
 	return (lexer);
 }
 
-t_exec	*handle_s_quote(t_data *data, t_exec *lexer)
+t_exec	*handle_s_quote(t_data *data, t_exec *lexer, int sep)
 {
 	lexer = lexer->next;
 	while (lexer -> type != S_QUOT)
@@ -59,19 +62,31 @@ t_exec	*handle_s_quote(t_data *data, t_exec *lexer)
 		lexer = lexer->next;
 	}
 	if (lexer->next && lexer->next->type == STRING)
-		lexer = handle_string(data, lexer);
-	data -> tmp->value = ft_strjoin_free(data -> tmp -> value, "@");
+		lexer = handle_string(data, lexer, 0);
+	if (sep != 1)
+			data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
 	return (lexer);
 }
 
-t_exec	*handle_d_quote(t_data *data, t_exec *lexer)
+t_exec	*handle_d_quote(t_data *data, t_exec *lexer, int sep)
 {
 	lexer = lexer->next;
 	while (lexer -> type != D_QUOT)
+	{
+		if (!lexer)
+			return (print_token_er(data, 258, "`\"'\n"));
+		if (lexer->type == DOLLAR)
+			lexer = handle_dollar(data, lexer, 1);
+		else
+			data->tmp->value = ft_strjoin(data->tmp->value, lexer->value);
 		lexer = lexer->next;
+	}
 	if (lexer->next && lexer->next->type == STRING)
-		lexer = handle_string(data, lexer);
-	data -> tmp->value = ft_strjoin_free(data -> tmp -> value, "@");
+		lexer = handle_string(data, lexer->next, 0);
+	else if (lexer->next && lexer->next->type == DOLLAR)
+		lexer = handle_dollar(data, lexer->next, 0);
+	if (sep != 1)
+			data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
 	return (lexer);
 }
 
@@ -84,7 +99,7 @@ t_exec	*handle_pipe(t_data *data, t_exec *lexer)
 		ft_lstadd_back_exec(&data->exec, \
 		ft_lstnew_exec(data -> tmp->value, PIPE, data -> tmp_f, lexer));
 		free_exec(&data -> tmp);
-		data -> tmp = ft_lstnew_exec("@", STRING, data -> tmp_f, lexer);
+		data -> tmp = ft_lstnew_exec("\n", STRING, data -> tmp_f, lexer);
 	}
 	return (lexer);
 }

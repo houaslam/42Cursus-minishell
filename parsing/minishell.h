@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/22 15:57:59 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:57:14 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,10 @@ int			check_pipe(t_exec *lexer);
 
 //string tokens
 t_exec		*handle_pipe(t_data *data, t_exec *lexer);
-t_exec		*handle_string(t_data *data, t_exec *lexer);
-t_exec		*handle_s_quote(t_data *data, t_exec *lexer);
-t_exec		*handle_d_quote(t_data *data, t_exec *lexer);
-t_exec		*handle_dollar(t_data *data, t_exec *lexer);
+t_exec		*handle_string(t_data *data, t_exec *lexer, int sep);
+t_exec		*handle_s_quote(t_data *data, t_exec *lexer, int sep);
+t_exec		*handle_d_quote(t_data *data, t_exec *lexer, int sep);
+t_exec		*handle_dollar(t_data *data, t_exec *lexer, int sep);
 t_exec		*handle_env_var(t_data *data, t_exec *lexer);
 
 //outils

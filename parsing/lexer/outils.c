@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/22 16:53:26 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:37:51 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	add(t_data **data, int *i, int type)
 	str = ft_substr((*data)->s, k, *i - k);
 	ft_lstadd_back_exec(&(*data)->lexer, \
 	ft_lstnew_exec(str, type, NULL, (*data)->lexer));
+	printf("%s\n", str);
 	free(str);
 	(*i)--;
 }

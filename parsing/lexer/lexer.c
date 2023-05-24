@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:41:48 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/22 16:50:42 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:59:33 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	*other_options(t_exec	*tmp, t_data	*data)
 	if (tmp-> type == PIPE)
 		tmp = handle_pipe(data, tmp);
 	else if (tmp-> type == S_QUOT)
-			tmp = handle_s_quote(data, tmp);
+			tmp = handle_s_quote(data, tmp, 0);
 	else if (tmp-> type == D_QUOT)
-		tmp = handle_d_quote(data, tmp);
+		tmp = handle_d_quote(data, tmp, 0);
 	else if (tmp-> type == STRING)
-		tmp = handle_string(data, tmp);
+		tmp = handle_string(data, tmp, 0);
 	else if (tmp-> type == DOLLAR)
-		tmp = handle_dollar(data, tmp);
+		tmp = handle_dollar(data, tmp, 0);
 	return (tmp);
 }
 
@@ -114,7 +114,7 @@ void	lexer(t_data **data)
 	(*data)->exec = NULL;
 	(*data)->f = 0;
 	(*data)->tmp_f = NULL;
-	(*data)->tmp = ft_lstnew_exec("@", STRING, NULL, NULL);
+	(*data)->tmp = ft_lstnew_exec("\n", STRING, NULL, NULL);
 	(*data)->tmp->file = NULL;
 	if ((*data)->g_exit_status == 0)
 		options(*data);
