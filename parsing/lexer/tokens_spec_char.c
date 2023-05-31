@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/22 15:53:01 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:52:02 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_exec	*handle_redin(t_data *data, t_exec *lexer)
 	if (lexer ->type == STRING)
 	{
 		ft_lstadd_back_file(&data -> tmp_f, \
-		ft_lstnew_file(data -> lexer->value, R_IN, 0));
+		ft_lstnew_file(lexer->value, R_IN, 0));
 		return (lexer);
 	}
 	else if (lexer ->type == S_QUOT || lexer ->type == D_QUOT)

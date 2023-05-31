@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/13 12:05:52 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:15:48 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	transmettre(t_data *data, char ***env, char ***export)
 	while (data->exec)
 	{
 		tmp = malloc(sizeof(t_pipe));
-		(tmp)->cmd = ft_split(data->exec->value, '@');
+		(tmp)->cmd = ft_split(data->exec->value, '\n');
 		(tmp)->infile = NULL;
 		(tmp)->outfile = NULL;
 		(tmp)->here_doc = NULL;

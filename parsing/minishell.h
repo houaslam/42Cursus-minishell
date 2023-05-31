@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/24 20:57:14 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:53:45 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_file		*ft_lstnew_file(char *value, int typem, int expand);
 int			ft_lstsize_file(t_file *lst);
 t_file		*ft_lstlast_file(t_file *lst);
 void		free_file(t_file **file);
+t_file		*copy_f(t_file *file);
 
 //env
 void		creat_env(char **en, t_data **data);

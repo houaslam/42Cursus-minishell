@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/24 21:00:15 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:56:15 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ctrl_c(int i)
 
 void	the_while(t_data *data, char **menv, char **export)
 {
+	(void)menv;
+	(void)export;
 	while (1)
 	{
 		data->s = readline("\e[92mMINISHELL>\e[0m");
@@ -34,8 +36,9 @@ void	the_while(t_data *data, char **menv, char **export)
 		if (data->s[0] != '\0' && data->s)
 		{
 			lexer(&data);
-			if (data->g_exit_status == 0)
-				transmettre(data, &menv, &export);
+			// aff1(data->exec, NULL);
+			// if (data->g_exit_status == 0)
+			// 	transmettre(data, &menv, &export);
 			free_file(&data->tmp_f);
 			free_exec(&data->tmp);
 			free_exec(&data->exec);
@@ -73,10 +76,11 @@ void	aff1(t_exec *exec, t_file *file)
 	t_file	*tmp_;
 
 	tmp = exec;
-	tmp_ = file;
+	(void)file;
 	while (tmp != NULL)
 	{
 		printf("---->type = %d value = |%s|\n", tmp->type, tmp->value);
+		tmp_ = tmp->file;
 		while (tmp_ != NULL)
 		{
 			printf("---->type = %d file = |%s|\n", tmp_->type, tmp_->file);
