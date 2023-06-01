@@ -6,7 +6,7 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/06/01 11:09:18 by houaslam         ###   ########.fr        #
+#    Updated: 2023/06/01 14:59:09 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,8 @@ SRC =   global/main.c \
 		./parsing/lexer/tokens_spec_char.c \
 		./parsing/lexer/outils.c \
 		./parsing/lexer/lexer.c \
-		./parsing/lexer/ft_isstring.c
+		./parsing/lexer/ft_isstring.c \
+		./parsing/lexer/expand.c
 
 SRCS= ${SRC} ${PIPEX} ${BUILTINS} ${LIBFT}
 

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:41:48 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/01 11:35:11 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:24:08 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	*other_options(t_exec	*tmp, t_data	*data)
 	else if (tmp-> type == STRING)
 		tmp = handle_string(data, tmp, 0);
 	else if (tmp-> type == DOLLAR)
-		tmp = handle_dollar(data, tmp, 0);
+		tmp = handle_dollar(data, tmp, 0, 1);
 	return (tmp);
 }
 

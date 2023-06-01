@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/31 18:54:46 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:32:50 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ char	*find_ex(char *sa, char **env)
 
 t_exec	*print_token_er(t_data *data, int status, char *s1)
 {
-	write(2, "bash: syntax error near unexpected token", 41);
+	if (ft_strcmp(s1, " ambiguous redirect\n") == 0)
+		write(2, "bash: ambiguous redirect\n", 25);
+	else
+		write(2, "bash: syntax error near unexpected token", 41);
 	if (s1)
 		write(2, s1, ft_strlen(s1));
 	g_exit_status = status;
@@ -83,6 +86,8 @@ void	add(t_data **data, int *i, int type)
 	((*data)->s[*i]) && (*data)->s[*i] != '$')
 		(*i)++;
 	str = ft_substr((*data)->s, k, *i - k);
+	if (type == DOLLAR)
+		str = the_expande(*data, str);
 	ft_lstadd_back_exec(&(*data)->lexer, \
 	ft_lstnew_exec(str, type, NULL, (*data)->lexer));
 	free(str);

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/31 18:53:45 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:23:58 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ t_exec		*handle_pipe(t_data *data, t_exec *lexer);
 t_exec		*handle_string(t_data *data, t_exec *lexer, int sep);
 t_exec		*handle_s_quote(t_data *data, t_exec *lexer, int sep);
 t_exec		*handle_d_quote(t_data *data, t_exec *lexer, int sep);
-t_exec		*handle_dollar(t_data *data, t_exec *lexer, int sep);
+t_exec		*handle_dollar(t_data *data, t_exec *lexer, int sep, int is_red);
 t_exec		*handle_env_var(t_data *data, t_exec *lexer);
 
 //outils
@@ -133,5 +133,7 @@ int			ft_isstring_w_s(char c);
 int			ft_isstring_w_q(char c);
 void		transmettre(t_data *data, char ***env, char ***export);
 void		add(t_data **data, int *i, int type);
+char		*the_expande(t_data *data, char *str);
+char		*expande_handle(t_data *data, char *str);
 
 #endif
