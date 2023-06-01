@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/31 18:56:15 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/01 11:37:31 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	the_while(t_data *data, char **menv, char **export)
 		if (data->s[0] != '\0' && data->s)
 		{
 			lexer(&data);
-			// aff1(data->exec, NULL);
-			// if (data->g_exit_status == 0)
-			// 	transmettre(data, &menv, &export);
+			aff1(data->exec, NULL);
+			if (data->g_exit_status == 0)
+				transmettre(data, &menv, &export);
 			free_file(&data->tmp_f);
 			free_exec(&data->tmp);
 			free_exec(&data->exec);

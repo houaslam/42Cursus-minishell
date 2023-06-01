@@ -6,13 +6,13 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:41:48 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/24 20:59:33 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/01 11:35:11 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	lexer_other_op(t_data **data, int i, int singl, int doubl)
+int	lexer_other_op(t_data **data, int i, int *singl, int *doubl)
 {
 	if ((*data)->s[i] == R_OUT && (*data)->s[i + 1] == R_OUT && ++i)
 		ft_lstadd_back_exec(&(*data)->lexer, \
@@ -23,16 +23,16 @@ int	lexer_other_op(t_data **data, int i, int singl, int doubl)
 	else if ((*data)->s[i] == R_IN)
 		ft_lstadd_back_exec(&(*data)->lexer, \
 		ft_lstnew_exec("<", R_IN, NULL, (*data)->lexer));
-	else if ((*data)->s[i] == D_QUOT && ++doubl)
+	else if ((*data)->s[i] == D_QUOT && ++(*doubl))
 		ft_lstadd_back_exec(&(*data)->lexer, \
 		ft_lstnew_exec("\"", D_QUOT, NULL, (*data)->lexer));
-	else if ((*data)->s[i] == S_QUOT && ++singl)
+	else if ((*data)->s[i] == S_QUOT && ++(*singl))
 		ft_lstadd_back_exec(&(*data)->lexer, \
 		ft_lstnew_exec("\'", S_QUOT, NULL, (*data)->lexer));
 	else if ((*data)->s[i] == DOLLAR)
 	{
-		(*data)-> d_status = doubl;
-		(*data)-> s_status = singl;
+		(*data)-> d_status = *doubl;
+		(*data)-> s_status = *singl;
 		add(data, &i, DOLLAR);
 	}
 	else
@@ -61,7 +61,7 @@ void	the_lexer(t_data **data)
 			ft_lstadd_back_exec(&(*data)->lexer, \
 			ft_lstnew_exec("<<", H_IN, NULL, (*data)->lexer));
 		else
-			i = lexer_other_op(data, i, singl, doubl);
+			i = lexer_other_op(data, i, &singl, &doubl);
 	}
 	if (singl % 2 != 0 || doubl % 2 != 0)
 		print_token_er(*data, 285, "'quotes`\n");

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/05/31 18:57:13 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/01 11:36:42 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ t_exec	*handle_string(t_data *data, t_exec *lexer, int sep)
 
 t_exec	*handle_s_quote(t_data *data, t_exec *lexer, int sep)
 {
-	lexer = lexer->next;
+	if (lexer -> next)
+		lexer = lexer->next;
 	while (lexer -> type != S_QUOT)
 	{
 		if (!lexer)
@@ -70,7 +71,8 @@ t_exec	*handle_s_quote(t_data *data, t_exec *lexer, int sep)
 
 t_exec	*handle_d_quote(t_data *data, t_exec *lexer, int sep)
 {
-	lexer = lexer->next;
+	if (lexer -> next)
+		lexer = lexer->next;
 	while (lexer -> type != D_QUOT)
 	{
 		if (!lexer)
