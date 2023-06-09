@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:28:17 by houaslam          #+#    #+#             */
-/*   Updated: 2023/04/09 21:34:42 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:17:58 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ int	ft_strcmp(char *str, char *str_2)
 			return (str[i] - str_2[i]);
 		i++;
 	}
+	if (str[i] || str_2[i])
+		return (1);
 	return (0);
 }

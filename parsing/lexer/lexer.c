@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:41:48 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/01 17:24:08 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/09 13:37:13 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	options(t_data *data)
 		if (!tmp->next && data->g_exit_status == 0)
 			ft_lstadd_back_exec(&data->exec, \
 			ft_lstnew_exec(data->tmp->value, STRING, data->tmp_f, tmp));
-		tmp = tmp -> next;
+		tmp = tmp -> next; 
 	}
 }
 
@@ -111,6 +111,7 @@ void	lexer(t_data **data)
 	(*data)->g_exit_status = 0;
 	(*data)->lexer = NULL;
 	the_lexer(data);
+	aff1((*data)->lexer, NULL);
 	(*data)->exec = NULL;
 	(*data)->f = 0;
 	(*data)->tmp_f = NULL;
