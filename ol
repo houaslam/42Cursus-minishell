@@ -1,0 +1,10 @@
+Makefile
+executionn
+global
+libft
+minishell
+ol
+out
+parsing
+test
+to_do.c
