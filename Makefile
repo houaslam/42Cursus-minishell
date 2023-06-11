@@ -6,7 +6,7 @@
 #    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/06/09 18:29:16 by aatki            ###   ########.fr        #
+#    Updated: 2023/06/11 22:58:59 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,7 @@ clean :
 push :
 	git add .
 	git commit -m minishell
-	git push origin master
+	git push origin aicha
 
 fclean : clean
 	rm -f $(NAME)

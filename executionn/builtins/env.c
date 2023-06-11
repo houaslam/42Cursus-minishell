@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:42 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/10 00:47:42 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/11 19:03:05 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,14 @@ void	ft_env(char **env, int fd, char **arg)
 	i = 0;
 	(void)fd;
 	if (!here(env, "PATH=/Users/aatki/.brew/"))
-		ft_errorb("bash: env: No such file or directory", NULL, NULL, 127);
+	{
+		ft_errorb("bash: env: No such file or directory", NULL, NULL, 1);
+		return ;
+	}
 	if (*arg)
 	{
-		return ;
 		ft_errorb("there is an argument\n", NULL, NULL, 1);
+		return ;
 	}
 	if (!*env)
 		return ;

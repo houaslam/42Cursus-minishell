@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:01:30 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/08 23:05:08 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/11 18:59:54 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	util_fun(char **env, char *buff)
 
 	i = 0;
 	if (!getcwd(buff2, 1024))
+	{
 		ft_errorb("no path1\n", NULL, NULL, 1);
+		return ;
+	}
 	while (env[i])
 	{
 		if (!ft_strncmp(env[i], "PWD=", 4))
@@ -67,16 +70,25 @@ void	ft_cd(char **env, char **export, char **arg)
 	dir = NULL;
 	i = 0;
 	if (arg[0] && arg[1])
+	{
 		ft_errorb("cd: string not in pwd: ", arg[0], "\n", 1);
+		return ;
+	}
 	if (!arg[0])
 		dir = ft_strdup("/Users/aatki");
 	else
 		dir = ft_strdup(arg[0]);
 	dir = telda(dir);
 	if (!getcwd(buff, 1024))
+	{
 		ft_errorb("no path1\n", NULL, NULL, 1);
+		return ;
+	}
 	if (chdir(dir))
+	{
 		ft_errorb("bash: cd: ", dir, ": No such file or directory\n", 1);
+		return ;
+	}
 	util_fun(env, buff);
 	util_fun(export, buff);
 	free(dir);

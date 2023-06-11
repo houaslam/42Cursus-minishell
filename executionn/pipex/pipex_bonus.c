@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/11 00:17:32 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/11 22:58:32 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,19 @@ void	execution(char **cmd, char **env)
 	if (access(cmd[0], X_OK) == 0)
 	{
 		if (execve(cmd[0], cmd, env) < 0)
+		{
 			ft_errorb("command can't executude\n", NULL, NULL, 1);
+			return ;
+		}
 	}
 	else
 	{
 		path = check_env(env, cmd);
 		if (execve(path, cmd, env) < 0)
+		{
 			ft_errorb("command can't executude\n", NULL, NULL, 1);
+			return ;
+		}
 	}
 }
 
@@ -68,15 +74,22 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
 	while (pipee)
 	{
 		if (pipe(ph) < 0)
+		{
 			ft_errorb("cant pipe in child one\n", NULL, NULL, 1);
+			return ;
+		}
 		id = fork();
 		if (id < 0)
+		{
 			ft_errorb("cant fork in child one\n", NULL, NULL, 1);
+			return ;
+		}
 		if (id == 0)
 		{
 			if(!pipee->next)
 				ph[1]=1;
-			duping(pipee, fd, ph);
+			if(!duping(pipee, fd, ph))
+				return ;
 			command((pipee)->cmd, export, ph[1], env);
 			exit(0);
 		}
@@ -106,14 +119,10 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
 
 void	pipex(t_pipe *pipe, char ***env, char ***export)
 {
-	// int	fd;
-
-	// fd = 0;
 	if (!pipe->next && builtin(*pipe->cmd))
 	{
 		builtin_exec(pipe, env, export);
 		return ;
 	}
 	child_one(pipe, env, export);
-	// child_two2(pipe, &fd, env, export);
 }
