@@ -3,23 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:55 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/30 11:18:40 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 14:01:46 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	ft_unset(char **env,char **arg)
+int	check_argg(char *s)
 {
 	int	i;
 
-	int j=0;
-	while(arg[j])
+	i = 0;
+	while (s[i] && ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z')
+			|| s[i] == '_'))
+		i++;
+	if (s[i] == '\0')
+		return (1);
+	else
+		return (0);
+}
+
+void	ft_unset(char **env, char **arg)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (arg[j])
 	{
-		i=0;
+		i = 0;
+		if (!check_argg(arg[j]))
+			return (ft_error("bash: unset: `" \
+			, arg[j], ": not a valid identifier\n"));
 		while ((env[i]))
 		{
 			if (arg && !ft_strncmp(env[i], arg[j], ft_strlen(arg[j])))
@@ -34,6 +52,7 @@ void	ft_unset(char **env,char **arg)
 			env[i] = ft_strdup(env[i + 1]);
 			i++;
 		}
+		free(env[i]);
 		env[i] = NULL;
 		j++;
 	}

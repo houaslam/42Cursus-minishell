@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:45 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/13 11:01:16 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:53:30 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,44 @@ void	found(char *sa, char **env)
 	i = 0;
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], sa, ft_strlen(sa))&& env[i][ft_strlen(sa)]=='=')
+		if (!ft_strncmp(env[i], sa, ft_strlen(sa))
+			&& env[i][ft_strlen(sa)] == '=')
 			printf("%s", env[i] + ft_strlen(sa) + 1);
 		i++;
 	}
 	return ;
 }
 
+// char *found(char *sa, char **env)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	char *s;
+// 	while (env[i])
+// 	{
+// 		if (!ft_strncmp(env[i], sa, ft_strlen(sa))
+// 			&& env[i][ft_strlen(sa)] == '=')
+// 			s=ft_strdup(env[i]);
+// 		i++;
+// 	}
+// 	return s;
+// }
+
 void	ft_echo(char **arg, int fd, char **env)
 {
 	int	i;
 
 	(void)fd;
-	//dup2(fd, 1);
 	i = 0;
-	if (*arg && !ft_strncmp(arg[0], "-n", 2))
+	if (*arg && !ft_strcmp(arg[0], "-n"))
 		i++;
 	while (arg[i])
 	{
 		if (arg[i][0] == '$')
 		{
-			printf("YESS\n");
-			if(arg[i][1]=='?')
-				printf("%d",g_exit_status);
+			if (arg[i][1] == '?')
+				printf("%d", g_exit_status);
 			if (arg[i][1] == '\'' || arg[i][1] == '\"')
 				printf("%s", arg[i] + 2);
 			else
@@ -52,8 +67,7 @@ void	ft_echo(char **arg, int fd, char **env)
 		i++;
 		printf(" ");
 	}
-	if (*arg && !ft_strncmp(arg[0], "-n", 2))
-		return;
-		printf("\n");
-	//ft_free(arg);
+	if (*arg && !ft_strcmp(arg[0], "-n"))
+		return ;
+	printf("\n");
 }

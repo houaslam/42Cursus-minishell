@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/01 17:28:55 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/12 14:20:57 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	check_pipe(t_exec *lexer)
 	tmp = lexer;
 	while (tmp)
 	{
-		if (tmp->type == STRING)
+		if (tmp->type == STRING || tmp->type == DOLLAR)
 			return (0);
 		if (tmp->prev == NULL)
 			return (1);

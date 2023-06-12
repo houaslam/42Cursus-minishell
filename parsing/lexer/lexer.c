@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:41:48 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/11 16:11:24 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/11 22:57:18 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void	lexer(t_data **data)
 	(*data)->g_exit_status = 0;
 	(*data)->lexer = NULL;
 	the_lexer(data);
-	// aff1((*data)->lexer, NULL);
 	(*data)->exec = NULL;
 	(*data)->f = 0;
 	(*data)->tmp_f = NULL;

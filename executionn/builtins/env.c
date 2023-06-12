@@ -6,10 +6,9 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:42 by aatki             #+#    #+#             */
-/*   Updated: 2023/05/02 12:49:53 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/11 19:03:05 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "builtins.h"
 
@@ -20,8 +19,7 @@ int	here(char **env, char *arg)
 	i = 0;
 	while (env[i])
 	{
-		if (arg && !ft_strncmp(env[i], arg,
-				ft_strlen(arg)))
+		if (arg && !ft_strncmp(env[i], arg, ft_strlen(arg)))
 			return (1);
 		i++;
 	}
@@ -43,27 +41,31 @@ char	**ft_envo(char **env)
 		menv[i] = ft_strdup(env[i]);
 		i++;
 	}
-    menv[i]=NULL;
+	menv[i] = NULL;
 	return (menv);
 }
 
-void	ft_env(char **env, int fd,char **arg)
+void	ft_env(char **env, int fd, char **arg)
 {
-	int		i=0;
+	int	i;
 
+	i = 0;
 	(void)fd;
-	// (void)arg;
-	if(*arg)
+	if (!here(env, "PATH=/Users/aatki/.brew/"))
 	{
-		return;
-		//ft_free(arg);
-		ft_errorb("there is an argument\n",NULL,NULL,1);
+		ft_errorb("bash: env: No such file or directory", NULL, NULL, 1);
+		return ;
 	}
-	if(!*env)
-		return;
-	while(*env && env[i])
+	if (*arg)
 	{
-		printf("%s\n",env[i]);
+		ft_errorb("there is an argument\n", NULL, NULL, 1);
+		return ;
+	}
+	if (!*env)
+		return ;
+	while (*env && env[i])
+	{
+		printf("%s\n", env[i]);
 		i++;
 	}
 }

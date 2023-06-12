@@ -6,13 +6,14 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/06/01 14:59:09 by houaslam         ###   ########.fr        #
+#    Updated: 2023/06/12 14:46:47 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+
 EXTRA_CFLAGS = -I ~/Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/include  -L /Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/lib -lreadline
 
 LIBFT = ./libft/ft_atoi.c \
@@ -88,8 +89,8 @@ SRCS= ${SRC} ${PIPEX} ${BUILTINS} ${LIBFT}
 all : ${NAME}
 
 OBJ = ${SRCS:.c=.o}
-B_OBJ = ${B_SRCS:.c=.o}
 
+B_OBJ = ${B_SRCS:.c=.o}
 
 ${NAME} : ${OBJ}
 	cc $(CFLAGS) ${OBJ} -o ${NAME} $(EXTRA_CFLAGS)
@@ -100,7 +101,7 @@ clean :
 push :
 	git add .
 	git commit -m minishell
-	git push origin master
+	git push origin aicha
 
 fclean : clean
 	rm -f $(NAME)

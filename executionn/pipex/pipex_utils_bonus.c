@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:28 by aatki             #+#    #+#             */
-/*   Updated: 2023/04/30 13:45:39 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 14:16:34 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	ft_error(char *s)
-{
-	write(2, "Error\n", 7);
-	write(2, s, ft_strlen(s));
-	exit(1);
-}
+// void	ft_error(char *s)
+// {
+// 	write(2, "Error\n", 7);
+// 	write(2, s, ft_strlen(s));
+// 	exit(1);
+// }
 
 char	**ft_ret(char **env)
 {
@@ -32,7 +32,7 @@ char	**ft_ret(char **env)
 			ret = ft_split(env[i] + 5, ':');
 	}
 	if (!ret)
-		ft_errorb("path not found\n",NULL,NULL,1);
+		ft_errorb("path not found\n", NULL, NULL, 1);
 	return (ret);
 }
 
@@ -55,7 +55,46 @@ char	*check_env(char **env, char **cmd)
 			free(path);
 	}
 	if (access(path, R_OK) == -1)
-		ft_errorb("bash: ",NULL,"command not found\n",127);
+	{
+		ft_errorb("bash: ", NULL, "command not found\n", 127);
+		return (NULL);
+	}
 	free(ret);
 	return (path);
+}
+
+void	builtin_exec(t_pipe *pipe, char ***env, char ***export)
+{
+	int	orig_fd;
+	int	orig_fd1;
+	int	ph[2];
+
+	orig_fd = dup(0);
+	orig_fd1 = dup(1);
+	ph[0] = 0;
+	ph[1] = 1;
+	duping(pipe, *ph, ph);
+	command(pipe->cmd, export, 1, env);
+	if (ph[0] != 0)
+	{
+		dup2(orig_fd, 0);
+		close(orig_fd);
+	}
+	if (ph[1] != 1)
+	{
+		dup2(orig_fd1, 1);
+		close(orig_fd1);
+	}
+}
+
+int	builtin(char *s)
+{
+	if (!s)
+		return (0);
+	if (!ft_strncmp(s, "echo", 4) || !ft_strncmp(s, "env", 3) || !ft_strncmp(s,
+			"export", 6) || !ft_strncmp(s, "exit", 4) || !ft_strncmp(s, "unset",
+			5) || !ft_strncmp(s, "pwd", 3) || !ft_strncmp(s, "cd", 3))
+		return (1);
+	else
+		return (0);
 }
