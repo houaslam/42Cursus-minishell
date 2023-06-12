@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:42 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/11 19:03:05 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 15:48:33 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,27 @@ char	**ft_envo(char **env)
 	return (menv);
 }
 
+char	*recherche(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (!ft_strncmp(env[i],"PATH", 4))
+			return (env[i]);
+			i++;
+	}
+	return (NULL);
+}
+
 void	ft_env(char **env, int fd, char **arg)
 {
 	int	i;
 
 	i = 0;
 	(void)fd;
-	if (!here(env, "PATH=/Users/aatki/.brew/"))
+	if (!here(env, recherche(env)))
 	{
 		ft_errorb("bash: env: No such file or directory", NULL, NULL, 1);
 		return ;

@@ -6,7 +6,7 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/06/12 14:46:47 by houaslam         ###   ########.fr        #
+#    Updated: 2023/06/12 15:48:54 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,7 @@ clean :
 push :
 	git add .
 	git commit -m minishell
-	git push origin aicha
+	git push origin master
 
 fclean : clean
 	rm -f $(NAME)
