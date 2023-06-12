@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 08:41:51 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/11 20:54:11 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 14:01:18 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	change(char ***export, char ***env, char *arg, int cas)
 {
 	int	i;
 
-	dprintf(2,"%d\n",cas);
 	if (cas == 1)
 	{
 		i = position(*env, arg);

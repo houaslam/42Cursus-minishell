@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:01:30 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/11 18:59:54 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 14:00:04 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ void	ft_cd(char **env, char **export, char **arg)
 	dir = NULL;
 	i = 0;
 	if (arg[0] && arg[1])
-	{
-		ft_errorb("cd: string not in pwd: ", arg[0], "\n", 1);
-		return ;
-	}
+		return (ft_errorb("cd: string not in pwd: ", arg[0], "\n", 1));
 	if (!arg[0])
 		dir = ft_strdup("/Users/aatki");
 	else
@@ -85,10 +82,8 @@ void	ft_cd(char **env, char **export, char **arg)
 		return ;
 	}
 	if (chdir(dir))
-	{
-		ft_errorb("bash: cd: ", dir, ": No such file or directory\n", 1);
-		return ;
-	}
+		return (ft_errorb("bash: cd: ", dir, \
+		": No such file or directory\n", 1));
 	util_fun(env, buff);
 	util_fun(export, buff);
 	free(dir);

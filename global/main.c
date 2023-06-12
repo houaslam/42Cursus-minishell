@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/09 15:49:46 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 13:53:07 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	the_while(t_data *data, char **menv, char **export)
 		if (data->s[0] != '\0' && data->s)
 		{
 			lexer(&data);
-			//aff1(data->exec, NULL);
 			if (data->g_exit_status == 0)
 				transmettre(data, &menv, &export);
 			free_file(&data->tmp_f);
@@ -44,6 +43,7 @@ void	the_while(t_data *data, char **menv, char **export)
 			free_exec(&data->exec);
 			free_exec(&data->lexer);
 			free(data->s);
+			data->env = menv;
 		}
 	}
 }

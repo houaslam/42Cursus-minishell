@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:47:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/11 21:27:09 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 14:04:36 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int	here_docc(t_pipe *pip, int *ph)
 	char	*tmp;
 	int		p[2];
 
-	if(pipe(p)<0)
+	if (pipe(p) < 0)
 		printf("!! ERROR !!\n");
 	while (1)
 	{
 		write(1, "here_doc>", 9);
 		tmp = get_next_line(0);
-		if(!tmp)
-			break;
+		if (!tmp)
+			break ;
 		if ((ft_strncmp(tmp, pip->here_doc, ft_strlen(tmp) - 1) == 0)
 			&& ft_strlen(tmp) - 1 == ft_strlen(pip->here_doc))
 		{
@@ -64,17 +64,17 @@ int	here_docc(t_pipe *pip, int *ph)
 		free(tmp);
 	}
 	close(p[1]);
-	return (after_here_doc(pip, p,ph));
+	return (after_here_doc(pip, p, ph));
 }
 
-int	after_here_doc(t_pipe *pipe, int *p,int *ph)
+int	after_here_doc(t_pipe *pipe, int *p, int *ph)
 {
 	char	*s;
 
 	if (dup2(p[0], 0) < 0)
 	{
 		ft_errorb("cant dup in here_doc\n", NULL, NULL, 1);
-		return 0;
+		return (0);
 	}
 	if ((pipe)->here_doc_out)
 		s = (pipe)->here_doc_out;
@@ -87,15 +87,15 @@ int	after_here_doc(t_pipe *pipe, int *p,int *ph)
 		if (dup2(ft_outfile_heredoc(s), 1) < 0)
 		{
 			ft_errorb("cant dup outfile\n", NULL, NULL, 1);
-			return 0;
+			return (0);
 		}
 	}
 	else if (dup2(ph[1], 1) < 0)
 	{
 		ft_errorb("cant d1up pipe[1]\n", NULL, NULL, 1);
-		return 0;
+		return (0);
 	}
-	return 1;
+	return (1);
 }
 
 int	ft_outfile_heredoc(char *s)
@@ -106,7 +106,7 @@ int	ft_outfile_heredoc(char *s)
 	if (outfile < 0)
 	{
 		ft_errorb("outfile here_doc can't open\n", NULL, NULL, 1);
-		return -1;
+		return (-1);
 	}
 	return (outfile);
 }

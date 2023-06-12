@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transmetter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/10 23:34:41 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 13:57:27 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,7 @@ void	affiche_pipe(t_pipe *pipe)
 	{
 		i = 0;
 		while (pipe->cmd[i])
-		{
-			//printf("cmd[%d]=%s\n", i, pipe->cmd[i]);
 			i++;
-		}
-		printf("infile=%s\n", pipe->infile);
-		printf("outfile=%s\n", pipe->outfile);
-		printf("here_doc=%s\n", pipe->outfile);
 		pipe = pipe->next;
 	}
 }
@@ -59,30 +53,29 @@ void	affiche_pipe(t_pipe *pipe)
 // 	}
 // }
 
-void free_pipe(t_pipe *pipe)
+void	free_pipe(t_pipe *pipe)
 {
-	t_pipe *tmp;
-	if(!pipe)
-		return;
-	while(pipe)
+	t_pipe	*tmp;
+
+	if (!pipe)
+		return ;
+	while (pipe)
 	{
-		tmp=pipe;
+		tmp = pipe;
 		//ft_free(pipe->cmd);
-		pipe=pipe->next;
+		pipe = pipe->next;
 		free(pipe);
 	}
 }
 
-void files(t_exec *exec,t_pipe *tmp)
+void	files(t_exec *exec, t_pipe *tmp)
 {
 	(tmp)->infile = NULL;
 	(tmp)->outfile = NULL;
 	(tmp)->here_doc = NULL;
-	(tmp)->here_doc_out=NULL;
+	(tmp)->here_doc_out = NULL;
 	while (exec->file)
 	{
-		// printf("file type=<%d>\n", exec->file->type);
-		// printf("file type=<%s>\n", exec->file->file);
 		if (exec->file->type == 60)
 			(tmp)->infile = exec->file->file;
 		else if (exec->file->type == 62)
@@ -90,7 +83,7 @@ void files(t_exec *exec,t_pipe *tmp)
 		else if (exec->file->type == 5)
 			(tmp)->here_doc = exec->file->file;
 		else if (exec->file->type == 6)
-			(tmp)->here_doc_out=exec->file->file;
+			(tmp)->here_doc_out = exec->file->file;
 		exec->file = exec->file->next;
 	}
 }
@@ -106,7 +99,7 @@ void	transmettre(t_data *data, char ***env, char ***export)
 	{
 		tmp = malloc(sizeof(t_pipe));
 		(tmp)->cmd = ft_split(data->exec->value, '\n');
-		files(data->exec,tmp);
+		files(data->exec, tmp);
 		tmp->next = NULL;
 		data->exec = data->exec->next;
 		ft_lstadd_back2(&pipe, tmp);

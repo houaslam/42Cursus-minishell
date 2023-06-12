@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:47:21 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/11 21:18:37 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 14:15:28 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_infile(char *s)
 	if (infile < 0)
 	{
 		ft_errorb("infile can't open\n", NULL, NULL, 1);
-		return -1;
+		return (-1);
 	}
 	return (infile);
 }
@@ -33,12 +33,12 @@ int	ft_outfile(char *s)
 	if (outfile < 0)
 	{
 		ft_errorb("outfile can't open\n", NULL, NULL, 1);
-		return -1;
+		return (-1);
 	}
 	return (outfile);
 }
 
-int duping(t_pipe *pipe, int fd, int *ph)
+int	duping(t_pipe *pipe, int fd, int *ph)
 {
 	if (pipe->here_doc)
 		return (here_docc(pipe, ph));
@@ -48,13 +48,13 @@ int duping(t_pipe *pipe, int fd, int *ph)
 		if (dup2(ph[0], 0) < 0)
 		{
 			ft_errorb("cant dup  infile\n", NULL, NULL, 1);
-			return 0;
+			return (0);
 		}
 	}
 	else if (dup2(fd, 0) < 0)
 	{
 		ft_errorb("cant dup pipe[0]\n", NULL, NULL, 1);
-		return 0;
+		return (0);
 	}
 	if ((pipe)->outfile)
 	{
@@ -62,7 +62,7 @@ int duping(t_pipe *pipe, int fd, int *ph)
 		if (dup2(ph[1], 1) < 0)
 		{
 			ft_errorb("cant dup outfile\n", NULL, NULL, 1);
-			return 0;
+			return (0);
 		}
 	}
 	else if ((pipe)->here_doc_out)
@@ -71,13 +71,13 @@ int duping(t_pipe *pipe, int fd, int *ph)
 		if (dup2(ph[1], 1) < 0)
 		{
 			ft_errorb("cant dup outfile\n", NULL, NULL, 1);
-			return 0;
+			return (0);
 		}
 	}
 	else if (dup2(ph[1], 1) < 0)
 	{
 		ft_errorb("cant dup pipe[1]\n", NULL, NULL, 1);
-		return 0;
+		return (0);
 	}
-	return 1;
+	return (1);
 }

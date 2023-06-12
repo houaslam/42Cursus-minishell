@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/09 14:53:56 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 13:57:59 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	change(char ***export, char ***env, char *arg, int cas);
 int		ft_cases(char **env, char **export, char *arg);
 int		check_arg(char *s);
 void	ft_error(char *s, char *s1, char *s2);
-void				ft_errorb(char *s, char *s1, char *s2, int ext);
+void	ft_errorb(char *s, char *s1, char *s2, int ext);
 #endif

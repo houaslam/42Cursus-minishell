@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:28 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/11 22:46:10 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 14:16:34 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*check_env(char **env, char **cmd)
 	if (access(path, R_OK) == -1)
 	{
 		ft_errorb("bash: ", NULL, "command not found\n", 127);
-		return NULL;
+		return (NULL);
 	}
 	free(ret);
 	return (path);
@@ -81,7 +81,7 @@ void	builtin_exec(t_pipe *pipe, char ***env, char ***export)
 		close(orig_fd);
 	}
 	if (ph[1] != 1)
-	{ 
+	{
 		dup2(orig_fd1, 1);
 		close(orig_fd1);
 	}
