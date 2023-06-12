@@ -6,18 +6,11 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:28 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 18:18:26 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:42:40 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
-// void	ft_error(char *s)
-// {
-// 	write(2, "Error\n", 7);
-// 	write(2, s, ft_strlen(s));
-// 	exit(1);
-// }
 
 char	**ft_ret(char **env, char *error)
 {
