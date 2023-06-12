@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 18:33:06 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:42:53 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,6 @@ void	affiche_pipe(t_pipe *pipe)
 		pipe = pipe->next;
 	}
 }
-
-// void ft_free_data(t_data *data)
-// {
-// 	t_data *tmp;
-// 	while(data->exec)
-// 	{
-// 		tmp=data->exec;
-// 		data->exec=data->exec->next;
-// 		free(tmp);
-// 	}
-// }
 
 void	free_pipe(t_pipe *pipe)
 {
