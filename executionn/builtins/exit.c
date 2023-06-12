@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:27 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/11 22:15:57 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 17:45:11 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@ void	ft_errorb(char *s, char *s1, char *s2, int ext)
 	if (s2)
 		write(2, s2, ft_strlen(s2));
 	g_exit_status = ext;
-}
-
-void	ft_error(char *s, char *s1, char *s2)
-{
-	if (s)
-		write(2, s, ft_strlen(s));
-	if (s1)
-		write(2, s1, ft_strlen(s1));
-	if (s2)
-		write(2, s2, ft_strlen(s2));
 }
 
 int	nbr(char *s)

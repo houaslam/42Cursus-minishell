@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:45 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/08 22:53:30 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 18:39:46 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,9 @@ void	found(char *sa, char **env)
 	return ;
 }
 
-// char *found(char *sa, char **env)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	char *s;
-// 	while (env[i])
-// 	{
-// 		if (!ft_strncmp(env[i], sa, ft_strlen(sa))
-// 			&& env[i][ft_strlen(sa)] == '=')
-// 			s=ft_strdup(env[i]);
-// 		i++;
-// 	}
-// 	return s;
-// }
-
 void	ft_echo(char **arg, int fd, char **env)
 {
+	(void)env;
 	int	i;
 
 	(void)fd;
@@ -53,21 +38,11 @@ void	ft_echo(char **arg, int fd, char **env)
 		i++;
 	while (arg[i])
 	{
-		if (arg[i][0] == '$')
-		{
-			if (arg[i][1] == '?')
-				printf("%d", g_exit_status);
-			if (arg[i][1] == '\'' || arg[i][1] == '\"')
-				printf("%s", arg[i] + 2);
-			else
-				found(arg[i] + 1, env);
-		}
-		else
-			printf("%s", arg[i]);
+		write(1, arg[i], ft_strlen(arg[i]));
 		i++;
-		printf(" ");
+		write(1, " ", 1);
 	}
 	if (*arg && !ft_strcmp(arg[0], "-n"))
 		return ;
-	printf("\n");
+	write(1, "\n", 1);
 }

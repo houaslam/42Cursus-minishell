@@ -6,27 +6,25 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/12 13:53:07 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:00:52 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing/minishell.h"
 
-// void	ctrl_c(int i)
-// {
-// 	if (i == SIGINT)
-// 	{
-// 		printf("\n");
-// 		rl_on_new_line();
-// 		rl_replace_line("", 0);
-// 		rl_redisplay();
-// 	}
-// }
+void	ctrl_c(int i)
+{
+	if (i == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
 
 void	the_while(t_data *data, char **menv, char **export)
 {
-	(void)menv;
-	(void)export;
 	while (1)
 	{
 		data->s = readline("\e[92mMINISHELL>\e[0m");
@@ -60,9 +58,9 @@ int	main(int ac, char **av, char **en)
 		g_exit_status = 0;
 		menv = ft_envo(en);
 		export = ft_envo(en);
+		signal(SIGINT, ctrl_c);
 		sort_export(export);
 		data = malloc(sizeof(t_data));
-		g_exit_status = 0;
 		data -> env = menv;
 		the_while(data, menv, export);
 		ft_free(menv);

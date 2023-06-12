@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:19:23 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/11 21:19:29 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/12 17:53:29 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <time.h>
+# include <sys/types.h>
 # include <unistd.h>
 
 typedef struct s_pipe

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 13:57:27 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:33:06 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	free_pipe(t_pipe *pipe)
 	while (pipe)
 	{
 		tmp = pipe;
-		//ft_free(pipe->cmd);
 		pipe = pipe->next;
 		free(pipe);
 	}
@@ -79,11 +78,17 @@ void	files(t_exec *exec, t_pipe *tmp)
 		if (exec->file->type == 60)
 			(tmp)->infile = exec->file->file;
 		else if (exec->file->type == 62)
+		{
+			open(exec->file->file, O_CREAT);
 			(tmp)->outfile = exec->file->file;
+		}
 		else if (exec->file->type == 5)
 			(tmp)->here_doc = exec->file->file;
 		else if (exec->file->type == 6)
+		{
+			open(exec->file->file, O_CREAT);
 			(tmp)->here_doc_out = exec->file->file;
+		}
 		exec->file = exec->file->next;
 	}
 }
@@ -104,10 +109,5 @@ void	transmettre(t_data *data, char ***env, char ***export)
 		data->exec = data->exec->next;
 		ft_lstadd_back2(&pipe, tmp);
 	}
-	// g_exit_status = g_exit_status;
-	//affiche_pipe(pipe);
-	//ft_free_data(data);
 	pipex(pipe, env, export);
-	//free_pipe(pipe);
-	//system("leaks minishell");
 }

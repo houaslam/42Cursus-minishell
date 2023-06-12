@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 14:16:11 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:54:57 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 		else if (!ft_strcmp(cmd_arg[0], "pwd"))
 			ft_pwd(fdout);
 		else
-		{
 			execution(cmd_arg, *env);
-		}
 	}
 }
 
@@ -57,10 +55,7 @@ void	execution(char **cmd, char **env)
 	{
 		path = check_env(env, cmd);
 		if (execve(path, cmd, env) < 0)
-		{
-			ft_errorb("command can't executude\n", NULL, NULL, 1);
 			return ;
-		}
 	}
 }
 
@@ -91,12 +86,14 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
 			if (!duping(pipee, fd, ph))
 				return ;
 			command((pipee)->cmd, export, ph[1], env);
-			exit(0);
+			exit(g_exit_status);
 		}
 		fd = dup(ph[0]);
 		close(ph[1]);
 		pipee = (pipee)->next;
 		waitpid(id, &g_exit_status, 0);
+		if (WIFEXITED(g_exit_status))
+        	g_exit_status = WEXITSTATUS(g_exit_status);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:42 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 15:48:33 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:13:16 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_env(char **env, int fd, char **arg)
 	(void)fd;
 	if (!here(env, recherche(env)))
 	{
-		ft_errorb("bash: env: No such file or directory", NULL, NULL, 1);
+		ft_errorb("bash: env: No such file or directory\n", NULL, NULL, 1);
 		return ;
 	}
 	if (*arg)

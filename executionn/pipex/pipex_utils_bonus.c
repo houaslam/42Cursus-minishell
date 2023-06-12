@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:28 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 14:16:34 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:18:26 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // 	exit(1);
 // }
 
-char	**ft_ret(char **env)
+char	**ft_ret(char **env, char *error)
 {
 	int		i;
 	char	**ret;
@@ -32,7 +32,7 @@ char	**ft_ret(char **env)
 			ret = ft_split(env[i] + 5, ':');
 	}
 	if (!ret)
-		ft_errorb("path not found\n", NULL, NULL, 1);
+		ft_errorb("bash: ", error, ": No such file or directory\n", 1);
 	return (ret);
 }
 
@@ -43,7 +43,9 @@ char	*check_env(char **env, char **cmd)
 	char	*path;
 	char	*temp;
 
-	ret = ft_ret(env);
+	ret = ft_ret(env,cmd[0]);
+	if (!ret)
+		exit(0);
 	i = -1;
 	while (ret[++i])
 	{

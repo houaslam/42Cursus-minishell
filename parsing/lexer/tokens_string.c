@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/01 17:22:49 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:58:22 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_exec	*handle_dollar(t_data *data, t_exec *lexer, int sep, int is_red)
 	k = 0;
 	while (str[k])
 	{
-		if (sep != 1)
-			data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
 		data->tmp->value = ft_strjoin_free(data->tmp->value, str[k++]);
+		if (sep != 1)
+		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
 	}
 	if (lexer->next && lexer->next->type == STRING)
 		lexer = handle_string(data, lexer->next, 1);

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:55 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 14:01:46 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:35:39 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	ft_unset(char **env, char **arg)
 	{
 		i = 0;
 		if (!check_argg(arg[j]))
-			return (ft_error("bash: unset: `" \
-			, arg[j], ": not a valid identifier\n"));
+			return (ft_errorb("bash: unset: `" \
+			, arg[j], ": not a valid identifier\n",127));
 		while ((env[i]))
 		{
 			if (arg && !ft_strncmp(env[i], arg[j], ft_strlen(arg[j])))
