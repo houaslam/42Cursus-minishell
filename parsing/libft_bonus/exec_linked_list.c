@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:45:15 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/01 15:54:41 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:17:15 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,8 @@ t_exec	*ft_lstnew_exec(char *value, int type, t_file *file, t_exec *curr)
 	node = malloc(sizeof(t_exec));
 	if (!node)
 		return (NULL);
-	node->value = malloc(ft_strlen(value) + 1);
-	if (!node->value)
-	{
-		free(node);
-		return (NULL);
-	}
 	if (value)
-		ft_strcpy(node->value, value);
+		node->value = ft_strdup(value);
 	else
 		node -> value = ft_strdup("\n");
 	node->type = type;

@@ -6,13 +6,13 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/06/12 18:03:46 by houaslam         ###   ########.fr        #
+#    Updated: 2023/06/13 15:11:10 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 
 EXTRA_CFLAGS = -I ~/Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/include  -L /Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/lib -lreadline
 
@@ -80,6 +80,7 @@ SRC =   global/main.c \
 		./parsing/lexer/tokens_string.c \
 		./parsing/lexer/tokens_spec_char.c \
 		./parsing/lexer/outils.c \
+		./parsing/lexer/utils.c \
 		./parsing/lexer/lexer.c \
 		./parsing/lexer/ft_isstring.c \
 		./parsing/lexer/expand.c

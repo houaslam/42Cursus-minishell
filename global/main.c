@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/12 20:24:57 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/13 15:16:06 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ctrl_c(int i)
 
 void	the_while(t_data *data, char **menv, char **export)
 {
+	(void)export;
+	(void)menv;
 	while (1)
 	{
 		data->s = readline("\e[92mMINISHELL>\e[0m");

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/13 13:52:56 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/13 15:09:52 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ t_exec	*handle_dollar(t_data *data, t_exec *lexer, int sep, int is_red)
 	int		k;
 
 	str = ft_split(lexer->value, ' ');
-	k = 0;
-	while (str[k])
-		k++;
+	k = simple_while(str);
 	if (k > 1)
 	{
 		if (is_red == 0)
@@ -91,6 +89,7 @@ t_exec	*handle_dollar(t_data *data, t_exec *lexer, int sep, int is_red)
 	}
 	else
 		data->tmp->value = ft_strjoin_free(data->tmp->value, lexer->value);
+	ft_free(str);
 	if (data->d_status % 2 == 0 || data->d_status == 0)
 		lexer = next_case(data, lexer);
 	if (sep != 1)

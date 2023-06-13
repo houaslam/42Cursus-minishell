@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:51:22 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/13 13:53:46 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/13 15:14:56 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 char	*expande_handle(t_data *data, char *str)
 {
 	char	*save;
+	char	*ptr;
 
 	if (data -> d_status % 2 == 0 && data -> s_status % 2 != 0)
 		return (str);
 	else
 	{
-		save = find_ex(ft_substr(str, 1, ft_strlen(str) - 1), data->env);
+		ptr = ft_substr(str, 1, ft_strlen(str) - 1);
+		save = find_ex(ptr, data->env);
+		free(ptr);
 		free(str);
 	}
 	return (save);
@@ -28,26 +31,26 @@ char	*expande_handle(t_data *data, char *str)
 
 char	*the_expande(t_data *data, char *str)
 {
-	int		i;
 	char	*save;
+	char	*ptr;
 
-	i = 0;
-	while (str[i])
+	if (str[1] == '?')
 	{
-		if (str[1] == '?')
-		{
-			save = ft_itoa(g_exit_status);
-			str = ft_substr(str, 2, ft_strlen(str) - 2);
-			save = ft_strjoin_free(save, str);
-			free(str);
-			return (save);
-		}
-		else if (ft_isdigit(str[1]))
-			return (ft_substr(str, 2, ft_strlen(str) - 2));
-		else
-			return (expande_handle(data, str));
-		i++;
+		ptr = ft_substr(str, 2, ft_strlen(str) - 2);
+		save = ft_itoa(g_exit_status);
+		save = ft_strjoin_free(save, ptr);
+		free(str);
+		free(ptr);
+		return (save);
 	}
+	else if (ft_isdigit(str[1]))
+	{
+		free(str);
+		save = ft_substr(str, 2, ft_strlen(str) - 2);
+		return (save);
+	}
+	else
+		return (expande_handle(data, str));
 	return (str);
 }
 
