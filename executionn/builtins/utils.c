@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 01:37:29 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 14:02:41 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:49:20 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	foundin(char *sa, char **env)
 		j = 0;
 		while (env[i][j] != '=' && env[i][j] == sa[j])
 			j++;
-		if ((env[i][j] != '=' || sa[j + 1]) && env[i])
+		if ((env[i][j] != '=' || (sa[j] && sa[j + 1])) && env[i])
 		{
 			i++;
 			continue ;

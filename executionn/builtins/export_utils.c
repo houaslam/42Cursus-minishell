@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 08:41:51 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 14:01:18 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 01:51:44 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ void	change2(char ***export, char ***env, char *arg, int cas)
 		*env = add_str(*env, arg);
 		export[0] = add_str(export[0], arg);
 		sort_export(*export);
-		//free(arg);
+		// free(arg);
 	}
 	else if (cas == 5)
 	{
 		arg = ft_strjoin(arg, "=");
 		export[0] = add_str(export[0], arg);
-		//free(arg);
-		sort_export(*export);
+		// free(arg);
+		sort_export(*export); 
 	}
 }
 
@@ -69,7 +69,7 @@ void	change(char ***export, char ***env, char *arg, int cas)
 		i = position(*export, arg);
 		free(export[0][i]);
 		export[0][i] = ft_strdup(arg);
-		*env = add_str(*env, arg);
+		*env = add_str(*env, arg); 
 	}
 	else
 		change2(export, env, arg, cas);

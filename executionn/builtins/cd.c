@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:01:30 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 14:00:04 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 03:15:56 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ void	ft_cd(char **env, char **export, char **arg)
 	else
 		dir = ft_strdup(arg[0]);
 	dir = telda(dir);
-	if (!getcwd(buff, 1024))
+	if (!getcwd(buff, 1024))// && strcmp(dir, "cd"))
 	{
 		ft_errorb("no path1\n", NULL, NULL, 1);
 		return ;
 	}
 	if (chdir(dir))
-		return (ft_errorb("bash: cd: ", dir, \
+		return (ft_errorb("bash: cd: ", dir,\
 		": No such file or directory\n", 1));
 	util_fun(env, buff);
 	util_fun(export, buff);

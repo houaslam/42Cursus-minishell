@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 17:54:57 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 04:14:37 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 {
+	char **hold;
 	if (*cmd_arg)
 	{
 		if (!ft_strcmp(cmd_arg[0], "echo"))
+		{
+			hold=cmd_arg;
+			free(*hold);
 			ft_echo(++cmd_arg, fdout, *env);
+			ft_free(cmd_arg);
+		}
 		else if (!ft_strcmp(cmd_arg[0], "env"))
 			ft_env(*env, fdout, ++cmd_arg);
 		else if (!ft_strcmp(cmd_arg[0], "export"))
@@ -36,6 +42,7 @@ void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 		else
 			execution(cmd_arg, *env);
 	}
+	// ft_free(cmd_arg);
 }
 
 void	execution(char **cmd, char **env)

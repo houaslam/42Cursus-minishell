@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transmetter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/13 13:55:32 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 03:36:22 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	free_pipe(t_pipe *pipe)
 		return ;
 	while (pipe)
 	{
+		ft_free(pipe->cmd);
 		tmp = pipe;
 		pipe = pipe->next;
 		free(pipe);
@@ -68,14 +69,14 @@ void	files(t_exec *exec, t_pipe *tmp)
 			(tmp)->infile = exec->file->file;
 		else if (exec->file->type == 62)
 		{
-			open(exec->file->file, O_CREAT);
+			open(exec->file->file, O_CREAT, 0644);
 			(tmp)->outfile = exec->file->file;
 		}
 		else if (exec->file->type == 5)
 			(tmp)->here_doc = exec->file->file;
 		else if (exec->file->type == 6)
 		{
-			open(exec->file->file, O_CREAT);
+			open(exec->file->file, O_CREAT, 0644);
 			(tmp)->here_doc_out = exec->file->file;
 		}
 		exec->file = exec->file->next;
@@ -99,4 +100,6 @@ void	transmettre(t_data *data, char ***env, char ***export)
 		ft_lstadd_back2(&pipe, tmp);
 	}
 	pipex(pipe, env, export);
+	printf("%s %s \n",pipe->cmd[0],pipe->cmd[1]);
+	free_pipe(pipe);
 }

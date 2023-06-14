@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:28 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 18:42:40 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:22:21 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	builtin_exec(t_pipe *pipe, char ***env, char ***export)
 	orig_fd1 = dup(1);
 	ph[0] = 0;
 	ph[1] = 1;
-	duping(pipe, *ph, ph);
+	if (!duping(pipe, *ph, ph))
+		return;
 	command(pipe->cmd, export, 1, env);
 	if (ph[0] != 0)
 	{
