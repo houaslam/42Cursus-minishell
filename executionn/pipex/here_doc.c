@@ -6,40 +6,23 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:47:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 14:04:36 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:05:26 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-// void	here_docc(t_pipe *pipe, int *ph)
-// {
-// 	int		infile;
-// 	char	*tmp;
-
-// 	infile = 0;
-// 	tmp = NULL;
-// 	infile = open("../../.file.tmp", O_RDWR | O_CREAT, O_TRUNC,0777);
-// 	if (infile < 0)
-// 		ft_errorb("file can't open\n", NULL, NULL, 1);
-// 	write(1, "here_doc>", 9);
-// 	tmp = get_next_line(0);
-// 	while (tmp)
-// 	{
-// 		if ((ft_strncmp(tmp, pipe->here_doc, ft_strlen(tmp) - 1) == 0)
-// 			&& ft_strlen(tmp) - 1 == ft_strlen(pipe->here_doc))
-// 		{
-// 			free(tmp);
-// 			break ;
-// 		}
-// 		write(1, "here_doc>", 9);
-// 		write(infile, tmp, ft_strlen(tmp));
-// 		free(tmp);
-// 		tmp = get_next_line(0);
-// 	}
-// 	close(infile);
-// 	after_here_doc(pipe, ph, infile);
-// }
+void	ctrl_ch(int i)
+{
+	if (i == SIGINT)
+	{
+		exit(0);
+		// printf("\n");
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
+		// rl_redisplay();
+	}
+}
 
 int	here_docc(t_pipe *pip, int *ph)
 {
@@ -47,14 +30,14 @@ int	here_docc(t_pipe *pip, int *ph)
 	int		p[2];
 
 	if (pipe(p) < 0)
-		printf("!! ERROR !!\n");
+		ft_errorb("cant pipe in here_doc\n", NULL, NULL, 1);
 	while (1)
 	{
-		write(1, "here_doc>", 9);
-		tmp = get_next_line(0);
+		tmp = readline("here doc>");
 		if (!tmp)
 			break ;
-		if ((ft_strncmp(tmp, pip->here_doc, ft_strlen(tmp) - 1) == 0)
+		tmp=ft_strjoin_free(tmp,"\n");
+		if ((ft_strncmp(tmp, pip->here_doc, ft_strlen(tmp) - 2) == 0)
 			&& ft_strlen(tmp) - 1 == ft_strlen(pip->here_doc))
 		{
 			free(tmp);
@@ -69,7 +52,7 @@ int	here_docc(t_pipe *pip, int *ph)
 
 int	after_here_doc(t_pipe *pipe, int *p, int *ph)
 {
-	char	*s;
+	int s;
 
 	if (dup2(p[0], 0) < 0)
 	{
@@ -77,14 +60,14 @@ int	after_here_doc(t_pipe *pipe, int *p, int *ph)
 		return (0);
 	}
 	if ((pipe)->here_doc_out)
-		s = (pipe)->here_doc_out;
+		s = ft_outfile_heredoc(pipe->here_doc_out);
 	else if ((pipe)->outfile)
-		s = (pipe)->outfile;
+		s = ft_outfile(pipe->outfile);
 	else
-		s = NULL;
-	if (s)
+		s = -1;
+	if (s > 0)
 	{
-		if (dup2(ft_outfile_heredoc(s), 1) < 0)
+		if (dup2(s, 1) < 0)
 		{
 			ft_errorb("cant dup outfile\n", NULL, NULL, 1);
 			return (0);

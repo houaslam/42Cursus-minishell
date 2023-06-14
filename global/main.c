@@ -3,34 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/14 01:07:59 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/14 20:00:50 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing/minishell.h"
 
-// void	ctrl_c(int i)
-// {
-// 	if (i == SIGINT)
-// 	{
-// 		printf("\n");
-// 		rl_on_new_line();
-// 		rl_replace_line("", 0);
-// 		rl_redisplay();
-// 	}
-// }
+void	ctrl_c(int i)
+{
+	if (i == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
 
 void	the_while(t_data *data, char **menv, char **export)
 {
-	(void)export;
-	(void)menv;
-
 	while (1)
 	{
-		data->s = readline("\e[92mMINISHELL>\e[0m");
+		data->s = readline("MINISHELL>");
 		add_history(data->s);
 		if (!data->s)
 			exit(0);
@@ -61,7 +58,7 @@ int	main(int ac, char **av, char **en)
 		g_exit_status = 0;
 		menv = ft_envo(en);
 		export = ft_envo(en);
-		//signal(SIGINT, ctrl_c);
+		signal(SIGINT, ctrl_c);
 		sort_export(export);
 		data = malloc(sizeof(t_data));
 		data -> env = menv;

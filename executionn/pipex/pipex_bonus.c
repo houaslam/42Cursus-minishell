@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 04:14:37 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/14 20:05:51 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,14 @@
 
 void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 {
-	char **hold;
 	if (*cmd_arg)
 	{
 		if (!ft_strcmp(cmd_arg[0], "echo"))
-		{
-			hold=cmd_arg;
-			free(*hold);
 			ft_echo(++cmd_arg, fdout, *env);
-			ft_free(cmd_arg);
-		}
 		else if (!ft_strcmp(cmd_arg[0], "env"))
 			ft_env(*env, fdout, ++cmd_arg);
 		else if (!ft_strcmp(cmd_arg[0], "export"))
-			ft_export(export, env, ++cmd_arg, fdout);
+			ft_export(export, env, ++cmd_arg);
 		else if (!ft_strcmp(cmd_arg[0], "cd"))
 			ft_cd(*env, *export, ++cmd_arg);
 		else if (!ft_strcmp(cmd_arg[0], "exit"))
@@ -42,7 +36,6 @@ void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 		else
 			execution(cmd_arg, *env);
 	}
-	// ft_free(cmd_arg);
 }
 
 void	execution(char **cmd, char **env)
@@ -88,6 +81,7 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
 		}
 		if (id == 0)
 		{
+			signal(SIGINT, ctrl_ch);
 			if (!pipee->next)
 				ph[1] = 1;
 			if (!duping(pipee, fd, ph))
@@ -103,23 +97,6 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
         	g_exit_status = WEXITSTATUS(g_exit_status);
 	}
 }
-
-// void	child_two2(t_pipe *pipee, int *fd, char ***env, char ***export)
-// {
-// 	int	id;
-// 	int	ph[2];
-// 	ph[0] = 0;
-// 	ph[1] = 1;
-// 	id = fork();
-// 	if (id == 0)
-// 	{
-// 		if (duping(pipee, fd, ph))
-// 				unlink("../.file.tmp");
-// 		command(pipee->cmd, export, 1, env);
-// 		exit(0);
-// 	}
-// 	waitpid(id, &g_exit_status, 0);
-// }
 
 void	pipex(t_pipe *pipe, char ***env, char ***export)
 {

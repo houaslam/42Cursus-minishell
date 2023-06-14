@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:50 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 14:03:06 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 18:18:35 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ char	**add_str(char **env, char *plus)
 	return (menv);
 }
 
-char	**equal(char *s, char c)
+char	**equal(char *s)
 {
 	char	**sp;
 	int		i;
 
 	if (!s)
 		return (NULL);
-	sp = malloc(sizeof(char *) * 2);
+	sp = malloc(sizeof(char *) * 3);
 	i = 0;
 	sp[0] = malloc(ft_strlen(s) + 1);
 	sp[0][ft_strlen(s)] = '\0';
@@ -81,7 +81,8 @@ char	**equal(char *s, char c)
 		}
 		i++;
 	}
-	sp[1] = ft_strchr(s, c) + 1;
+	sp[1] = ft_substr(s, i, ft_strlen(s) - i);
+	sp[2] = NULL;
 	return (sp);
 }
 
@@ -107,14 +108,13 @@ void	affiche_export(char **export)
 	}
 }
 
-void	ft_export(char ***export, char ***env, char **arg, int fd)
+void	ft_export(char ***export, char ***env, char **arg)
 {
 	int		i;
 	int		c;
 	char	**sp;
 
 	sp = NULL;
-	(void)fd;
 	i = 0;
 	if (!*arg)
 		affiche_export(*export);
@@ -122,17 +122,15 @@ void	ft_export(char ***export, char ***env, char **arg, int fd)
 	{
 		while (arg[i])
 		{
-			sp = equal(arg[i], '=');
+			sp = equal(arg[i]);
 			if (!check_arg(sp[0]))
 				return (ft_errorb("bash: export: `", sp[0], \
 				"': not a valid identifier\n", 1));
 			else
 			{
 				c = ft_cases(*env, *export, sp[0]);
-				//exit(0);
 				change(export, env, arg[i], c);
-				//free(sp);
-				//free(sp[0]);
+				ft_free(sp);
 			}
 			i++;
 		}

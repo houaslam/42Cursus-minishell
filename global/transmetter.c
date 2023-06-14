@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 18:12:04 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:15:51 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ void	files(t_exec *exec, t_pipe *tmp)
 			(tmp)->infile = exec->file->file;
 		else if (exec->file->type == 62)
 		{
-			open(exec->file->file, O_CREAT);
+			open(exec->file->file, O_CREAT, 0644);
 			(tmp)->outfile = exec->file->file;
 		}
 		else if (exec->file->type == 5)
-			(tmp)->here_doc = exec->file->file;
+			
 		else if (exec->file->type == 6)
 		{
-			open(exec->file->file, O_CREAT);
+			open(exec->file->file, O_CREAT, 0644);
 			(tmp)->here_doc_out = exec->file->file;
 		}
 		exec->file = exec->file->next;

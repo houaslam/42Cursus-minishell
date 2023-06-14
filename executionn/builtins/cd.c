@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:01:30 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 03:15:56 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/14 18:53:25 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*telda(char *s)
 	{
 		if (s[i] == '~')
 		{
-			r = ft_strjoin_free(ft_substr(s, 0, i), "/Users/aatki");
+			r = ft_strjoin_free(ft_substr(s, 0, i), "/Users/houaslam");
 			l = s;
 			s = ft_strjoin_free(r, s + i + 1);
 			free(l);
@@ -67,23 +67,26 @@ void	ft_cd(char **env, char **export, char **arg)
 	char	buff[1024];
 	char	*dir;
 
-	dir = NULL;
 	i = 0;
 	if (arg[0] && arg[1])
 		return (ft_errorb("cd: string not in pwd: ", arg[0], "\n", 1));
 	if (!arg[0])
-		dir = ft_strdup("/Users/aatki");
+		dir = ft_strdup("/Users/houaslam");
 	else
 		dir = ft_strdup(arg[0]);
 	dir = telda(dir);
-	if (!getcwd(buff, 1024))// && strcmp(dir, "cd"))
+	if (!getcwd(buff, 1024))
 	{
+		free(dir);
 		ft_errorb("no path1\n", NULL, NULL, 1);
 		return ;
 	}
 	if (chdir(dir))
-		return (ft_errorb("bash: cd: ", dir,\
-		": No such file or directory\n", 1));
+	{
+		ft_errorb("bash: cd: ", dir, ": No such file or directory\n", 1);
+		free(dir);
+		return ;
+	}
 	util_fun(env, buff);
 	util_fun(export, buff);
 	free(dir);

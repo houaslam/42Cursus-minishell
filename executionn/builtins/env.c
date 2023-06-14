@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:42 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/13 22:36:45 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/14 18:29:42 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ char	**ft_envo(char **env)
 	return (menv);
 }
 
-char	*recherche(char **env)
+char	*recherche(char **env, char *s)
 {
 	int	i;
 
 	i = 0;
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i],"PATH", 4))
+		if (!ft_strncmp(env[i], s, 4))
 			return (env[i]);
 			i++;
 	}
@@ -65,7 +65,7 @@ void	ft_env(char **env, int fd, char **arg)
 
 	i = 0;
 	(void)fd;
-	if (!here(env, recherche(env)))
+	if (!here(env, recherche(env, "PATH")))
 	{
 		ft_errorb("bash: env: No such file or directory\n", NULL, NULL, 1);
 		return ;
