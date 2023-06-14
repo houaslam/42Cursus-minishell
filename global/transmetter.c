@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   transmetter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 03:36:22 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/14 18:12:04 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing/minishell.h"
-
-void	ft_lstadd_back2(t_pipe **lst, t_pipe *new)
+void	ft_lstadd_back2(t_pipe **lst, t_pipe **new)
 {
 	t_pipe	*temp;
 
@@ -23,10 +22,10 @@ void	ft_lstadd_back2(t_pipe **lst, t_pipe *new)
 		temp = (*lst);
 		while (temp->next)
 			temp = temp->next;
-		temp->next = new;
+		temp->next = *new;
 	}
 	else
-		*lst = new;
+		*lst = *new;
 }
 
 void	affiche_pipe(t_pipe *pipe)
@@ -50,10 +49,10 @@ void	free_pipe(t_pipe *pipe)
 		return ;
 	while (pipe)
 	{
-		ft_free(pipe->cmd);
 		tmp = pipe;
 		pipe = pipe->next;
-		free(pipe);
+		ft_free(tmp->cmd);
+		free(tmp);
 	}
 }
 
@@ -69,14 +68,14 @@ void	files(t_exec *exec, t_pipe *tmp)
 			(tmp)->infile = exec->file->file;
 		else if (exec->file->type == 62)
 		{
-			open(exec->file->file, O_CREAT, 0644);
+			open(exec->file->file, O_CREAT);
 			(tmp)->outfile = exec->file->file;
 		}
 		else if (exec->file->type == 5)
 			(tmp)->here_doc = exec->file->file;
 		else if (exec->file->type == 6)
 		{
-			open(exec->file->file, O_CREAT, 0644);
+			open(exec->file->file, O_CREAT);
 			(tmp)->here_doc_out = exec->file->file;
 		}
 		exec->file = exec->file->next;
@@ -87,19 +86,23 @@ void	transmettre(t_data *data, char ***env, char ***export)
 {
 	t_pipe	*tmp;
 	t_pipe	*pipe;
+	t_exec	*exec;
 
 	pipe = NULL;
 	tmp = NULL;
-	while (data->exec)
+	exec = data->exec;
+	(void)env;
+	(void)export;
+	while (exec)
 	{
 		tmp = malloc(sizeof(t_pipe));
-		(tmp)->cmd = ft_split(data->exec->value, '\n');
-		files(data->exec, tmp);
+		(tmp)->cmd = ft_split(exec->value, '\n');
+		files(exec, tmp);
 		tmp->next = NULL;
-		data->exec = data->exec->next;
-		ft_lstadd_back2(&pipe, tmp);
+		exec = exec->next;
+		ft_lstadd_back2(&pipe, &tmp);
 	}
 	pipex(pipe, env, export);
-	printf("%s %s \n",pipe->cmd[0],pipe->cmd[1]);
 	free_pipe(pipe);
 }
+
