@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:47:21 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 20:21:07 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:52:11 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	ft_outfile(char *s)
 	return (outfile);
 }
 
-int	duping(t_pipe *pipe, int fd, int *ph)
+int	duping(t_pipe *pipe, int fd, int *ph,int h)
 {
-	if (pipe->here_doc)
+	if (pipe->here_doc && h)
 		return (after_here_doc(pipe,pipe->here_doc,ph));
 	else if ((pipe)->infile)
 	{

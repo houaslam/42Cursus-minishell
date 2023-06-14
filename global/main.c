@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/14 20:00:50 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 21:44:22 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int ac, char **av, char **en)
 	(void)av;
 	if (ac == 1)
 	{
-		g_exit_status = 0;
+		signals.exit_status = 0;
 		menv = ft_envo(en);
 		export = ft_envo(en);
 		signal(SIGINT, ctrl_c);

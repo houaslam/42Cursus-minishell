@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:28 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 20:14:33 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:54:00 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*check_env(char **env, char **cmd)
 	char	*path;
 	char	*temp;
 
-	ret = ft_ret(env,cmd[0]);
+	ret = ft_ret(env, cmd[0]);
 	if (!ret)
 		exit(0);
 	i = -1;
@@ -68,8 +68,8 @@ void	builtin_exec(t_pipe *pipe, char ***env, char ***export)
 	orig_fd1 = dup(1);
 	ph[0] = 0;
 	ph[1] = 1;
-	if (!duping(pipe, *ph, ph))
-		return;
+	if (!duping(pipe, *ph, ph, 0))
+		return ;
 	command(pipe->cmd, export, 1, env);
 	if (ph[0] != 0)
 	{

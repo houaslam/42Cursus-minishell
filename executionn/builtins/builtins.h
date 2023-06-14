@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/14 20:05:02 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 21:43:21 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@
 # include <string.h>
 # include <unistd.h>
 
-int		g_exit_status;
+typedef  struct g_global{
+    int		exit_status;
+    int     save;
+}   g_global;
+
+g_global signals;
 
 //builtins
 void	ft_pwd(int fd);

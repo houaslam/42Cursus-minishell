@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 20:05:51 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 21:45:15 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,29 +81,29 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
 		}
 		if (id == 0)
 		{
-			signal(SIGINT, ctrl_ch);
+			// signal(SIGINT, ctrl_ch);
 			if (!pipee->next)
 				ph[1] = 1;
-			if (!duping(pipee, fd, ph))
+			if (!duping(pipee, fd, ph,1))
 				return ;
 			command((pipee)->cmd, export, ph[1], env);
-			exit(g_exit_status);
+			exit(signals.exit_status);
 		}
 		fd = dup(ph[0]);
 		close(ph[1]);
 		pipee = (pipee)->next;
-		waitpid(id, &g_exit_status, 0);
-		if (WIFEXITED(g_exit_status))
-        	g_exit_status = WEXITSTATUS(g_exit_status);
+		waitpid(id, &signals.exit_status, 0);
+		if (WIFEXITED(signals.exit_status))
+        	signals.exit_status = WEXITSTATUS(signals.exit_status);
 	}
 }
 
 void	pipex(t_pipe *pipe, char ***env, char ***export)
 {
 	if (!pipe->next && builtin(*pipe->cmd))
-	{
 		builtin_exec(pipe, env, export);
-		return ;
-	}
-	child_one(pipe, env, export);
+	else
+		child_one(pipe, env, export);
+	
+	//dprintf(2,"heghkigiojrgkljrtiojrkr.LO.O.,O;.LO,LO,Ke\n\n\n\n");
 }

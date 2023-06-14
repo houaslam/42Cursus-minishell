@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:47:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 20:24:00 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 21:47:47 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,34 @@ void	ctrl_ch(int i)
 {
 	if (i == SIGINT)
 	{
-		exit(0);
-		// printf("\n");
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
-		// rl_redisplay();
+		printf("HERE\n");
+		signals.save = signals.exit_status;
+		signals.exit_status = -1;
+		return ;
 	}
 }
 
 int	*here_docc(char *str)
 {
 	char	*tmp;
-	int		p[2];
+	int		*p;
 
+	p = malloc(sizeof(int *)*2);
 	if (pipe(p) < 0)
 		ft_errorb("cant pipe in here_doc\n", NULL, NULL, 1);
+	signal(SIGINT, ctrl_ch);
 	while (1)
 	{
 		tmp = readline("here doc>");
 		if (!tmp)
 			break ;
+		if (signals.exit_status== -1)
+		{
+			printf("HEREFFFF\n");
+			signals.exit_status=signals.save;
+			// close(p[1]);
+			return(p);
+		}
 		tmp=ft_strjoin_free(tmp,"\n");
 		if ((ft_strncmp(tmp, str, ft_strlen(tmp) - 2) == 0)
 			&& ft_strlen(tmp) - 1 == ft_strlen(str))

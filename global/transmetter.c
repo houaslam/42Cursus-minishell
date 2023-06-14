@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 20:24:08 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 21:31:03 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void	files(t_exec *exec, t_pipe *tmp)
 			(tmp)->outfile = exec->file->file;
 		}
 		else if (exec->file->type == 5)
-			tmp->heredoc=here_docc(exec->file->file);
+		{
+			tmp->here_doc = here_docc(exec->file->file);
+			printf("JKSBDEFVYAJD\n");
+		}
 		else if (exec->file->type == 6)
 		{
 			open(exec->file->file, O_CREAT, 0644);

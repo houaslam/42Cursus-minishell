@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/13 14:08:11 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 21:45:22 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_exec	*print_token_er(t_data *data, int status, char *s1)
 		if (s1)
 			write(2, s1, ft_strlen(s1));
 	}
-	g_exit_status = status;
+	signals.exit_status = status;
 	data->g_exit_status = 1;
 	return (ft_lstlast_exec(data->lexer));
 }
