@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:47:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 20:05:26 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:24:00 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ctrl_ch(int i)
 	}
 }
 
-int	here_docc(t_pipe *pip, int *ph)
+int	*here_docc(char *str)
 {
 	char	*tmp;
 	int		p[2];
@@ -37,8 +37,8 @@ int	here_docc(t_pipe *pip, int *ph)
 		if (!tmp)
 			break ;
 		tmp=ft_strjoin_free(tmp,"\n");
-		if ((ft_strncmp(tmp, pip->here_doc, ft_strlen(tmp) - 2) == 0)
-			&& ft_strlen(tmp) - 1 == ft_strlen(pip->here_doc))
+		if ((ft_strncmp(tmp, str, ft_strlen(tmp) - 2) == 0)
+			&& ft_strlen(tmp) - 1 == ft_strlen(str))
 		{
 			free(tmp);
 			break ;
@@ -47,7 +47,7 @@ int	here_docc(t_pipe *pip, int *ph)
 		free(tmp);
 	}
 	close(p[1]);
-	return (after_here_doc(pip, p, ph));
+	return (p);
 }
 
 int	after_here_doc(t_pipe *pipe, int *p, int *ph)

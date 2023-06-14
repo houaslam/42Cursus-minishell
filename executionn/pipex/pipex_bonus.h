@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:19:23 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/12 17:53:29 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:24:25 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_pipe
 	char			**cmd;
 	char			*infile;
 	char			*outfile;
-	char			*here_doc;
+	int			*here_doc;
 	char			*here_doc_out;
 	struct s_pipe	*next;
 }					t_pipe;
@@ -41,7 +41,7 @@ char				*ft_strjoin(char *s1, char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				**ft_free(char **p);
 int					here_doc(char **av, int *infile);
-int					here_docc(t_pipe *pipe, int *ph);
+int	*here_docc(char *str);
 void				here_doc_child(int *fd, char **av, char **env);
 void				execution(char **cmd, char **env);
 void				herep(char **av, char **env, int ac);
