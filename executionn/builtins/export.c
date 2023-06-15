@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:50 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 01:38:56 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/15 16:28:07 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,12 @@ void	affiche_export(char **export)
 	}
 }
 
-int	ft_export(char ***export, char ***env, char **arg)
+int	ft_export(char ***export, char ***env, char **arg, int i)
 {
-	int		i;
 	int		c;
 	char	**sp;
 
 	sp = NULL;
-	i = -1;
 	if (!*arg)
 		affiche_export(*export);
 	else
@@ -128,6 +126,8 @@ int	ft_export(char ***export, char ***env, char **arg)
 						"': not a valid identifier\n", 1));
 			else
 			{
+				if (the_plus(*export, sp))
+					return (0);
 				c = ft_cases(*env, *export, sp[0]);
 				change(export, env, arg[i], c);
 				ft_free(sp);

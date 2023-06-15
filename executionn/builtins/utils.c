@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 01:37:29 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 23:51:30 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/15 16:28:14 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,18 @@ int	position(char **doubl, char *str)
 		i++;
 	}
 	return (i);
+}
+
+int	the_plus(char **export, char **sp)
+{
+	int	i;
+	int	k;
+
+	i = ft_strlen(sp[0]);
+	if (!(sp[0][i - 2] == '+' && sp[0][i - 1] == '='))
+		return (0);
+	k = position(export, sp[0]);
+	printf("%s  %s\n", export[k], sp[1]);
+	export[k] = ft_strjoin_free(export[k], sp[1] + 1);
+	return (1);
 }

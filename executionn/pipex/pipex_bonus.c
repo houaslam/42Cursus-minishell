@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 01:56:58 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/15 16:28:36 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 		else if (!ft_strcmp(cmd_arg[0], "env"))
 			ft_env(*env, fdout, ++cmd_arg);
 		else if (!ft_strcmp(cmd_arg[0], "export"))
-			ft_export(export, env, ++cmd_arg);
+			ft_export(export, env, ++cmd_arg, -1);
 		else if (!ft_strcmp(cmd_arg[0], "cd"))
 			ft_cd(*env, *export, ++cmd_arg);
 		else if (!ft_strcmp(cmd_arg[0], "exit"))
