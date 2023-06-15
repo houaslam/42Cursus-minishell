@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:47:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 21:47:47 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/15 01:56:34 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,37 @@ void	ctrl_ch(int i)
 	if (i == SIGINT)
 	{
 		printf("HERE\n");
-		signals.save = signals.exit_status;
-		signals.exit_status = -1;
+		g_signals.save = g_signals.exit_status;
+		g_signals.exit_status = -1;
 		return ;
 	}
+}
+
+int	*the_while2(char *str, int fd, char *tmp, int *p)
+{
+	while (1)
+	{
+		tmp = readline("here doc>");
+		if (!tmp)
+			break ;
+		if (g_signals.exit_status == -1)
+		{
+			printf("HEREFFFF\n");
+			g_signals.exit_status = g_signals.save;
+			return (p);
+		}
+		tmp = ft_strjoin_free(tmp, "\n");
+		if ((ft_strncmp(tmp, str, ft_strlen(tmp) - 2) == 0) && ft_strlen(tmp)
+			- 1 == ft_strlen(str))
+		{
+			free(tmp);
+			break ;
+		}
+		write(fd, tmp, ft_strlen(tmp));
+		free(tmp);
+	}
+	close(p[1]);
+	return (p);
 }
 
 int	*here_docc(char *str)
@@ -28,64 +55,32 @@ int	*here_docc(char *str)
 	char	*tmp;
 	int		*p;
 
-	p = malloc(sizeof(int *)*2);
+	tmp = NULL;
+	p = malloc(sizeof(int *) * 2);
 	if (pipe(p) < 0)
 		ft_errorb("cant pipe in here_doc\n", NULL, NULL, 1);
 	signal(SIGINT, ctrl_ch);
-	while (1)
-	{
-		tmp = readline("here doc>");
-		if (!tmp)
-			break ;
-		if (signals.exit_status== -1)
-		{
-			printf("HEREFFFF\n");
-			signals.exit_status=signals.save;
-			// close(p[1]);
-			return(p);
-		}
-		tmp=ft_strjoin_free(tmp,"\n");
-		if ((ft_strncmp(tmp, str, ft_strlen(tmp) - 2) == 0)
-			&& ft_strlen(tmp) - 1 == ft_strlen(str))
-		{
-			free(tmp);
-			break ;
-		}
-		write(p[1], tmp, ft_strlen(tmp));
-		free(tmp);
-	}
-	close(p[1]);
-	return (p);
+	return (the_while2(str, p[1], tmp, p));
 }
 
 int	after_here_doc(t_pipe *pipe, int *p, int *ph)
 {
-	int s;
+	int	s;
 
+	s = -1;
 	if (dup2(p[0], 0) < 0)
-	{
-		ft_errorb("cant dup in here_doc\n", NULL, NULL, 1);
-		return (0);
-	}
+		return (ft_errorb("cant dup in here_doc\n", NULL, NULL, 1));
 	if ((pipe)->here_doc_out)
 		s = ft_outfile_heredoc(pipe->here_doc_out);
 	else if ((pipe)->outfile)
 		s = ft_outfile(pipe->outfile);
-	else
-		s = -1;
 	if (s > 0)
 	{
 		if (dup2(s, 1) < 0)
-		{
-			ft_errorb("cant dup outfile\n", NULL, NULL, 1);
-			return (0);
-		}
+			return (ft_errorb("cant dup outfile\n", NULL, NULL, 1));
 	}
 	else if (dup2(ph[1], 1) < 0)
-	{
-		ft_errorb("cant d1up pipe[1]\n", NULL, NULL, 1);
-		return (0);
-	}
+		return (ft_errorb("cant d1up pipe[1]\n", NULL, NULL, 1));
 	return (1);
 }
 

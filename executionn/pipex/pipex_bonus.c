@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 21:45:15 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/15 01:56:58 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,21 @@ void	execution(char **cmd, char **env)
 	}
 }
 
+void	pipe_fork(int *id, int *ph)
+{
+	if (pipe(ph) < 0)
+	{
+		ft_errorb("cant pipe in child one\n", NULL, NULL, 1);
+		return ;
+	}
+	*id = fork();
+	if (*id < 0)
+	{
+		ft_errorb("cant fork in child one\n", NULL, NULL, 1);
+		return ;
+	}
+}
+
 void	child_one(t_pipe *pipee, char ***env, char ***export)
 {
 	int	id;
@@ -68,33 +83,22 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
 	fd = 0;
 	while (pipee)
 	{
-		if (pipe(ph) < 0)
-		{
-			ft_errorb("cant pipe in child one\n", NULL, NULL, 1);
-			return ;
-		}
-		id = fork();
-		if (id < 0)
-		{
-			ft_errorb("cant fork in child one\n", NULL, NULL, 1);
-			return ;
-		}
+		pipe_fork(&id, ph);
 		if (id == 0)
 		{
-			// signal(SIGINT, ctrl_ch);
 			if (!pipee->next)
 				ph[1] = 1;
-			if (!duping(pipee, fd, ph,1))
+			if (!duping(pipee, fd, ph, 1))
 				return ;
 			command((pipee)->cmd, export, ph[1], env);
-			exit(signals.exit_status);
+			exit(g_signals.exit_status);
 		}
 		fd = dup(ph[0]);
 		close(ph[1]);
 		pipee = (pipee)->next;
-		waitpid(id, &signals.exit_status, 0);
-		if (WIFEXITED(signals.exit_status))
-        	signals.exit_status = WEXITSTATUS(signals.exit_status);
+		waitpid(id, &g_signals.exit_status, 0);
+		if (WIFEXITED(g_signals.exit_status))
+			g_signals.exit_status = WEXITSTATUS(g_signals.exit_status);
 	}
 }
 
@@ -104,6 +108,4 @@ void	pipex(t_pipe *pipe, char ***env, char ***export)
 		builtin_exec(pipe, env, export);
 	else
 		child_one(pipe, env, export);
-	
-	//dprintf(2,"heghkigiojrgkljrtiojrkr.LO.O.,O;.LO,LO,Ke\n\n\n\n");
 }

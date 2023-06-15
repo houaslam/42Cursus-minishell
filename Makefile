@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
+#    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/06/14 18:58:02 by houaslam         ###   ########.fr        #
+#    Updated: 2023/06/15 01:32:32 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 EXTRA_CFLAGS = -I ~/Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/include  -L /Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/lib -lreadline
 

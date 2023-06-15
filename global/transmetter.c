@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   transmetter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 21:31:03 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/15 02:00:54 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing/minishell.h"
+
 void	ft_lstadd_back2(t_pipe **lst, t_pipe **new)
 {
 	t_pipe	*temp;
@@ -108,4 +109,3 @@ void	transmettre(t_data *data, char ***env, char ***export)
 	pipex(pipe, env, export);
 	free_pipe(pipe);
 }
-

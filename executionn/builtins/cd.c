@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:01:30 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 18:53:25 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/15 01:36:33 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	util_fun(char **env, char *buff)
+void	util_fun(char **env, char *buff, char **export)
 {
 	int		i;
 	char	buff2[1024];
@@ -37,6 +37,8 @@ void	util_fun(char **env, char *buff)
 		}
 		i++;
 	}
+	if (export)
+		util_fun(export, buff, NULL);
 }
 
 char	*telda(char *s)
@@ -61,7 +63,7 @@ char	*telda(char *s)
 	return (s);
 }
 
-void	ft_cd(char **env, char **export, char **arg)
+int	ft_cd(char **env, char **export, char **arg)
 {
 	int		i;
 	char	buff[1024];
@@ -78,16 +80,14 @@ void	ft_cd(char **env, char **export, char **arg)
 	if (!getcwd(buff, 1024))
 	{
 		free(dir);
-		ft_errorb("no path1\n", NULL, NULL, 1);
-		return ;
+		return (ft_errorb("no path1\n", NULL, NULL, 1));
 	}
 	if (chdir(dir))
 	{
-		ft_errorb("bash: cd: ", dir, ": No such file or directory\n", 1);
 		free(dir);
-		return ;
+		return (ft_errorb("bash: cd: ", dir, ": No such file\n", 1));
 	}
-	util_fun(env, buff);
-	util_fun(export, buff);
+	util_fun(env, buff, export);
 	free(dir);
+	return (0);
 }

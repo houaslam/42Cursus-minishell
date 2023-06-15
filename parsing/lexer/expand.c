@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:51:22 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/14 21:45:19 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/15 01:57:20 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*the_expande(t_data *data, char *str)
 	if (str[1] == '?')
 	{
 		ptr = ft_substr(str, 2, ft_strlen(str) - 2);
-		save = ft_itoa(signals.exit_status);
+		save = ft_itoa(g_signals.exit_status);
 		save = ft_strjoin_free(save, ptr);
 		free(str);
 		free(ptr);

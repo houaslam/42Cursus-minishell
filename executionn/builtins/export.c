@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:50 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 18:18:35 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/15 01:38:56 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,31 +108,31 @@ void	affiche_export(char **export)
 	}
 }
 
-void	ft_export(char ***export, char ***env, char **arg)
+int	ft_export(char ***export, char ***env, char **arg)
 {
 	int		i;
 	int		c;
 	char	**sp;
 
 	sp = NULL;
-	i = 0;
+	i = -1;
 	if (!*arg)
 		affiche_export(*export);
 	else
 	{
-		while (arg[i])
+		while (arg[++i])
 		{
 			sp = equal(arg[i]);
 			if (!check_arg(sp[0]))
-				return (ft_errorb("bash: export: `", sp[0], \
-				"': not a valid identifier\n", 1));
+				return (ft_errorb("bash: export: `", sp[0],
+						"': not a valid identifier\n", 1));
 			else
 			{
 				c = ft_cases(*env, *export, sp[0]);
 				change(export, env, arg[i], c);
 				ft_free(sp);
 			}
-			i++;
 		}
 	}
+	return (0);
 }

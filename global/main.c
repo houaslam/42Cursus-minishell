@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/14 21:44:22 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/15 02:01:28 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ int	main(int ac, char **av, char **en)
 	(void)av;
 	if (ac == 1)
 	{
-		signals.exit_status = 0;
+		g_signals.exit_status = 0;
 		menv = ft_envo(en);
 		export = ft_envo(en);
 		signal(SIGINT, ctrl_c);
 		sort_export(export);
 		data = malloc(sizeof(t_data));
-		data -> env = menv;
+		data->env = menv;
 		the_while(data, menv, export);
 		ft_free(menv);
 		ft_free(export);

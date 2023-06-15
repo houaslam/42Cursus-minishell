@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:42 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 18:29:42 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 23:50:55 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*recherche(char **env, char *s)
 	{
 		if (!ft_strncmp(env[i], s, 4))
 			return (env[i]);
-			i++;
+		i++;
 	}
 	return (NULL);
 }

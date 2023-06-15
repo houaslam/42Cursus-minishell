@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:45 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 18:56:40 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/14 23:50:49 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	found(char *sa, char **env)
 
 void	ft_echo(char **arg, int fd, char **env)
 {
-	(void)env;
-	int		i;
+	int	i;
 
+	(void)env;
 	(void)fd;
 	i = 0;
 	if (*arg && !ft_strcmp(arg[0], "-n"))
