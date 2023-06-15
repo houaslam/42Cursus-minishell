@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:47:21 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 01:59:34 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/15 23:41:24 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	ft_outfile(char *s)
 
 int	duping(t_pipe *pipe, int fd, int *ph, int h)
 {
+	
 	if (pipe->here_doc && h)
 		return (after_here_doc(pipe, pipe->here_doc, ph));
 	else if ((pipe)->infile)

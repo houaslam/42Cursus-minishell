@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 02:00:54 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/15 23:35:56 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ void	files(t_exec *exec, t_pipe *tmp)
 			(tmp)->outfile = exec->file->file;
 		}
 		else if (exec->file->type == 5)
-		{
 			tmp->here_doc = here_docc(exec->file->file);
-			printf("JKSBDEFVYAJD\n");
-		}
 		else if (exec->file->type == 6)
 		{
 			open(exec->file->file, O_CREAT, 0644);
@@ -95,8 +92,6 @@ void	transmettre(t_data *data, char ***env, char ***export)
 	pipe = NULL;
 	tmp = NULL;
 	exec = data->exec;
-	(void)env;
-	(void)export;
 	while (exec)
 	{
 		tmp = malloc(sizeof(t_pipe));

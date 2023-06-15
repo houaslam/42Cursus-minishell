@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 16:28:36 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/15 23:37:50 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	execution(char **cmd, char **env)
 	}
 }
 
-void	pipe_fork(int *id, int *ph)
+void	pipe_fork(int *id, int *ph) 
 {
 	if (pipe(ph) < 0)
 	{
@@ -85,7 +85,7 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
 	{
 		pipe_fork(&id, ph);
 		if (id == 0)
-		{
+		{ 
 			if (!pipee->next)
 				ph[1] = 1;
 			if (!duping(pipee, fd, ph, 1))

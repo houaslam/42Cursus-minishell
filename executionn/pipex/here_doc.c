@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:47:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 01:56:34 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/15 23:46:59 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,51 +16,52 @@ void	ctrl_ch(int i)
 {
 	if (i == SIGINT)
 	{
-		printf("HERE\n");
-		g_signals.save = g_signals.exit_status;
-		g_signals.exit_status = -1;
-		return ;
+		write(1, "\n", 1);
+		exit(0);
 	}
 }
 
-int	*the_while2(char *str, int fd, char *tmp, int *p)
+int *the_while2(char *str, char *tmp, int *p)
 {
-	while (1)
+	(void)str;
+	(void) tmp;
+	int id=fork();
+	if (id == 0)
 	{
-		tmp = readline("here doc>");
-		if (!tmp)
-			break ;
-		if (g_signals.exit_status == -1)
+		while (1)
 		{
-			printf("HEREFFFF\n");
-			g_signals.exit_status = g_signals.save;
-			return (p);
-		}
-		tmp = ft_strjoin_free(tmp, "\n");
-		if ((ft_strncmp(tmp, str, ft_strlen(tmp) - 2) == 0) && ft_strlen(tmp)
-			- 1 == ft_strlen(str))
-		{
+			signal(SIGINT, ctrl_ch);
+			tmp = readline("here doc>");
+			if (!tmp)
+				break ;
+			tmp = ft_strjoin_free(tmp, "\n");
+			if ((ft_strncmp(tmp, str, ft_strlen(tmp) - 2) == 0) && ft_strlen(tmp)
+				- 1 == ft_strlen(str))
+			{
+				free(tmp);
+				break ;
+			}
+			write(p[1], tmp, ft_strlen(tmp));
 			free(tmp);
-			break ;
 		}
-		write(fd, tmp, ft_strlen(tmp));
-		free(tmp);
+		close(p[1]);
+		exit(0);
 	}
-	close(p[1]);
+	wait(NULL);
 	return (p);
 }
 
 int	*here_docc(char *str)
 {
 	char	*tmp;
-	int		*p;
 
 	tmp = NULL;
+	int *p;
 	p = malloc(sizeof(int *) * 2);
 	if (pipe(p) < 0)
 		ft_errorb("cant pipe in here_doc\n", NULL, NULL, 1);
-	signal(SIGINT, ctrl_ch);
-	return (the_while2(str, p[1], tmp, p));
+	printf("p in heredoc  %d\n",p[0]);
+	return (the_while2(str, tmp, p));
 }
 
 int	after_here_doc(t_pipe *pipe, int *p, int *ph)
@@ -68,7 +69,9 @@ int	after_here_doc(t_pipe *pipe, int *p, int *ph)
 	int	s;
 
 	s = -1;
-	if (dup2(p[0], 0) < 0)
+	// dprintf(2,"p in here  %d\n",p[0]);
+	// dprintf(2,"sec %d\n",pipe->here_doc[0]);
+	if (dup2(pipe->here_doc[0], 0) < 0)
 		return (ft_errorb("cant dup in here_doc\n", NULL, NULL, 1));
 	if ((pipe)->here_doc_out)
 		s = ft_outfile_heredoc(pipe->here_doc_out);
