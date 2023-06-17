@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:47:21 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 17:30:15 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 19:10:29 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	ft_outfile(char *s)
 
 int	duping(t_pipe *pipe, int fd, int *ph, int h)
 {
-	
 	if (pipe->her_docin && h)
 		return (after_here_doc(pipe, pipe->here_doc, ph));
 	else if ((pipe)->infile)

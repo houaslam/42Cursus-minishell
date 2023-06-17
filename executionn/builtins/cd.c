@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:01:30 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 13:35:27 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:48:00 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,14 @@ char	*telda(char *s)
 
 int	ft_cd(char **env, char **export, char **arg)
 {
-	int		i;
 	char	buff[1024];
 	char	*dir;
 
-	i = 0;
 	if (arg[0] && arg[1])
-		return (ft_errorb("cd: ", arg[0], " No such file or directory \n", 1));
+		return (ft_errorb("bash: cd: ", arg[0], \
+		" No such file or directory \n", 1));
+	if (!arg[0] && !recherche(env, "HOME"))
+		return (ft_errorb("bash: ", "cd:", " HOME not set\n", 1));
 	if (!arg[0])
 		dir = ft_strdup("/Users/houaslam");
 	else

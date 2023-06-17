@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/17 18:33:32 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:48:22 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,7 @@ char		*expande_handle(t_data *data, char *str);
 t_exec		*next_case(t_data *data, t_exec *lexer);
 int			simple_while(char **str);
 int			dollar(t_data *data, t_exec *lexer, int is_red);
-void	initialize(t_pipe **tmp);
-int	other_file2(t_exec *exec, t_pipe *tmp);
-int	other_file(t_exec *exec, t_pipe *tmp);
+// int	other_file2(t_exec *exec, t_pipe *tmp);
+// int	other_file(t_exec *exec, t_pipe *tmp);
 
 #endif

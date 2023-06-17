@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/17 18:25:03 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:47:39 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ char		*recherche(char **env, char *s);
 void		ctrl_ch(int i);
 int			the_plus(char **export, char **sp);
 void		checkarg(char **arg);
-int			other_file(t_exec *exec, t_pipe *tmp);
-int			other_file2(t_exec *exec, t_pipe *tmp);
+
 #endif

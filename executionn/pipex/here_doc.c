@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:47:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 17:10:32 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 20:37:27 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,47 +21,92 @@ void	ctrl_ch(int i)
 	}
 }
 
-int *the_while2(char *str, char *tmp, int *p)
+char	*expand_h(char *str, char **env)
 {
-	(void)str;
-	(void) tmp;
-	int id=fork();
+	char	*save;
+	char	*ptr;
+
+	ptr = ft_substr(str, 1, ft_strlen(str) - 1);
+	save = find_ex(ptr, env);
+	free(ptr);
+	free(str);
+	return (save);
+}
+
+char	*general_expand(char *str, char **env)
+{
+	char	**s;
+	char	*save;
+	char	*ret;
+	int		i;
+
+	s = ft_split(str, ' ');
+	i = 0;
+	ret = NULL;
+	while (s[i])
+	{
+		if (s[i][0] == '$')
+		{
+			save = expand_h(s[i], env);
+			s[i] = save;
+		}
+		ret = ft_strjoin_free(ret, s[i]);
+		if (ret[i + 1])
+			ret = ft_strjoin_free(ret, " ");
+		i++;
+	}
+	return (ret);
+}
+
+int *the_while2(t_pipe *norm)
+{
+	int id;
+	
+	id = fork();
 	if (id == 0)
 	{
 		while (1)
 		{
 			signal(SIGINT, ctrl_ch);
-			tmp = readline("here doc>");
-			if (!tmp)
+			norm->infile = readline("here doc>");
+			if (!norm->infile)
 				break ;
-			tmp = ft_strjoin_free(tmp, "\n");
-			if ((ft_strncmp(tmp, str, ft_strlen(tmp) - 1) == 0) && ft_strlen(tmp)
-				- 1 == ft_strlen(str))
+			if (norm->her_docin != 1)
+				norm->infile = general_expand(norm->infile, norm->cmd);
+			norm->infile = ft_strjoin_free(norm->infile, "\n");
+			if ((ft_strncmp(norm->infile, norm->outfile, ft_strlen(norm->infile) - 1) == 0) && ft_strlen(norm->infile)
+				- 1 == ft_strlen(norm->outfile))
 			{
-				free(tmp);
+				free(norm->infile);
 				break ;
 			}
-			write(p[1], tmp, ft_strlen(tmp));
-			free(tmp);
+			write(norm->here_doc[1], norm->infile, ft_strlen(norm->infile));
+			free(norm->infile);
 		}
-		close(p[1]);
+		close(norm->here_doc[1]);
 		exit(0);
 	}
 	wait(NULL);
-	return (p);
+	return (norm->here_doc);
 }
 
-int	*here_docc(char *str)
+int	*here_docc(char *str, char **env, int expand)
 {
 	char	*tmp;
+	t_pipe *norm;
+	int		*p;
 
 	tmp = NULL;
-	int *p;
 	p = malloc(sizeof(int *) * 2);
 	if (pipe(p) < 0)
 		ft_errorb("cant pipe in here_doc\n", NULL, NULL, 1);
-	printf("p in heredoc  %d\n",p[0]);
-	return (the_while2(str, tmp, p));
+	norm = malloc(sizeof(t_pipe));
+	norm->cmd=env;
+	norm->infile=tmp;
+	norm->outfile=str;
+	norm->here_doc=p;
+	norm->her_docin=expand;
+	return (the_while2(norm));
 }
 
 int	after_here_doc(t_pipe *pipe, int *p, int *ph)
@@ -70,8 +115,6 @@ int	after_here_doc(t_pipe *pipe, int *p, int *ph)
 
 	s = -1;
 	(void)p;
-	// dprintf(2,"p in here  %d\n",p[0]);
-	// dprintf(2,"sec %d\n",pipe->here_doc[0]);
 	if (dup2(pipe->her_docin, 0) < 0)
 		return (ft_errorb("cant dup in here_doc\n", NULL, NULL, 1));
 	if ((pipe)->here_doc_out)
