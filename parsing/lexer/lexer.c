@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:41:48 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/17 16:31:43 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 21:19:37 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	options(t_data *data)
 			ft_lstadd_back_exec(&data->exec, \
 			ft_lstnew_exec(data->tmp->value, STRING, data->tmp_f, tmp));
 		tmp = tmp -> next;
+		// exit (0);
 	}
 }
 

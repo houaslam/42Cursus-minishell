@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 18:06:15 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 22:23:07 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,36 +73,70 @@ void	pipe_fork(int *id, int *ph)
 		return ;
 	}
 }
-
-void	child_one(t_pipe *pipee, char ***env, char ***export)
+int ft_lstSize(t_pipe *head)
 {
-	int	ph[2];
-	int	fd;
-	int id;
+    int i = 0;
+    while(head)
+    {
+        head = head->next;
+        i++;
+    }
+    return i;
+}
 
-	fd = 0;
-	while (pipee)
+
+void	ctrl_s(int i)
+{
+	if (i == SIGQUIT)
 	{
-		pipe_fork(&id, ph);
-		if (id == 0)
-		{
-			signal(SIGINT, SIG_DFL);
-			if (!pipee->next)
-				ph[1] = 1;
-			if (!duping(pipee, fd, ph, 1))
-				return ;
-			command((pipee)->cmd, export, ph[1], env);
-			exit(g_exit_status);
-		}
-		fd = dup(ph[0]);
-		close(ph[1]);
-		if (pipee->her_docin)
-			close (pipee->her_docin);
-		pipee = (pipee)->next;
+		write(1, "\\", 2);
+		write(1, "QUIT", 4);
+		exit(0);
 	}
-	waitpid (-1, &g_exit_status, 0);
-	if (WIFEXITED(g_exit_status))
-		g_exit_status = WEXITSTATUS(g_exit_status);
+}
+
+void    child_one(t_pipe *pipee, char ***env, char ***export)
+{
+    int    ph[2];
+    int    fd;
+
+    int *tab;
+    int i=0;
+	fd=0;
+    int lst_size = ft_lstSize(pipee);
+    tab = malloc(lst_size * sizeof(int));
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+    while (pipee)
+    {
+        pipe_fork(&tab[i], ph);
+        if (tab[i] == 0)
+        {
+			signal(SIGQUIT, ctrl_s);
+            signal(SIGINT, ctrl_ch);
+            if (!pipee->next)
+                ph[1] = 1;
+            if (!duping(pipee, fd, ph, 1))
+                return ;
+            command((pipee)->cmd, export, ph[1], env);
+            exit(g_exit_status);
+        }
+        fd = dup(ph[0]);
+        close(ph[1]);
+        if (pipee->her_docin)
+            close (pipee->her_docin);
+        pipee = (pipee)->next;
+        i++;
+    }
+	signal(SIGINT, ctrl_ch);
+    i--;
+    while(i >= 0)
+    {
+        waitpid(tab[i], &g_exit_status, 0);
+        if (WIFEXITED(g_exit_status))
+            g_exit_status = WEXITSTATUS(g_exit_status);
+        i--;
+    }
 }
 
 void	pipex(t_pipe *pipe, char ***env, char ***export)

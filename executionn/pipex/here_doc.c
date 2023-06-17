@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:47:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 20:37:27 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 22:29:47 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ void	ctrl_ch(int i)
 {
 	if (i == SIGINT)
 	{
-		write(1, "\n", 1);
+		write(1, "HHH\n", 4);
 		exit(0);
 	}
 }
+
 
 char	*expand_h(char *str, char **env)
 {
@@ -61,8 +62,10 @@ char	*general_expand(char *str, char **env)
 int *the_while2(t_pipe *norm)
 {
 	int id;
-	
+
 	id = fork();
+	signal(SIGINT, SIG_IGN);
+	
 	if (id == 0)
 	{
 		while (1)
@@ -87,13 +90,14 @@ int *the_while2(t_pipe *norm)
 		exit(0);
 	}
 	wait(NULL);
+	signal(SIGINT, ctrl_c);
 	return (norm->here_doc);
 }
 
 int	*here_docc(char *str, char **env, int expand)
 {
 	char	*tmp;
-	t_pipe *norm;
+	t_pipe	*norm;
 	int		*p;
 
 	tmp = NULL;

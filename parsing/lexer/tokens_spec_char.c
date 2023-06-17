@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/16 17:15:18 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 21:22:22 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ t_exec	*handle_here_doc_in2(t_data *data, t_exec *lexer, int *nb)
 	}
 	else if ((lexer ->type == S_QUOT || lexer ->type == D_QUOT))
 	{
-		str = ft_substr(lexer->value, 1, ft_strlen(lexer->value) - 1);
+		lexer = lexer->next;
+		str = ft_substr(lexer->value, 0, ft_strlen(lexer->value));
 		ft_lstadd_back_file(&data -> tmp_f, ft_lstnew_file \
 		(str, H_IN, 1));
+		lexer = lexer->next;
 		(*nb)++;
 	}
 	else if (lexer->type == DOLLAR)

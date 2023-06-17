@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/17 20:00:40 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 22:12:09 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ctrl_c(int i)
 	{
 		printf("\n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
 		rl_redisplay();
+		
 		g_exit_status = 1;
 	}
 }

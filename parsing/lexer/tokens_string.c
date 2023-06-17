@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/17 16:22:07 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 21:16:04 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_exec	*handle_pipe(t_data *data, t_exec *lexer)
 t_exec	*handle_d_quote(t_data *data, t_exec *lexer, int sep, int check)
 {
 	data->d_status++;
+	printf("D_QUOT[%s]\n", lexer->value);
+	printf("D_QUOT NEXT [%s]\n", lexer->next->value);
 	if (lexer -> next)
 		lexer = lexer->next;
 	if (lexer -> type == D_QUOT && check != 2)

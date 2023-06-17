@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:19:23 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 20:27:57 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 21:30:31 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@
 # include "../../libft/libft.h"
 # include "../builtins/builtins.h"
 # include <fcntl.h>
-# include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <time.h>
+# include <signal.h>
 # include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_pipe
 {
