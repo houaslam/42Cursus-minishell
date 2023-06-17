@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 22:23:07 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 22:37:09 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,22 +105,24 @@ void    child_one(t_pipe *pipee, char ***env, char ***export)
 	fd=0;
     int lst_size = ft_lstSize(pipee);
     tab = malloc(lst_size * sizeof(int));
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, SIG_IGN);
     while (pipee)
     {
         pipe_fork(&tab[i], ph);
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
         if (tab[i] == 0)
         {
+			signal(SIGINT, ctrl_ch);
 			signal(SIGQUIT, ctrl_s);
-            signal(SIGINT, ctrl_ch);
             if (!pipee->next)
                 ph[1] = 1;
             if (!duping(pipee, fd, ph, 1))
                 return ;
             command((pipee)->cmd, export, ph[1], env);
+            signal(SIGINT, ctrl_ch);
             exit(g_exit_status);
         }
+		signal(SIGINT, ctrl_c);
         fd = dup(ph[0]);
         close(ph[1]);
         if (pipee->her_docin)
@@ -128,7 +130,6 @@ void    child_one(t_pipe *pipee, char ***env, char ***export)
         pipee = (pipee)->next;
         i++;
     }
-	signal(SIGINT, ctrl_ch);
     i--;
     while(i >= 0)
     {

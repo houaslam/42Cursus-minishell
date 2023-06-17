@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:47:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 22:29:47 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 22:36:41 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ctrl_ch(int i)
 		exit(0);
 	}
 }
-
 
 char	*expand_h(char *str, char **env)
 {
@@ -65,19 +64,20 @@ int *the_while2(t_pipe *norm)
 
 	id = fork();
 	signal(SIGINT, SIG_IGN);
-	
+	signal(SIGQUIT, SIG_IGN);
 	if (id == 0)
 	{
+		signal(SIGINT, ctrl_ch);
 		while (1)
 		{
-			signal(SIGINT, ctrl_ch);
 			norm->infile = readline("here doc>");
 			if (!norm->infile)
 				break ;
 			if (norm->her_docin != 1)
 				norm->infile = general_expand(norm->infile, norm->cmd);
 			norm->infile = ft_strjoin_free(norm->infile, "\n");
-			if ((ft_strncmp(norm->infile, norm->outfile, ft_strlen(norm->infile) - 1) == 0) && ft_strlen(norm->infile)
+			if ((ft_strncmp(norm->infile, norm->outfile, \
+			ft_strlen(norm->infile) - 1) == 0) && ft_strlen(norm->infile)
 				- 1 == ft_strlen(norm->outfile))
 			{
 				free(norm->infile);
