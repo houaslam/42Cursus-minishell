@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
+#    By: aatki <aatki@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/06/17 20:45:10 by houaslam         ###   ########.fr        #
+#    Updated: 2023/06/17 23:47:14 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,9 @@ BUILTINS =  ./executionn/builtins/utils.c\
 PIPEX =./executionn/pipex/pipex_bonus.c\
 		./executionn/pipex/pipex_utils_bonus.c\
 		./executionn/pipex/here_doc.c\
-		./executionn/pipex/open_files.c
+		./executionn/pipex/open_files.c\
+		./executionn/pipex/here_doc_utils.c\
+		./execution/pipex/for_execution.c
 
 SRC =   global/main.c \
 		global/transmetter.c \

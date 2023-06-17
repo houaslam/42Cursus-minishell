@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 01:37:29 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/16 18:42:33 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 23:56:36 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,31 @@ int	the_plus(char **export, char **sp)
 	export[k] = ft_strjoin_free(export[k], sp[1] + 1);
 	ft_free(sp);
 	return (1);
+}
+
+char	**equal(char *s, int *j)
+{
+	char	**sp;
+	int		i;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	sp = malloc(sizeof(char *) * 3);
+	while (s[i])
+	{
+		if (s[i] == '=')
+		{
+			sp[0] = ft_substr(s, 0, i + 1);
+			sp[1] = ft_substr(s, i + 1, ft_strlen(s) - i);
+			sp[2] = NULL;
+			*j = 1;
+			return (sp);
+		}
+		i++;
+	}
+	sp[0] = ft_strdup(s);
+	sp[1] = NULL;
+	*j = 2;
+	return (sp);
 }
