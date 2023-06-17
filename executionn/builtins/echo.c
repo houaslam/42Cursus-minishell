@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:45 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/14 23:50:49 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 16:18:30 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,69 @@ void	found(char *sa, char **env)
 	return ;
 }
 
-void	ft_echo(char **arg, int fd, char **env)
+void	checkarg(char **arg)
 {
 	int	i;
 
-	(void)env;
-	(void)fd;
 	i = 0;
-	if (*arg && !ft_strcmp(arg[0], "-n"))
+	if (arg[0] && arg[0][0] && arg[0][0] == '`' && !arg[1])
+		ft_errorb("bash; ", "command not found\n", NULL, 127);
+	while (arg[i])
+	{
+		if (!ft_strcmp(arg[i], "`"))
+		{
+			free(arg[i]);
+			arg[i] = ft_strdup("");
+		}
+		i++;
+	}
+}
+
+int	which_flag(char **arg, int *i)
+{
+	int	j;
+	int	flag;
+
+	flag = 0;
+	while (arg[*i])
+	{
+		j = 0;
+		if (arg[*i][j] == '-')
+		{
+			while (arg[*i][++j])
+			{
+				if (arg[*i][j] != 'n')
+				{
+					write(1, arg[*i], ft_strlen(arg[*i]));
+					write(1, " ", 1);
+					return (2);
+				}
+			}
+			flag = 1;
+		}
+		else
+			return (flag);
+		(*i)++;
+	}
+	return (flag);
+}
+
+void	ft_echo(char **arg)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = which_flag(arg, &i);
+	if (flag == 2)
 		i++;
 	while (arg[i])
 	{
 		write(1, arg[i], ft_strlen(arg[i]));
+		if (arg[i + 1])
+			write(1, " ", 1);
 		i++;
-		write(1, " ", 1);
 	}
-	if (*arg && !ft_strcmp(arg[0], "-n"))
-		return ;
-	write(1, "\n", 1);
+	if (flag != 1)
+		printf("\n");
 }

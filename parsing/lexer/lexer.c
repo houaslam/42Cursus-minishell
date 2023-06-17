@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:41:48 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/13 15:06:03 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 16:31:43 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	lexer_other_op(t_data **data, int i, int *singl, int *doubl)
 {
-	if ((*data)->s[i] == R_OUT && (*data)->s[i + 1] == R_OUT && ++i)
-		ft_lstadd_back_exec(&(*data)->lexer, \
-		ft_lstnew_exec(">>", H_OUT, NULL, (*data)->lexer));
-	else if ((*data)->s[i] == R_OUT)
+	if ((*data)->s[i] == R_OUT)
 		ft_lstadd_back_exec(&(*data)->lexer, \
 		ft_lstnew_exec(">", R_OUT, NULL, (*data)->lexer));
 	else if ((*data)->s[i] == R_IN)
 		ft_lstadd_back_exec(&(*data)->lexer, \
 		ft_lstnew_exec("<", R_IN, NULL, (*data)->lexer));
-	else if ((*data)->s[i] == D_QUOT && ++(*doubl))
+	else if ((*data)->s[i] == D_QUOT && (*data)->s[i + 1] == D_QUOT && ++i)
+		ft_lstadd_back_exec(&(*data)->lexer, \
+		ft_lstnew_exec("", EMPTY_STRING, NULL, (*data)->lexer));
+	else if ((*data)->s[i] == D_QUOT && *singl % 2 == 0 && ++(*doubl))
 		ft_lstadd_back_exec(&(*data)->lexer, \
 		ft_lstnew_exec("\"", D_QUOT, NULL, (*data)->lexer));
-	else if ((*data)->s[i] == S_QUOT && ++(*singl))
+	else if ((*data)->s[i] == S_QUOT && *doubl % 2 == 0 && ++(*singl))
 		ft_lstadd_back_exec(&(*data)->lexer, \
 		ft_lstnew_exec("\'", S_QUOT, NULL, (*data)->lexer));
 	else if ((*data)->s[i] == DOLLAR)
@@ -60,21 +60,24 @@ void	the_lexer(t_data **data)
 		else if ((*data)->s[i] == R_IN && (*data)->s[i + 1] == R_IN && ++i)
 			ft_lstadd_back_exec(&(*data)->lexer, \
 			ft_lstnew_exec("<<", H_IN, NULL, (*data)->lexer));
+		else if ((*data)->s[i] == R_OUT && (*data)->s[i + 1] == R_OUT && ++i)
+			ft_lstadd_back_exec(&(*data)->lexer, \
+			ft_lstnew_exec(">>", H_OUT, NULL, (*data)->lexer));
 		else
 			i = lexer_other_op(data, i, &singl, &doubl);
 	}
-	if (singl % 2 != 0 || doubl % 2 != 0)
-		print_token_er(*data, 285, "'quotes`\n");
 }
 
 void	*other_options(t_exec	*tmp, t_data	*data)
 {
 	if (tmp-> type == PIPE)
 		tmp = handle_pipe(data, tmp);
+	else if (tmp-> type == EMPTY_STRING)
+		tmp = handle_empty_s(data, tmp, 0);
 	else if (tmp-> type == S_QUOT)
-			tmp = handle_s_quote(data, tmp, 0);
+			tmp = handle_s_quote(data, tmp, 0, 0);
 	else if (tmp-> type == D_QUOT)
-		tmp = handle_d_quote(data, tmp, 0);
+		tmp = handle_d_quote(data, tmp, 0, 0);
 	else if (tmp-> type == STRING)
 		tmp = handle_string(data, tmp, 0);
 	else if (tmp-> type == DOLLAR)
@@ -110,7 +113,10 @@ void	lexer(t_data **data)
 {
 	(*data)->g_exit_status = 0;
 	(*data)->lexer = NULL;
+	(*data)-> d_status = 0;
+	(*data)-> s_status = 0;
 	the_lexer(data);
+	// aff1((*data)->lexer, NULL);
 	(*data)->exec = NULL;
 	(*data)->f = 0;
 	(*data)->tmp_f = NULL;
@@ -120,4 +126,6 @@ void	lexer(t_data **data)
 	(*data)->s_status = 0;
 	if ((*data)->g_exit_status == 0)
 		options(*data);
+	// printf("-----------EXEEEEC-----------\n");
+	// aff1((*data)->exec, NULL);
 }

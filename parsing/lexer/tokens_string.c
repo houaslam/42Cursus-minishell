@@ -6,31 +6,34 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:49:13 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/15 15:43:01 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 16:22:07 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_exec	*handle_s_quote(t_data *data, t_exec *lexer, int sep)
+t_exec	*handle_s_quote(t_data *data, t_exec *lexer, int sep, int check)
 {
 	data->s_status++;
 	if (lexer -> next)
 		lexer = lexer->next;
-	if (lexer -> type == D_QUOT)
-		lexer = lexer->next;
-	while (lexer -> type != S_QUOT)
+	if (lexer -> type == S_QUOT && check != 2)
+		data->tmp->value = ft_strjoin_free(data->tmp->value, "`");
+	while (lexer)
 	{
-		if (!lexer)
-			return (print_token_er(data, 258, "`\"'\n"));
-		data->tmp->value = ft_strjoin_free(data->tmp->value, lexer->value);
+		if (lexer->type == S_QUOT)
+		{
+			data->s_status++;
+			lexer = next_case(data, lexer);
+			if (sep != 1)
+				data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
+			return (lexer);
+		}
+		else
+			data->tmp->value = ft_strjoin_free(data->tmp->value, lexer->value);
 		lexer = lexer->next;
 	}
-	data->s_status++;
-	lexer = next_case(data, lexer);
-	if (sep != 1)
-			data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
-	return (lexer);
+	return (print_token_er(data, 258, "`\"'\n"));
 }
 
 t_exec	*handle_pipe(t_data *data, t_exec *lexer)
@@ -49,28 +52,30 @@ t_exec	*handle_pipe(t_data *data, t_exec *lexer)
 	return (lexer);
 }
 
-t_exec	*handle_d_quote(t_data *data, t_exec *lexer, int sep)
+t_exec	*handle_d_quote(t_data *data, t_exec *lexer, int sep, int check)
 {
 	data->d_status++;
 	if (lexer -> next)
 		lexer = lexer->next;
-	// if (lexer -> next->type == D_QUOT)
-	// 	lexer = lexer->next;
-	while (lexer -> type != D_QUOT)
+	if (lexer -> type == D_QUOT && check != 2)
+		data->tmp->value = ft_strjoin_free(data->tmp->value, "`");
+	while (lexer)
 	{
-		if (!lexer)
-			return (print_token_er(data, 258, "`\"'\n"));
+		if (lexer -> type == D_QUOT)
+		{
+			data->d_status++;
+			lexer = next_case(data, lexer);
+			if (sep != 1)
+				data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
+			return (lexer);
+		}
 		if (lexer->type == DOLLAR)
 			lexer = handle_dollar(data, lexer, 1, 1);
 		else
 			data->tmp->value = ft_strjoin_free(data->tmp->value, lexer->value);
 		lexer = lexer->next;
 	}
-	data->d_status++;
-	lexer = next_case(data, lexer);
-	if (sep != 1)
-			data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
-	return (lexer);
+	return (print_token_er(data, 258, "`\"'\n"));
 }
 
 t_exec	*handle_dollar(t_data *data, t_exec *lexer, int sep, int is_red)
@@ -82,7 +87,7 @@ t_exec	*handle_dollar(t_data *data, t_exec *lexer, int sep, int is_red)
 	k = simple_while(str);
 	if (k > 1)
 	{
-		if (is_red == 0)
+		if (is_red == 0 && (!str[0] || !str[0][0]))
 			print_token_er(data, 1, " ambiguous redirect\n");
 		k = -1;
 		while (str[++k])
@@ -104,7 +109,14 @@ t_exec	*handle_dollar(t_data *data, t_exec *lexer, int sep, int is_red)
 t_exec	*handle_string(t_data *data, t_exec *lexer, int sep)
 {
 	data -> tmp -> value = ft_strjoin_free(data->tmp->value, lexer->value);
-	lexer = next_case(data, lexer);
+	if (lexer->next && lexer->next->type == DOLLAR)
+		lexer = handle_dollar(data, lexer->next, 1, 1);
+	else if (lexer->next && lexer->next->type == D_QUOT)
+		lexer = handle_d_quote(data, lexer->next, 1, 2);
+	else if (lexer->next && lexer->next->type == S_QUOT)
+		lexer = handle_s_quote(data, lexer->next, 1, 2);
+	if (lexer->next && lexer->next->type == STRING)
+		lexer = handle_string(data, lexer->next, 1);
 	if (sep != 1)
 		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
 	return (lexer);

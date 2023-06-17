@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:50 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 16:28:07 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 17:19:05 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,29 +60,30 @@ char	**add_str(char **env, char *plus)
 	return (menv);
 }
 
-char	**equal(char *s)
+char	**equal(char *s, int *j)
 {
 	char	**sp;
 	int		i;
 
 	if (!s)
 		return (NULL);
-	sp = malloc(sizeof(char *) * 3);
 	i = 0;
-	sp[0] = malloc(ft_strlen(s) + 1);
-	sp[0][ft_strlen(s)] = '\0';
+	sp = malloc(sizeof(char *) * 3);
 	while (s[i])
 	{
-		sp[0][i] = s[i];
 		if (s[i] == '=')
 		{
-			sp[0][i + 1] = '\0';
-			break ;
+			sp[0] = ft_substr(s, 0, i + 1);
+			sp[1] = ft_substr(s, i + 1, ft_strlen(s) - i);
+			sp[2] = NULL;
+			*j = 1;
+			return (sp);
 		}
 		i++;
 	}
-	sp[1] = ft_substr(s, i, ft_strlen(s) - i);
-	sp[2] = NULL;
+	sp[0] = ft_strdup(s);
+	sp[1] = NULL;
+	*j = 2;
 	return (sp);
 }
 
@@ -112,18 +113,25 @@ int	ft_export(char ***export, char ***env, char **arg, int i)
 {
 	int		c;
 	char	**sp;
+	int		k;
 
 	sp = NULL;
+	k = 0;
 	if (!*arg)
 		affiche_export(*export);
 	else
 	{
 		while (arg[++i])
 		{
-			sp = equal(arg[i]);
-			if (!check_arg(sp[0]))
-				return (ft_errorb("bash: export: `", sp[0],
-						"': not a valid identifier\n", 1));
+			sp = equal(arg[i], &k);
+			if ((k == 1 && (!check_arg(sp[0]) \
+			|| !sp[1] || !sp[1][0])) || (k == 2 && !sp[0][0]))
+			{
+				ft_errorb("bash: export: `", sp[0],
+					"': not a valid identifier\n", 1);
+				ft_free(sp);
+				return (0);
+			}
 			else
 			{
 				if (the_plus(*export, sp))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:55 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 01:54:54 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 15:37:25 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	norm(char **env, int i)
 	env[i] = NULL;
 }
 
-void	ft_unset(char **env, char **arg)
+void	ft_unset(char **env, char **arg, int flag)
 {
 	int	i;
 	int	j;
@@ -49,10 +49,11 @@ void	ft_unset(char **env, char **arg)
 	while (arg[j])
 	{
 		i = 0;
-		if (!check_argg(arg[j]))
+		if (!check_argg(arg[j]) && flag == 0)
 		{
-			ft_errorb("bash: unset: `", arg[j], ": not a valid identifier\n",
-				127);
+			if (flag == 0)
+				ft_errorb("bash: unset: `", arg[j], ": not a valid identifier\n",
+					127);
 			return ;
 		}
 		while ((env[i]))

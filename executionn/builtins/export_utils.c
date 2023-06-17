@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 08:41:51 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 16:19:34 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/16 19:10:17 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,14 @@ void	change(char ***export, char ***env, char *arg, int cas)
 
 int	check_arg(char *s)
 {
-	int	i;
+	unsigned long int	i;
 
 	i = 0;
-	while (s[i] && ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z')
-			|| s[i] == '_' || s[i] == '=' || s[i] == '+'))
+	if (!s || s[0] == '\0')
+		return (0);
+	while (s[i] && (ft_isalpha(s[i])|| (s[i] == '=' \
+	&& s[i+1]=='\0') || s[i] == '_' \
+	|| (s[i]== '+'&& s[i+1] == '=' && s[i + 2]=='\0')))
 		i++;
 	if (s[i] == '\0')
 		return (1);

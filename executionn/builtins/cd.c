@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 07:01:30 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 01:36:33 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 13:35:27 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_cd(char **env, char **export, char **arg)
 
 	i = 0;
 	if (arg[0] && arg[1])
-		return (ft_errorb("cd: string not in pwd: ", arg[0], "\n", 1));
+		return (ft_errorb("cd: ", arg[0], " No such file or directory \n", 1));
 	if (!arg[0])
 		dir = ft_strdup("/Users/houaslam");
 	else
@@ -79,15 +79,14 @@ int	ft_cd(char **env, char **export, char **arg)
 	dir = telda(dir);
 	if (!getcwd(buff, 1024))
 	{
+		ft_errorb("bash: cd: ", dir, ": No such file or directory\n", 1);
 		free(dir);
-		return (ft_errorb("no path1\n", NULL, NULL, 1));
+		return (0);
 	}
 	if (chdir(dir))
-	{
-		free(dir);
-		return (ft_errorb("bash: cd: ", dir, ": No such file\n", 1));
-	}
-	util_fun(env, buff, export);
+		ft_errorb("bash: cd: ", dir, ": No such file or directory\n", 1);
+	else
+		util_fun(env, buff, export);
 	free(dir);
 	return (0);
 }

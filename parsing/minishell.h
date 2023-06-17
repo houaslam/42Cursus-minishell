@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/15 14:30:57 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:09:05 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define S_QUOT  39 ///
 # define IN_FILE 2
 # define STRING 1 
+# define EMPTY_STRING 2 
 # define TAB 9
 # define OUT_FILE 3
 # define H_IN 5 //
@@ -58,6 +59,7 @@ typedef struct exec
 {
 	int			type;
 	char		*value;
+	char		**cmd;
 	int			expand;
 	t_file		*file;
 	struct exec	*next;
@@ -119,10 +121,11 @@ int			check_pipe(t_exec *lexer);
 //string tokens
 t_exec		*handle_pipe(t_data *data, t_exec *lexer);
 t_exec		*handle_string(t_data *data, t_exec *lexer, int sep);
-t_exec		*handle_s_quote(t_data *data, t_exec *lexer, int sep);
-t_exec		*handle_d_quote(t_data *data, t_exec *lexer, int sep);
+t_exec		*handle_s_quote(t_data *data, t_exec *lexer, int sep, int check);
+t_exec		*handle_d_quote(t_data *data, t_exec *lexer, int sep, int check);
 t_exec		*handle_dollar(t_data *data, t_exec *lexer, int sep, int is_red);
-t_exec		*handle_env_var(t_data *data, t_exec *lexer);
+// t_exec		*handle_env_var(t_data *data, t_exec *lexer);
+t_exec	*handle_empty_s(t_data *data, t_exec *lexer, int sep);
 
 //outils
 char		*find_ex(char *sa, char **env);

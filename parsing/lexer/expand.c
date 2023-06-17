@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:51:22 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/15 01:57:20 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 16:26:27 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+t_exec	*handle_empty_s(t_data *data, t_exec *lexer, int sep)
+{
+	if (lexer->next && lexer->prev && (lexer->next->type == SPACE \
+	|| lexer->next->type == TAB) \
+	&& (lexer->prev->type == SPACE || lexer->prev->type == TAB))
+	{
+		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "`");
+		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
+	}
+	else if (!lexer->next && lexer->prev && \
+	(lexer->prev->type == SPACE || lexer->prev->type == TAB))
+	{
+		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "`");
+		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
+	}
+	else if (!lexer->next && !lexer->prev)
+	{
+		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "`");
+		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
+	}
+	else
+		lexer = next_case(data, lexer);
+	if (sep != 1)
+		data -> tmp -> value = ft_strjoin_free(data->tmp->value, "\n");
+	return (lexer);
+}
 
 char	*expande_handle(t_data *data, char *str)
 {
@@ -37,7 +64,7 @@ char	*the_expande(t_data *data, char *str)
 	if (str[1] == '?')
 	{
 		ptr = ft_substr(str, 2, ft_strlen(str) - 2);
-		save = ft_itoa(g_signals.exit_status);
+		save = ft_itoa(g_exit_status);
 		save = ft_strjoin_free(save, ptr);
 		free(str);
 		free(ptr);
@@ -45,10 +72,12 @@ char	*the_expande(t_data *data, char *str)
 	}
 	else if (ft_isdigit(str[1]))
 	{
-		free(str);
 		save = ft_substr(str, 2, ft_strlen(str) - 2);
+		free(str);
 		return (save);
 	}
+	else if (!str[1])
+		return (ft_strdup("$"));
 	else
 		return (expande_handle(data, str));
 	return (str);
@@ -56,13 +85,40 @@ char	*the_expande(t_data *data, char *str)
 
 t_exec	*next_case(t_data *data, t_exec *lexer)
 {
-	if (lexer->next && lexer->next->type == DOLLAR)
+	if (lexer->next && lexer->next->type == EMPTY_STRING)
+		lexer = lexer->next;
+	else if (lexer->next && lexer->next->type == DOLLAR)
 		lexer = handle_dollar(data, lexer->next, 1, 1);
 	else if (lexer->next && lexer->next->type == D_QUOT)
-		lexer = handle_d_quote(data, lexer->next, 1);
+		lexer = handle_d_quote(data, lexer->next, 1, 2);
 	else if (lexer->next && lexer->next->type == S_QUOT)
-		lexer = handle_s_quote(data, lexer->next, 1);
-	if (lexer->next && lexer->next->type == STRING)
+		lexer = handle_s_quote(data, lexer->next, 1, 2);
+	else if (lexer->next && lexer->next->type == STRING)
 		lexer = handle_string(data, lexer->next, 1);
 	return (lexer);
+}
+
+int	check_pipe(t_exec *lexer)
+{
+	t_exec	*tmp;
+
+	tmp = lexer;
+	while (tmp)
+	{
+		if (tmp->type == STRING || tmp->type == DOLLAR)
+			break ;
+		if ((tmp->prev == NULL || tmp->prev->type == PIPE))
+			return (1);
+		tmp = tmp->prev;
+	}
+	tmp = lexer;
+	while (tmp)
+	{
+		if (tmp->type == STRING || tmp->type == DOLLAR)
+			break ;
+		if ((tmp->next == NULL || tmp->next->type == PIPE))
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }

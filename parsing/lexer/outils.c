@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   outils.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:39:45 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/15 01:57:29 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 16:26:31 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ char	*find_ex(char *sa, char **env)
 			, ft_strlen(env[i]) - ft_strlen(sa));
 		i++;
 	}
+	if (!s)
+		s = ft_strdup("");
 	return (s);
 }
 
@@ -72,7 +74,7 @@ t_exec	*print_token_er(t_data *data, int status, char *s1)
 		if (s1)
 			write(2, s1, ft_strlen(s1));
 	}
-	g_signals.exit_status = status;
+	g_exit_status = status;
 	data->g_exit_status = 1;
 	return (ft_lstlast_exec(data->lexer));
 }
@@ -85,8 +87,11 @@ void	add(t_data **data, int *i, int type)
 	k = *i;
 	(*i)++;
 	while ((*data)->s[*i] && ft_isstring \
-	((*data)->s[*i]) && (*data)->s[*i] != '$')
+	((*data)->s[*i]) && (*data)->s[*i] != '$' && (*data)->s[*i] != '/')
+	{
+		if (ft_isstring((*data)->s[*i]))
 		(*i)++;
+	}
 	str = ft_substr((*data)->s, k, *i - k);
 	if (type == DOLLAR)
 		str = the_expande(*data, str);
