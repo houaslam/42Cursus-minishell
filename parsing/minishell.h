@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/16 16:09:05 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:33:32 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,7 @@ t_exec		*handle_string(t_data *data, t_exec *lexer, int sep);
 t_exec		*handle_s_quote(t_data *data, t_exec *lexer, int sep, int check);
 t_exec		*handle_d_quote(t_data *data, t_exec *lexer, int sep, int check);
 t_exec		*handle_dollar(t_data *data, t_exec *lexer, int sep, int is_red);
-// t_exec		*handle_env_var(t_data *data, t_exec *lexer);
-t_exec	*handle_empty_s(t_data *data, t_exec *lexer, int sep);
+t_exec		*handle_empty_s(t_data *data, t_exec *lexer, int sep);
 
 //outils
 char		*find_ex(char *sa, char **env);
@@ -141,5 +140,8 @@ char		*expande_handle(t_data *data, char *str);
 t_exec		*next_case(t_data *data, t_exec *lexer);
 int			simple_while(char **str);
 int			dollar(t_data *data, t_exec *lexer, int is_red);
+void	initialize(t_pipe **tmp);
+int	other_file2(t_exec *exec, t_pipe *tmp);
+int	other_file(t_exec *exec, t_pipe *tmp);
 
 #endif

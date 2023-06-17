@@ -6,13 +6,13 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/06/17 16:53:00 by houaslam         ###   ########.fr        #
+#    Updated: 2023/06/17 18:32:36 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 
 EXTRA_CFLAGS = -I ~/Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/include  -L /Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/lib -lreadline
 
@@ -62,14 +62,14 @@ BUILTINS =  ./executionn/builtins/utils.c\
 			./executionn/builtins/export.c\
 			./executionn/builtins/pwd.c\
 			./executionn/builtins/unset.c\
-			./executionn/builtins/export_utils.c
+			./executionn/builtins/export_utils.c\
 
 PIPEX =./executionn/pipex/pipex_bonus.c\
 		./executionn/pipex/pipex_utils_bonus.c\
-		./executionn/pipex/ft_split_bonus.c\
 		./executionn/pipex/here_doc.c\
 		./executionn/pipex/get_next_line.c\
 		./executionn/pipex/get_next_line_utils.c\
+		./executionn/pipex/ft_split_bonus.c\
 		./executionn/pipex/open_files.c
 
 SRC =   global/main.c \

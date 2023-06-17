@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:19:23 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 17:00:27 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 18:29:56 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../../libft/libft.h"
 # include "../builtins/builtins.h"
-# include "get_next_line.h"
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <stdio.h>

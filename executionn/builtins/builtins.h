@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/17 16:25:55 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:25:03 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILTINS_H
 
 # include "../../libft/libft.h"
+# include "../../parsing/minishell.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -52,4 +53,6 @@ char		*recherche(char **env, char *s);
 void		ctrl_ch(int i);
 int			the_plus(char **export, char **sp);
 void		checkarg(char **arg);
+int			other_file(t_exec *exec, t_pipe *tmp);
+int			other_file2(t_exec *exec, t_pipe *tmp);
 #endif

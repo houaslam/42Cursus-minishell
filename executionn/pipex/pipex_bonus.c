@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 17:45:06 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:06:15 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,7 @@ void	execution(char **cmd, char **env)
 	}
 }
 
-int ft_lstSize(t_pipe *head)
-{
-	int i = 0;
-	while(head)
-	{
-		head = head->next;
-		i++;
-	}
-	return i;
-}
-
-void	pipe_fork(int *id, int *ph) 
+void	pipe_fork(int *id, int *ph)
 {
 	if (pipe(ph) < 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:34:20 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/17 16:26:21 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:10:45 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	the_while(t_data *data, char **menv, char **export)
 		add_history(data->s);
 		if (!data->s)
 		{
-			printf("exit\n");	
+			printf("exit\n");
 			exit(0);
 		}
 		if (data->s[0] != '\0' && data->s)
