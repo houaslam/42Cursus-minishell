@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 23:37:50 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 17:30:44 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 	if (*cmd_arg)
 	{
 		if (!ft_strcmp(cmd_arg[0], "echo"))
-			ft_echo(++cmd_arg, fdout, *env);
+			ft_echo(++cmd_arg);
 		else if (!ft_strcmp(cmd_arg[0], "env"))
 			ft_env(*env, fdout, ++cmd_arg);
 		else if (!ft_strcmp(cmd_arg[0], "export"))
@@ -59,6 +59,17 @@ void	execution(char **cmd, char **env)
 	}
 }
 
+int ft_lstSize(t_pipe *head)
+{
+	int i = 0;
+	while(head)
+	{
+		head = head->next;
+		i++;
+	}
+	return i;
+}
+
 void	pipe_fork(int *id, int *ph) 
 {
 	if (pipe(ph) < 0)
@@ -76,16 +87,19 @@ void	pipe_fork(int *id, int *ph)
 
 void	child_one(t_pipe *pipee, char ***env, char ***export)
 {
-	int	id;
 	int	ph[2];
 	int	fd;
+	int *tab;
 
+	tab = malloc(ft_lstSize(pipee)* sizeof(int));
+	int i=0;
 	fd = 0;
 	while (pipee)
 	{
-		pipe_fork(&id, ph);
-		if (id == 0)
-		{ 
+		pipe_fork(&tab[i], ph);
+		if (tab[i] == 0)
+		{
+			signal(SIGINT, SIG_DFL);
 			if (!pipee->next)
 				ph[1] = 1;
 			if (!duping(pipee, fd, ph, 1))
@@ -95,11 +109,22 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
 		}
 		fd = dup(ph[0]);
 		close(ph[1]);
+		i++;
+		if(pipee->her_docin)
+			close (pipee->her_docin);
 		pipee = (pipee)->next;
-		waitpid(id, &g_signals.exit_status, 0);
-		if (WIFEXITED(g_signals.exit_status))
-			g_signals.exit_status = WEXITSTATUS(g_signals.exit_status);
 	}
+	// wait(NULL);
+	i--;
+	while(i > 0)
+	{
+		// tab[i]=9;
+		 waitpid(tab[i], NULL, 0);
+		// if (WIFEXITED(g_signals.exit_status))
+		// 	g_signals.exit_status = WEXITSTATUS(g_signals.exit_status);
+		i--;
+	}
+	free (tab);
 }
 
 void	pipex(t_pipe *pipe, char ***env, char ***export)

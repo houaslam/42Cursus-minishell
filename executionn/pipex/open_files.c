@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 09:47:21 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 23:41:24 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 17:30:15 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_infile(char *s)
 	infile = open(s, O_RDWR, 0644);
 	if (infile < 0)
 	{
-		ft_errorb("infile can't open\n", NULL, NULL, 1);
+		ft_errorb("bash: ", s, "no such file or directory\n", 1);
 		return (-1);
 	}
 	return (infile);
@@ -32,7 +32,7 @@ int	ft_outfile(char *s)
 	outfile = open(s, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (outfile < 0)
 	{
-		ft_errorb("outfile can't open\n", NULL, NULL, 1);
+		ft_errorb("bash: ", s, "no such file or directory\n", 1);
 		return (-1);
 	}
 	return (outfile);
@@ -41,7 +41,7 @@ int	ft_outfile(char *s)
 int	duping(t_pipe *pipe, int fd, int *ph, int h)
 {
 	
-	if (pipe->here_doc && h)
+	if (pipe->her_docin && h)
 		return (after_here_doc(pipe, pipe->here_doc, ph));
 	else if ((pipe)->infile)
 	{

@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:47:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 23:46:59 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 17:10:32 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int *the_while2(char *str, char *tmp, int *p)
 			if (!tmp)
 				break ;
 			tmp = ft_strjoin_free(tmp, "\n");
-			if ((ft_strncmp(tmp, str, ft_strlen(tmp) - 2) == 0) && ft_strlen(tmp)
+			if ((ft_strncmp(tmp, str, ft_strlen(tmp) - 1) == 0) && ft_strlen(tmp)
 				- 1 == ft_strlen(str))
 			{
 				free(tmp);
@@ -69,9 +69,10 @@ int	after_here_doc(t_pipe *pipe, int *p, int *ph)
 	int	s;
 
 	s = -1;
+	(void)p;
 	// dprintf(2,"p in here  %d\n",p[0]);
 	// dprintf(2,"sec %d\n",pipe->here_doc[0]);
-	if (dup2(pipe->here_doc[0], 0) < 0)
+	if (dup2(pipe->her_docin, 0) < 0)
 		return (ft_errorb("cant dup in here_doc\n", NULL, NULL, 1));
 	if ((pipe)->here_doc_out)
 		s = ft_outfile_heredoc(pipe->here_doc_out);

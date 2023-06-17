@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:19:23 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/15 23:22:03 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/17 17:00:27 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_pipe
 	char			*outfile;
 	int				*here_doc;
 	char			*here_doc_out;
+	int				her_docin;
 	struct s_pipe	*next;
 }					t_pipe;
 
