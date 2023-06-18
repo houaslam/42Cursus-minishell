@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/18 13:39:24 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:03:16 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	pipe_fork(int *id, int *ph)
 {
+	signal(SIGINT, SIG_IGN);
 	if (pipe(ph) < 0)
 	{
 		ft_errorb("cant pipe in child one\n", NULL, NULL, 1);
@@ -64,12 +65,9 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
 	i = 0;
 	fd = 0;
 	tab = malloc(ft_lst_size(pipee) * sizeof(int));
-		signal(SIGINT, SIG_IGN);
 	while (pipee)
 	{
-		signal(SIGINT, SIG_IGN);
 		pipe_fork(&tab[i], ph);
-		// signal(SIGQUIT, SIG_IGN);
 		if (tab[i] == 0)
 		{
 			signal(SIGINT, ctrl_ch);

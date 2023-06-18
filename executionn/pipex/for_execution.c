@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   for_execution.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 23:46:18 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/18 13:41:49 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/18 16:56:40 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,8 @@ void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 			ft_pwd(fdout);
 		else
 			execution(cmd_arg, *env);
-			signal(SIGINT, ctrl_c);
+		signal(SIGINT, ctrl_c);
 	}
-	
 }
 
 void	execution(char **cmd, char **env)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 21:08:11 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/18 16:20:06 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:02:41 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ char	*general_expand(char *str, char **env)
 	ft_free(s);
 	return (ret);
 }
-int	return_func(t_pipe *norm,int id)
+
+int	return_func(t_pipe *norm, int id)
 {
 	int	get;
 	int	ret;
@@ -89,7 +90,7 @@ int	return_func(t_pipe *norm,int id)
 	free(norm->here_doc);
 	if (get == 22)
 	{
-		close (ret);
+		close(ret);
 		g_exit_status = 1;
 		return (-1);
 	}
@@ -101,7 +102,6 @@ int	the_while2(t_pipe *norm)
 	int	id;
 
 	signal(SIGINT, SIG_IGN);
-	
 	id = fork();
 	if (id == 0)
 	{
@@ -110,5 +110,5 @@ int	the_while2(t_pipe *norm)
 		close(norm->here_doc[1]);
 		exit(0);
 	}
-	return (return_func(norm,id));
+	return (return_func(norm, id));
 }
