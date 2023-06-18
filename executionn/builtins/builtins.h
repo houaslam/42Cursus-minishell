@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/17 23:08:17 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/18 00:30:40 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		ft_echo(char **s);
 int			ft_cd(char **env, char **export, char **dir);
 void		ft_env(char **env, int fd, char **arg);
 void		ft_unset(char **env, char **arg, int flag);
-int			ft_export(char ***export, char ***env, char **arg, int i);
+void		ft_export(char ***export, char ***env, char **arg);
 
 //function
 void		found(char *sa, char **env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:50 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 23:56:28 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/18 02:13:20 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	affiche_export(char **export)
 	}
 }
 
-void	for_norm(char ***export, char ***env, char **arg, char **sp)
+void	for_norm_(char ***export, char ***env, char **arg, char **sp)
 {
 	int	i;
 	int	k;
@@ -120,5 +120,5 @@ void	ft_export(char ***export, char ***env, char **arg)
 	if (!*arg)
 		affiche_export(*export);
 	else
-		for_norm(export, env, arg, sp);
+		for_norm_(export, env, arg, sp);
 }

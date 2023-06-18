@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/17 21:28:04 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/18 00:45:53 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_data
 	t_exec		*exec;
 	t_exec		*lexer;
 	int			f;
+	int			h_nb;
 	char		*s;
 }			t_data;
 
@@ -140,8 +141,7 @@ char		*expande_handle(t_data *data, char *str);
 t_exec		*next_case(t_data *data, t_exec *lexer);
 int			simple_while(char **str);
 int			dollar(t_data *data, t_exec *lexer, int is_red);
-void	ctrl_c(int i);
-// int	other_file2(t_exec *exec, t_pipe *tmp);
-// int	other_file(t_exec *exec, t_pipe *tmp);
+void		ctrl_c(int i);
+void		for_norm_(char ***export, char ***env, char **arg, char **sp);
 
 #endif

@@ -3,116 +3,108 @@
 /*                                                        :::      ::::::::   */
 /*   transmetter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 23:44:03 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/18 15:48:59 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing/minishell.h"
 
-int	other_file2(t_exec *exec, t_pipe *tmp)
+void	for_norm(t_exec *exec, t_pipe **tmp)
 {
-	if (exec->file->type == 6)
-	{
-		if (tmp->outfile)
-			tmp->outfile = NULL;
-		open(exec->file->file, O_CREAT, 0644);
-		(tmp)->here_doc_out = exec->file->file;
-	}
-	else if (exec->file->type == 60)
-	{
-		if (tmp->here_doc)
-			tmp->here_doc = NULL;
-		if (open(exec->file->file, O_RDONLY, 0644) < 0)
-		{
-			ft_errorb("bash: ", exec->file->file, \
-			": No such file or directory\n", 1);
-			return (0);
-		}
-	}
-	return (1);
-}
+	int	fd;
 
-void	for_norm(t_exec *exec, t_pipe *tmp)
-{
-	if (exec->file->type == 62)
+	if ((exec)->file->type == R_OUT)
 	{
-		if (tmp->here_doc_out)
-			tmp->here_doc_out = NULL;
-		open(exec->file->file, O_CREAT, 0644);
-		(tmp)->outfile = exec->file->file;
+		if ((*tmp)->here_doc_out)
+			(*tmp)->here_doc_out = NULL;
+		fd = open((exec)->file->file, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		((*tmp))->outfile = (exec)->file->file;
+		close (fd);
 	}
-	else if (exec->file->type == 6)
+	else if ((exec)->file->type == H_OUT)
 	{
-		if (tmp->outfile)
-			tmp->outfile = NULL;
-		open(exec->file->file, O_CREAT, 0644);
-		(tmp)->here_doc_out = exec->file->file;
+		fd = open((exec)->file->file, O_CREAT | O_APPEND, 0644);
+		((*tmp))->here_doc_out = (exec)->file->file;
+		close (fd);
 	}
 }
 
-int	for_norm2(t_exec *exec, t_pipe *tmp)
+int	for_norm2(t_exec **exec, t_pipe **tmp)
 {
-	if (tmp->here_doc)
-		tmp->here_doc = NULL;
-	if (open(exec->file->file, O_RDONLY, 0644) < 0)
+	int	fd;
+
+	if ((*tmp)->her_docin)
 	{
-		ft_errorb("bash: ", exec->file->file, ": No such \
-		file or directory\n", \
-		1);
+		close((*tmp)->her_docin);
+		(*tmp)->her_docin = 0;
+	}
+	fd = open((*exec)->file->file, O_RDONLY, 0644);
+	if (fd < 0)
+	{
+		ft_errorb("bash: ", (*exec)->file->file, ": No such \
+	    file or directory\n", 1);
 		return (0);
 	}
-	(tmp)->infile = exec->file->file;
+	(*tmp)->infile = (*exec)->file->file;
+	close(fd);
 	return (1);
 }
 
 int	files(t_exec *exec, t_pipe *tmp, char **env)
 {
+	int	ret;
+
+	ret = 1;
 	(tmp)->infile = NULL;
 	(tmp)->outfile = NULL;
-	(tmp)->here_doc = NULL;
 	(tmp)->here_doc_out = NULL;
 	(tmp)->her_docin = 0;
+
+	(void)env;
 	while (exec->file)
 	{
-		for_norm(exec, tmp);
-		if (exec->file->type == 5)
+		if (exec->file->type == R_OUT || exec->file->type == H_OUT)
+			for_norm(exec, &tmp);
+		else if (exec->file->type == H_IN)
 		{
 			if (tmp->infile)
 				tmp->infile = NULL;
-			tmp->her_docin = here_docc(exec->file->file, env,
-					exec->file->expand);
+			if ((tmp)->her_docin)
+				close((tmp)->her_docin);
+			tmp->her_docin = here_docc(exec->file->file, env, \
+				exec->file->expand);
 		}
-		else if (exec->file->type == 60)
-			return (for_norm2(exec, tmp));
+		else if (exec->file->type == R_IN)
+			ret = for_norm2(&exec, &tmp);
 		exec->file = exec->file->next;
 	}
-	return (1);
+	return (ret);
 }
 
 void	transmettre(t_data *data, char ***env, char ***export)
 {
 	t_pipe	*tmp;
 	t_pipe	*pipe;
-	t_exec	*exec;
+	t_exec	*t;
 
 	pipe = NULL;
 	tmp = NULL;
-	exec = data->exec;
-	while (exec)
+	t = data->exec;
+	while (t)
 	{
 		tmp = malloc(sizeof(t_pipe));
-		(tmp)->cmd = ft_split(exec->value, '\n');
+		(tmp)->cmd = ft_split(t->value, '\n');
 		checkarg((tmp)->cmd);
 		tmp->next = NULL;
-		if (!files(exec, tmp, *env))
+		if (!files(t, tmp, *env))
 		{
 			free_pipe(tmp);
 			break ;
 		}
-		exec = exec->next;
+		t = t->next;
 		ft_lstadd_back2(&pipe, &tmp);
 	}
 	if (pipe)

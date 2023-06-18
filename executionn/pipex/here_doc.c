@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:47:12 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 23:29:47 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/18 16:02:15 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
 void	ctrl_ch(int i)
+{
+	if (i == SIGINT)
+	{
+		write(1, "\n", 1);
+		exit(0);
+	}
+}
+
+void	ctrl_h(int i)
 {
 	if (i == SIGINT)
 	{
@@ -37,7 +46,6 @@ void	norm_func(t_pipe *norm)
 {
 	while (1)
 	{
-		signal(SIGINT, ctrl_ch);
 		norm->infile = readline("here doc>");
 		if (!norm->infile)
 			break ;
@@ -56,39 +64,12 @@ void	norm_func(t_pipe *norm)
 	}
 }
 
-int	the_while2(t_pipe *norm)
-{
-	int	id;
-	int	get;
-	int	ret;
-
-	id = fork();
-	// signal(SIGINT, SIG_IGN);
-	// signal(SIGQUIT, SIG_IGN);
-	if (id == 0)
-	{
-		signal(SIGINT, ctrl_ch);
-		norm_func(norm);
-		close(norm->here_doc[1]);
-		exit(0);
-	}
-	// signal(SIGINT, ctrl_c);
-	ret = dup(norm->here_doc[0]);
-	close(norm->here_doc[1]);
-	close(norm->here_doc[0]);
-	waitpid(-1, &get, 0);
-	if (WIFEXITED(get))
-		get = WEXITSTATUS(get);
-	if (ret == 22)
-		return (-1);
-	return (ret);
-}
-
 int	here_docc(char *str, char **env, int expand)
 {
 	char	*tmp;
 	t_pipe	*norm;
 	int		*p;
+	int		ret;
 
 	tmp = NULL;
 	p = malloc(sizeof(int *) * 2);
@@ -100,5 +81,7 @@ int	here_docc(char *str, char **env, int expand)
 	norm->outfile = str;
 	norm->here_doc = p;
 	norm->her_docin = expand;
-	return (the_while2(norm));
+	ret = the_while2(norm);
+	free (norm);
+	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/18 00:15:51 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/18 13:39:24 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	pipe_fork(int *id, int *ph)
 		ft_errorb("cant fork in child one\n", NULL, NULL, 1);
 		return ;
 	}
-	// signal(SIGQUIT, SIG_IGN);
-	// signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 }
 
 void	wait_func(int *tab, int i)
@@ -37,6 +37,8 @@ void	wait_func(int *tab, int i)
 		waitpid(tab[i], &g_exit_status, 0);
 		if (WIFEXITED(g_exit_status))
 			g_exit_status = WEXITSTATUS(g_exit_status);
+		else if (WIFSIGNALED(g_exit_status))
+			g_exit_status = WEXITSTATUS(g_exit_status);
 		i--;
 	}
 	free(tab);
@@ -44,13 +46,12 @@ void	wait_func(int *tab, int i)
 
 void	dup_func(int *ph, int *fd, int *i, t_pipe **pipe)
 {
-	// signal(SIGINT, ctrl_c);
 	*fd = dup(ph[0]);
 	close(ph[1]);
 	if ((*pipe)->her_docin)
 		close((*pipe)->her_docin);
 	*pipe = (*pipe)->next;
-	*i+=1;
+	*i += 1;
 }
 
 void	child_one(t_pipe *pipee, char ***env, char ***export)
@@ -63,13 +64,16 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
 	i = 0;
 	fd = 0;
 	tab = malloc(ft_lst_size(pipee) * sizeof(int));
+		signal(SIGINT, SIG_IGN);
 	while (pipee)
 	{
+		signal(SIGINT, SIG_IGN);
 		pipe_fork(&tab[i], ph);
+		// signal(SIGQUIT, SIG_IGN);
 		if (tab[i] == 0)
 		{
-			// signal(SIGINT, ctrl_ch);
-			// signal(SIGQUIT, ctrl_s);
+			signal(SIGINT, ctrl_ch);
+			signal(SIGQUIT, ctrl_s);
 			if (!pipee->next)
 				ph[1] = 1;
 			if (!duping(pipee, fd, ph, 1))

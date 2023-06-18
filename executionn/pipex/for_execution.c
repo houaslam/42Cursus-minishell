@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   for_execution.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 23:46:18 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/18 00:14:16 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/18 13:41:49 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ int	ft_lst_size(t_pipe *head)
 	return (i);
 }
 
-// void	ctrl_s(int i)
-// {
-// 	if (i == SIGQUIT)
-// 	{
-// 		write(1, "\\", 2);
-// 		write(1, "QUIT", 4);
-// 		exit(0);
-// 	}
-// }
+void	ctrl_s(int i)
+{
+	if (i == SIGQUIT)
+	{
+		write(1, "\\", 2);
+		write(1, "QUIT", 4);
+		exit(0);
+	}
+}
 
 void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 {
@@ -44,7 +44,7 @@ void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 		else if (!ft_strcmp(cmd_arg[0], "env"))
 			ft_env(*env, fdout, ++cmd_arg);
 		else if (!ft_strcmp(cmd_arg[0], "export"))
-			ft_export(export, env, ++cmd_arg, -1);
+			ft_export(export, env, ++cmd_arg);
 		else if (!ft_strcmp(cmd_arg[0], "cd"))
 			ft_cd(*env, *export, ++cmd_arg);
 		else if (!ft_strcmp(cmd_arg[0], "exit"))
@@ -58,8 +58,9 @@ void	command(char **cmd_arg, char ***export, int fdout, char ***env)
 			ft_pwd(fdout);
 		else
 			execution(cmd_arg, *env);
+			signal(SIGINT, ctrl_c);
 	}
-	//signal(SIGINT, ctrl_ch);
+	
 }
 
 void	execution(char **cmd, char **env)

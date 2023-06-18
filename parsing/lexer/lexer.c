@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 17:41:48 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/17 21:19:37 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/18 00:45:18 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void	options(t_data *data)
 			ft_lstadd_back_exec(&data->exec, \
 			ft_lstnew_exec(data->tmp->value, STRING, data->tmp_f, tmp));
 		tmp = tmp -> next;
-		// exit (0);
 	}
 }
 
@@ -116,8 +115,8 @@ void	lexer(t_data **data)
 	(*data)->lexer = NULL;
 	(*data)-> d_status = 0;
 	(*data)-> s_status = 0;
+	(*data)-> h_nb = 0;
 	the_lexer(data);
-	// aff1((*data)->lexer, NULL);
 	(*data)->exec = NULL;
 	(*data)->f = 0;
 	(*data)->tmp_f = NULL;
@@ -127,6 +126,4 @@ void	lexer(t_data **data)
 	(*data)->s_status = 0;
 	if ((*data)->g_exit_status == 0)
 		options(*data);
-	// printf("-----------EXEEEEC-----------\n");
-	// aff1((*data)->exec, NULL);
 }

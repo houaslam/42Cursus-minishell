@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:19:23 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/18 00:17:34 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/18 16:19:38 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../../libft/libft.h"
 # include "../builtins/builtins.h"
+# include "../../parsing/minishell.h"
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -71,5 +72,8 @@ char				*general_expand(char *str, char **env);
 int					ft_lst_size(t_pipe *head);
 void				ctrl_s(int i);
 char				*expand_h(char *str, char **env);
-
+int					the_while2(t_pipe *norm);
+int					return_func(t_pipe *norm, int id);
+void				ctrl_h(int i);
+void				norm_func(t_pipe *norm);
 #endif

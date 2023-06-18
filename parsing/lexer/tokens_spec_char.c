@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:56:12 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/17 21:22:22 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/18 00:45:42 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ t_exec	*handle_here_doc_in2(t_data *data, t_exec *lexer, int *nb)
 
 t_exec	*handle_here_doc_in(t_data *data, t_exec *lexer)
 {
-	static int	nb;
-
 	if (lexer -> next)
 		lexer = lexer->next;
 	while (lexer && (lexer->type == SPACE || lexer->type == TAB))
@@ -52,8 +50,8 @@ t_exec	*handle_here_doc_in(t_data *data, t_exec *lexer)
 	if (!lexer)
 		return (print_token_er(data, 258, "`<<'\n"));
 	else
-		lexer = handle_here_doc_in2(data, lexer, &nb);
-	if (nb > 16)
+		lexer = handle_here_doc_in2(data, lexer, &data->h_nb);
+	if (data->h_nb > 16)
 	{
 		ft_errorb("bash: ", "maximum here-document count exceeded\n", NULL, 2);
 		exit(2);
