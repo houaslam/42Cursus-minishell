@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 17:14:33 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/18 17:03:16 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/18 17:47:57 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ void	child_one(t_pipe *pipee, char ***env, char ***export)
 		pipe_fork(&tab[i], ph);
 		if (tab[i] == 0)
 		{
-			signal(SIGINT, ctrl_ch);
+			signal(SIGINT, SIG_DFL);
 			signal(SIGQUIT, ctrl_s);
 			if (!pipee->next)
 				ph[1] = 1;
 			if (!duping(pipee, fd, ph, 1))
-				return ;
+				exit(g_exit_status);
 			command((pipee)->cmd, export, ph[1], env);
 			exit(g_exit_status);
 		}

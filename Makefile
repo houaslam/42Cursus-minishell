@@ -6,13 +6,13 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 22:47:05 by houaslam          #+#    #+#              #
-#    Updated: 2023/06/18 02:31:42 by houaslam         ###   ########.fr        #
+#    Updated: 2023/06/18 17:54:47 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror
 
 EXTRA_CFLAGS = -I ~/Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/include  -L /Users/houaslam/goinfre/homebrew/Cellar/readline/8.2.1/lib -lreadline
 

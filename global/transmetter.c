@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:13:31 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/18 15:48:59 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:53:52 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,21 @@ int	for_norm2(t_exec **exec, t_pipe **tmp)
 	return (1);
 }
 
+void	herein_case(t_pipe **tmp, t_exec **exec, char **env)
+{
+	if ((*tmp)->her_docin == -1)
+		(*exec)->file = (*exec)->file->next;
+	else
+	{
+		if ((*tmp)->infile)
+		(*tmp)->infile = NULL;
+		if (((*tmp))->her_docin)
+			close(((*tmp))->her_docin);
+		(*tmp)->her_docin = here_docc((*exec)->file->file, env, \
+		(*exec)->file->expand);
+	}
+}
+
 int	files(t_exec *exec, t_pipe *tmp, char **env)
 {
 	int	ret;
@@ -62,21 +77,12 @@ int	files(t_exec *exec, t_pipe *tmp, char **env)
 	(tmp)->outfile = NULL;
 	(tmp)->here_doc_out = NULL;
 	(tmp)->her_docin = 0;
-
-	(void)env;
 	while (exec->file)
 	{
 		if (exec->file->type == R_OUT || exec->file->type == H_OUT)
 			for_norm(exec, &tmp);
 		else if (exec->file->type == H_IN)
-		{
-			if (tmp->infile)
-				tmp->infile = NULL;
-			if ((tmp)->her_docin)
-				close((tmp)->her_docin);
-			tmp->her_docin = here_docc(exec->file->file, env, \
-				exec->file->expand);
-		}
+			herein_case(&tmp, &exec, env);
 		else if (exec->file->type == R_IN)
 			ret = for_norm2(&exec, &tmp);
 		exec->file = exec->file->next;
