@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 15:32:03 by houaslam          #+#    #+#             */
-/*   Updated: 2023/06/18 00:30:40 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:33:52 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		ft_error(char *s, char *s1, char *s2);
 int			ft_errorb(char *s, char *s1, char *s2, int ext);
 char		*recherche(char **env, char *s);
 void		ctrl_ch(int i);
-int			the_plus(char **export, char **sp);
+int			the_plus(char **export, char **sp, char **env);
 void		checkarg(char **arg);
 
 #endif

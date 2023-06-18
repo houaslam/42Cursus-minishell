@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 11:50:50 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/18 02:13:20 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:31:29 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	affiche_export(char **export)
 	}
 }
 
-void	for_norm_(char ***export, char ***env, char **arg, char **sp)
+void	for_norm(char ***export, char ***env, char **arg, char **sp)
 {
 	int	i;
 	int	k;
@@ -96,13 +96,15 @@ void	for_norm_(char ***export, char ***env, char **arg, char **sp)
 				&& !sp[0][0]))
 		{
 			ft_errorb("bash: export: `", sp[0], "': \
-			not a valid identifier\n", 1);
+			not a valid identifier\n",
+						1);
 			ft_free(sp);
 		}
 		else
 		{
-			if (the_plus(*export, sp))
+			if (the_plus(*export, sp, *env))
 				return ;
+			arg[i] = ft_strjoin(sp[0], sp[1]);
 			change(export, env, arg[i], ft_cases(*env, *export, sp[0]));
 			ft_free(sp);
 		}
@@ -120,5 +122,5 @@ void	ft_export(char ***export, char ***env, char **arg)
 	if (!*arg)
 		affiche_export(*export);
 	else
-		for_norm_(export, env, arg, sp);
+		for_norm(export, env, arg, sp);
 }

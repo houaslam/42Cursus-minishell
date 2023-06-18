@@ -6,7 +6,7 @@
 /*   By: aatki <aatki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 01:37:29 by aatki             #+#    #+#             */
-/*   Updated: 2023/06/17 23:56:36 by aatki            ###   ########.fr       */
+/*   Updated: 2023/06/18 21:32:41 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,20 @@ int	position(char **doubl, char *str)
 {
 	int	i;
 	int	j;
+	int	k;
 
 	i = 0;
+	k = 0;
 	while (doubl[i])
 	{
 		j = 0;
-		while (doubl[i][j] != '=' && doubl[i][j] == str[j])
+		while (doubl[i][j] != '=' && (doubl[i][j] == str[j] || str[j] == '+'))
 			j++;
 		if (doubl[i][j] == '=')
+		{
+			k = 1;
 			break ;
+		}
 		else if (doubl[i])
 		{
 			i++;
@@ -76,10 +81,12 @@ int	position(char **doubl, char *str)
 		}
 		i++;
 	}
-	return (i);
+	if (k == 1)
+		return (i);
+	return (-1);
 }
 
-int	the_plus(char **export, char **sp)
+int	the_plus(char **export, char **sp, char **env)
 {
 	int	i;
 	int	k;
@@ -90,7 +97,17 @@ int	the_plus(char **export, char **sp)
 	if (i >= 2 && !(sp[0][i - 2] == '+' && sp[0][i - 1] == '='))
 		return (0);
 	k = position(export, sp[0]);
-	export[k] = ft_strjoin_free(export[k], sp[1] + 1);
+	if (k >= 0)
+		export[k] = ft_strjoin_free(export[k], sp[1]);
+	i = position(env, sp[0]);
+	if (i >= 0)
+		env[i] = ft_strjoin_free(env[i], sp[1]);
+	if (i < 0 || k < 0)
+	{
+		sp[0][ft_strlen(sp[0]) - 2] = '\0';
+		sp[0] = ft_strjoin_free(sp[0], "=");
+		return (0);
+	}
 	ft_free(sp);
 	return (1);
 }
